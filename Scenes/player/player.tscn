@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bxcm1viko0bc2"]
+[gd_scene load_steps=23 format=3 uid="uid://bxcm1viko0bc2"]
 
 [ext_resource type="Script" uid="uid://ckdivkb1dvitb" path="res://Scripts/player/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cv2w6dgxak7of" path="res://Art/Sprites/Player/ROBO_WITHOUT HANDS.png" id="2_eo61r"]
+[ext_resource type="Script" uid="uid://jjkw21xruqq8" path="res://Scripts/camera/camera_shaker.gd" id="3_mxepk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mxepk"]
 atlas = ExtResource("2_eo61r")
@@ -148,8 +149,6 @@ collision_layer = 3
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_v0iea")
-speed = 150.0
-max_health = 20000
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -19.999998)
@@ -175,6 +174,9 @@ shape = SubResource("CircleShape2D_f60y1")
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 12.0
+
+[node name="CameraShaker" type="Node" parent="PlayerCamera"]
+script = ExtResource("3_mxepk")
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 one_shot = true

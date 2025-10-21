@@ -5,16 +5,15 @@ signal died(enemy_node: CharacterBody2D)
 const PLAYER_GROUP: String = "player"
 
 @export_group("Stats")
-@export var max_health: int = 5:
+@export var max_health: float = 5.0:
 	set(value):
-		max_health = maxi(1, value)
+		max_health = maxf(1.0, value)
 		if current_health > max_health:
 			current_health = max_health
-
 @export var speed: float = 120.0
 @export var acceleration: float = 800.0
 @export var xp_amount: int = 1
-@export var damage: int = 10
+@export var damage: float = 10.0
 @export var attack_cooldown: float = 1.0
 @export var knockback_strength: float = 750.0
 
@@ -42,6 +41,7 @@ const PLAYER_GROUP: String = "player"
 var _can_attack: bool = true
 var is_miniboss: bool = false
 var XpOrb: PackedScene = preload("res://Scenes/items/xp_orb.tscn")
+const DamageLabelScene: PackedScene = preload("res://Scenes/ui/damage_label.tscn")
 
 enum EnemyState {
 	IDLE,
@@ -52,7 +52,7 @@ enum EnemyState {
 }
 
 var player: CharacterBody2D = null
-var current_health: int
+var current_health: float
 var current_state: EnemyState = EnemyState.IDLE:
 	set(value):
 		if current_state != value:
@@ -184,15 +184,31 @@ func _update_stunned_state(_delta: float):
 func _update_dead_state(_delta: float):
 	pass
 
-func set_health(value: int):
-	current_health = clampi(value, 0, max_health)
+func set_health(value: float):
+	current_health = clampf(value, 0.0, max_health)
 	if current_health <= 0 and current_state != EnemyState.DEAD:
 		transition_to_state(EnemyState.DEAD)
 
-func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, incoming_knockback_strength: float = 0.0):
+func take_damage(damage_payload: Dictionary, knockback_direction: Vector2 = Vector2.ZERO, incoming_knockback_strength: float = 0.0):
+	if typeof(damage_payload) != TYPE_DICTIONARY:
+		push_error("take_damage recebeu um payload inválido! Tipo: %s" % typeof(damage_payload))
+		return
+
 	if current_state == EnemyState.DEAD or current_state == EnemyState.STUNNED:
 		return
+
+	var amount = damage_payload.get("amount", 1.0)
+	var is_crit = damage_payload.get("is_critical", false)
+	
+	var label_instance = DamageLabelScene.instantiate()
+	get_tree().current_scene.call_deferred("add_child", label_instance)
+	var start_pos = global_position + Vector2(0, -30)
+	label_instance.setup(amount, is_crit, start_pos)
+	
+	if is_crit:
+		EntityManager.trigger_shake(10.0, 0.1, 30.0)
 	set_health(current_health - amount)
+	
 	if current_state != EnemyState.DEAD and incoming_knockback_strength > 0:
 		velocity = knockback_direction * incoming_knockback_strength
 		transition_to_state(EnemyState.KNOCKBACK)
@@ -235,7 +251,7 @@ func _attack():
 			var payload = get_damage_payload()
 			
 			target.take_damage(
-				payload.get("amount", 1),
+				payload.get("amount", 1.0),
 				payload.get("direction", Vector2.ZERO),
 				payload.get("knockback", 0.0)
 			)

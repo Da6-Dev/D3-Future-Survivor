@@ -11,5 +11,5 @@ rarity = 3
 target_ability_id = &"overload"
 modifiers = {
 "cooldown_reduction_percent": 0.15,
-"damage_amount": 5
+"damage_amount": 5.0
 }

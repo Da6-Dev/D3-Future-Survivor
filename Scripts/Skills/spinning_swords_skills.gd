@@ -39,7 +39,7 @@ func _on_sword_hit(body: Node, sword_node: Area2D):
 
 	if body.has_method("take_damage"):
 		var knockback_direction: Vector2 = (body.global_position - sword_node.global_position).normalized()
-		var final_damage = player.get_calculated_damage(damage_amount)
+		var final_damage = player.get_calculated_damage(damage_amount) 
 		body.take_damage(final_damage, knockback_direction, knockback_strength)
 		
 		var hit_timer: SceneTreeTimer = get_tree().create_timer(HIT_COOLDOWN)

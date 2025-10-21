@@ -3,6 +3,7 @@ extends Node
 # Listas que o jogo todo pode acessar
 var active_enemies: Array[Node2D] = []
 var player: Node2D = null
+var camera_shaker: Node = null
 
 # Funções para os inimigos se registrarem
 func register_enemy(enemy: Node2D) -> void:
@@ -16,9 +17,14 @@ func unregister_enemy(enemy: Node2D) -> void:
 # Funções para o jogador se registrar
 func register_player(p_player: Node2D) -> void:
 	player = p_player
+	if is_instance_valid(player) and player.has_node("PlayerCamera/CameraShaker"):
+		camera_shaker = player.get_node("PlayerCamera/CameraShaker")
+	else:
+		camera_shaker = null
 
 func unregister_player() -> void:
 	player = null
+	camera_shaker = null
 
 # --- AS NOVAS FUNÇÕES DE BUSCA ---
 
@@ -47,3 +53,7 @@ func get_closest_enemy(position: Vector2, max_range: float = INF) -> Node2D:
 			closest_enemy = enemy
 			
 	return closest_enemy
+
+func trigger_shake(strength: float, duration: float, frequency: float) -> void:
+	if is_instance_valid(camera_shaker) and camera_shaker.has_method("shake"):
+		camera_shaker.shake(strength, duration, frequency)

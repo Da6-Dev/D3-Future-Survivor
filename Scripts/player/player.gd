@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal xp_changed(current_xp: float, xp_to_next_level: float)
 signal level_changed(new_level: int)
-signal health_changed(current_health: int, max_health: int)
+signal health_changed(current_health: float, max_health: float)
 signal died
 signal ability_added(ability: BaseAbility)
 signal shield_changed(current_shield: float, max_shield: float)
@@ -17,13 +17,13 @@ var current_stats: PlayerStats
 @onready var animations: AnimatedSprite2D = $PlayerAnimations
 @onready var collision_shape: CollisionShape2D = $PhysicalCollision
 @onready var invincibility_timer: Timer = $InvincibilityTimer
+@onready var shield_recharge_timer: Timer = $ShieldRechargeTimer
 
 var active_abilities: Dictionary[StringName, BaseAbility] = {}
 var active_passives: Dictionary = {}
 
 var _health_regen_accumulator: float = 0.0
 var current_shield: float = 0.0
-@onready var shield_recharge_timer: Timer = $ShieldRechargeTimer
 var applied_upgrades_map: Dictionary = {}
 var last_direction: Vector2 = Vector2.RIGHT
 var _is_invincible: bool = false
@@ -240,11 +240,21 @@ func _apply_passive_stat(upgrade: AbilityUpgrade):
 			"shield":
 				var shield_gain = float(modifier_value)
 				current_stats.max_shield += shield_gain
-				current_shield += shield_gain # Ganha escudo imediatamente
+				current_shield += shield_gain 
 				shield_changed.emit(current_shield, current_stats.max_shield)
+
+			"health_regen":
+				var regen_gain = float(modifier_value)
+				current_stats.health_regen_rate += regen_gain
+				
+			"global_damage":
+				var damage_gain_percent = float(modifier_value)
+				current_stats.global_damage_multiplier += damage_gain_percent
 				
 			_:
-				if current_stats.has(key):
+				# O 'if' aqui previne que os stats já tratados sejam adicionados duas vezes
+				var handled_keys = ["health_regen", "health_regen_rate", "global_damage"]
+				if (key in current_stats) and (not key in handled_keys):
 					var current_value = current_stats.get(key)
 					current_stats.set(key, current_value + modifier_value)
 
@@ -280,7 +290,7 @@ func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knock
 		shield_recharge_timer.start(current_stats.shield_recharge_delay)
 
 	var damage_after_reduction = amount * current_stats.damage_reduction_multiplier
-	var incoming_damage = roundi(damage_after_reduction)
+	var incoming_damage = damage_after_reduction
 	if incoming_damage < 1:
 		incoming_damage = 1
 
@@ -296,6 +306,7 @@ func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knock
 		velocity = knockback_direction * knockback_strength
 
 	if damage_to_health > 0:
+		EntityManager.trigger_shake(15.0, 0.2, 25.0)
 		current_health -= damage_to_health
 		health_changed.emit(current_health, current_stats.max_health)
 		_is_invincible = true
@@ -340,11 +351,18 @@ func get_upgrades_for_ability(ability_id: StringName) -> Array:
 	else:
 		return []
 
-func get_calculated_damage(base_damage: int) -> int:
+func get_calculated_damage(base_damage: float) -> Dictionary:
 	var final_damage = base_damage * current_stats.global_damage_multiplier
+	var is_crit = false 
+	
 	if randf() < current_stats.crit_chance:
 		final_damage *= current_stats.crit_damage
-	return int(final_damage)
+		is_crit = true 
+		
+	return {
+		"amount": final_damage,
+		"is_critical": is_crit
+	}
 
 func _on_shield_recharge_timer_timeout():
 	pass

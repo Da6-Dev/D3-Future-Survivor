@@ -8,7 +8,7 @@ signal on_deactivated
 @export var ability_id: StringName
 @export var cooldown_time: float = 1.0
 @export var active_duration: float = 0.0
-@export var damage_amount: int = 1
+@export var damage_amount: float = 1.0
 @export var requires_aiming: bool = false
 @export var aim_at_closest_enemy: bool = true
 

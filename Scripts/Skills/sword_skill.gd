@@ -33,6 +33,5 @@ func _on_area_entered(area: Area2D) -> void:
 
 	if target.has_method("take_damage"):
 		var knockback_direction = (target.global_position - global_position).normalized()
-
-		var final_damage = player.get_calculated_damage(damage_amount)
-		target.take_damage(final_damage, knockback_direction, knockback_strength)
+		var final_damage_payload = player.get_calculated_damage(damage_amount)
+		target.take_damage(final_damage_payload, knockback_direction, knockback_strength)

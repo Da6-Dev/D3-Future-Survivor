@@ -2,7 +2,7 @@ extends Resource
 class_name PlayerStats
 
 @export_group("Primary Stats")
-@export var max_health: int = 100
+@export var max_health: float = 100.0
 @export var speed: float = 300.0
 @export var damage_reduction_multiplier: float = 1.0
 @export var health_regen_rate: float = 0.0

@@ -17,6 +17,7 @@ func _ability_ready() -> void:
 		original_camera_zoom = camera.zoom
 
 func _on_activate(_params: Dictionary) -> void:
+	EntityManager.trigger_shake(25.0, 0.4, 15.0)
 	_create_explosion_effect()
 	_apply_explosion_knockback()
 	_apply_player_buff()

@@ -78,7 +78,6 @@ value = 100.0
 show_percentage = false
 
 [node name="ShieldContainer" type="BoxContainer" parent="Control"]
-visible = false
 layout_mode = 0
 offset_left = 19.0
 offset_top = 123.0
@@ -89,7 +88,6 @@ vertical = true
 
 [node name="ShieldLabel" type="Label" parent="Control/ShieldContainer"]
 layout_mode = 2
-text = "100/100"
 label_settings = SubResource("LabelSettings_e0onf")
 horizontal_alignment = 1
 

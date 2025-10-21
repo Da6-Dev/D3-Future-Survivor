@@ -9,6 +9,6 @@ ability_name = "Ataque da Espada"
 description = "Aumenta o dano do ataque em +1."
 target_ability_id = &"sword_attack"
 modifiers = {
-"damage_amount": 1
+"damage_amount": 1.0
 }
 metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

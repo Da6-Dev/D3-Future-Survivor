@@ -136,6 +136,7 @@ func _generate_drones_and_beams() -> void:
 		var beam = beam_scene.instantiate()
 		beam.damage_amount = self.damage_amount
 		beam.knockback_strength = self.knockback_strength
+		beam.player = self.player
 		beam_container.add_child(beam)
 		_beams.append(beam)
 

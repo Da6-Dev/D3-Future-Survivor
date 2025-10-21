@@ -6,6 +6,7 @@ extends Area2D
 
 var damage_amount: int = 1
 var knockback_strength: float = 100.0
+var player: Node = null
 
 var _hit_cooldown: float = 0.5
 var _enemies_on_hit_cooldown: Dictionary = {}
@@ -115,11 +116,14 @@ func _on_area_entered(area: Area2D):
 
 	if target.is_in_group("enemies") and target.has_method("take_damage"):
 		var knockback_dir = (target.global_position - global_position).normalized()
-		target.take_damage(damage_amount, knockback_dir, knockback_strength)
-		
+		var payload: Dictionary
+		if is_instance_valid(player) and player.has_method("get_calculated_damage"):
+			payload = player.get_calculated_damage(damage_amount)
+		else:
+			payload = {"amount": damage_amount, "is_critical": false}
+		target.take_damage(payload, knockback_dir, knockback_strength)
 		var hit_timer: SceneTreeTimer = get_tree().create_timer(_hit_cooldown)
 		_enemies_on_hit_cooldown[target] = hit_timer
 		await hit_timer.timeout
-		
 		if _enemies_on_hit_cooldown.has(target):
 			_enemies_on_hit_cooldown.erase(target)

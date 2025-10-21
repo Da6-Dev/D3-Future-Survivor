@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3 uid="uid://47vojuad7auk"]
+
+[ext_resource type="Script" uid="uid://dwp34fyd7wdcw" path="res://Scripts/enemies/enemy.gd" id="1_notgg"]
+[ext_resource type="Texture2D" uid="uid://7pykul6q1p0v" path="res://Art/Sprites/Enemy/Idle/Spr_Idle.png" id="2_cpjt6"]
+[ext_resource type="Texture2D" uid="uid://f37ykyxexsit" path="res://Art/Sprites/Crown/gold.png" id="2_we58l"]
+[ext_resource type="PackedScene" uid="uid://1068yjes325l" path="res://Scenes/ui/damage_label.tscn" id="4_we58l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slefu"]
+atlas = ExtResource("2_we58l")
+region = Rect2(6, 103, 20, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afpow"]
+atlas = ExtResource("2_cpjt6")
+region = Rect2(8, 13, 25, 15)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1f0kj"]
+radius = 6.99994
+height = 46.007915
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cpjt6"]
+radius = 34.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_notgg"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hghv2"]
+radius = 36.013885
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_notgg")
+speed = 80.0
+stopping_distance = 40.0
+
+[node name="CrownIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -23)
+scale = Vector2(0.6, 0.6)
+texture = SubResource("AtlasTexture_slefu")
+
+[node name="EnemyVisual" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_afpow")
+
+[node name="PhysicsCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 9)
+rotation = -1.5666376
+shape = SubResource("CapsuleShape2D_1f0kj")
+
+[node name="MeleeAttackArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackArea"]
+shape = SubResource("CircleShape2D_cpjt6")
+
+[node name="Cooldown" type="Timer" parent="MeleeAttackArea"]
+one_shot = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_notgg")
+
+[node name="SeparationArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationArea"]
+shape = SubResource("CircleShape2D_hghv2")
+
+[node name="KnockbackTimer" type="Timer" parent="."]
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visibility_layer = 4
+scale = Vector2(3, 3)
+
+[node name="DamageLabel" parent="." instance=ExtResource("4_we58l")]
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

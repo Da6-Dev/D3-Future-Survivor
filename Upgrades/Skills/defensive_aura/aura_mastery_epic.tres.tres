@@ -11,6 +11,6 @@ rarity = 3
 target_ability_id = &"defensive_aura"
 modifiers = {
 "attack_speed_multiplier": 0.2,
-"damage_amount": 2
+"damage_amount": 2.0
 }
 metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

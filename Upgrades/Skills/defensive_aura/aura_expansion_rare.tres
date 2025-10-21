@@ -10,7 +10,7 @@ description = "Aumenta o dano em +1 e a área de efeito em +15."
 rarity = 2
 target_ability_id = &"defensive_aura"
 modifiers = {
-"damage_amount": 1,
+"damage_amount": 1.0,
 "radius": 15
 }
 metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

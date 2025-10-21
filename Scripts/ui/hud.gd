@@ -76,12 +76,12 @@ func _on_player_level_changed(new_level: int) -> void:
 func _on_player_health_changed(current_health: int, max_health: int):
 	health_bar.max_value = max_health
 	health_bar.value = current_health
-	health_label.text = "%d/%d" % [current_health, max_health]
+	health_label.text = "%.0f/%.0f" % [current_health, max_health]
 
 func show_warning(text: String, duration: float = 2.5):
 	if not is_instance_valid(warning_label):
 		return
-
+	EntityManager.trigger_shake(5.0, duration, 5.0)
 	warning_label.text = text
 	warning_label.visible = true
 

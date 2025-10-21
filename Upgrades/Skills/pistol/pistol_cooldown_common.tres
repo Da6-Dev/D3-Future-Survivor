@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://bmlah5lso6t8w"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"pistol_cooldown_common"
+ability_name = "Pistola Automática"
+description = "Aumenta a cadência de tiro em 10%."
+target_ability_id = &"pistol_shot"
+modifiers = {
+"attack_speed_multiplier": 0.1
+}

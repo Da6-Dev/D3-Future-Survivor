@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://mxl46wtq3y6o"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_fu30d"]
+[ext_resource type="PackedScene" uid="uid://dftvljsvec3au" path="res://Scenes/Skills/paralyzing_shot_skill.tscn" id="1_u4egk"]
+
+[resource]
+script = ExtResource("1_fu30d")
+id = &"unlock_paralyzing_shot"
+ability_name = "NOVA: Tiro Paralisante"
+description = "Atira um projétil largo na direção em que está virado, paralisando inimigos por um curto período."
+rarity = 2
+type = 0
+target_ability_id = &"paralyzing_shot"
+new_ability_scene = ExtResource("1_u4egk")
+metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

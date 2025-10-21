@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://df7bl0b5qnxg8"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_8md55"]
+
+[resource]
+script = ExtResource("1_8md55")
+id = &"sword_area_rare"
+ability_name = "Ataque da Espada"
+description = "Aumenta a área de efeito do ataque em 15%."
+rarity = 2
+target_ability_id = &"sword_attack"
+modifiers = {
+"scale": Vector2(0.15, 0.15)
+}
+metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

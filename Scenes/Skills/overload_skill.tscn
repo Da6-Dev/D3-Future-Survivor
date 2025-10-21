@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://coumkc3xbkquh"]
+
+[ext_resource type="Script" uid="uid://c536icmqfk1ii" path="res://Scripts/Skills/overload_skill.gd" id="1_ne2fo"]
+
+[node name="OverloadSkill" type="Node2D"]
+script = ExtResource("1_ne2fo")
+explosion_radius = 100.0
+ability_id = &"overload"
+cooldown_time = 12.0
+active_duration = 5.0
+damage_amount = 5

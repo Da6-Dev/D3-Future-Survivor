@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"passive_health_rare"
+ability_name = "Passiva: Vitalidade III"
+description = "Aumenta a vida máxima em +35."
+rarity = 2
+type = 2
+passive_stat_id = &"stat_health"
+modifiers = {
+"max_health": 35
+}

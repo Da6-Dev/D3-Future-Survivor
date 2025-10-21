@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cstqnmjeuyl0"]
+
+[ext_resource type="Script" uid="uid://djmbxlwb4vn85" path="res://Scripts/Skills/spinning_sword.gd" id="1_a51qd"]
+
+[node name="SpinningSword" type="Area2D"]
+scale = Vector2(1.5, 1.5)
+collision_layer = 64
+collision_mask = 16
+script = ExtResource("1_a51qd")
+
+[node name="SwordVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-4, 0, 0, -33, 5, 0, 7, 0, 7, 1, 2, 1, 2, 8, -1, 8, -1, 1, -6, 1, -6, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-4, 0, 0, -33, 5, 0, 7, 0, 7, 1, 2, 1, 2, 8, -1, 8, -1, 1, -6, 1, -6, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

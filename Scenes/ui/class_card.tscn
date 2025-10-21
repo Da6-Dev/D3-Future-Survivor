@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://06472j8ppsyt"]
+
+[ext_resource type="Script" uid="uid://b467c0mf1u5w7" path="res://Scripts/ui/class_card.gd" id="1_script"]
+
+[node name="ClassCard" type="PanelContainer"]
+script = ExtResource("1_script")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="ClassNameLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Nome da Classe"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SelectButton" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Selecionar"

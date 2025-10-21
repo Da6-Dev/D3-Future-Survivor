@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn5ssynxbvw4d"]
+
+[ext_resource type="Script" uid="uid://bmc3gnl42dusb" path="res://Scripts/ui/choose_class_menu.gd" id="1_tx4pt"]
+
+[node name="ChooseClassMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tx4pt")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ClassList" type="ScrollContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="CardsContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ClassList"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ClassDetails" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ClassDetails"]
+layout_mode = 2
+
+[node name="ClassNameLabel" type="Label" parent="MarginContainer/HBoxContainer/ClassDetails/VBox"]
+layout_mode = 2
+text = "Selecione uma Classe"
+horizontal_alignment = 1
+
+[node name="ClassDescriptionLabel" type="Label" parent="MarginContainer/HBoxContainer/ClassDetails/VBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer/ClassDetails/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/ClassDetails/VBox"]
+layout_mode = 2
+text = "Iniciar Jogo"

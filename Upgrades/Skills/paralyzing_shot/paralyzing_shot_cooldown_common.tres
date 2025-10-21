@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://bp3vrmtgiq5ev"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"paralyzing_shot_cooldown_common"
+ability_name = "Tiro Paralisante"
+description = "Reduz o tempo de recarga em 15%."
+target_ability_id = &"paralyzing_shot"
+modifiers = {
+"attack_speed_multiplier": 0.15
+}

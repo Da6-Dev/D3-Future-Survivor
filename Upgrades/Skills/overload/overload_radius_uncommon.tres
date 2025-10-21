@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"overload_radius_uncommon"
+ability_name = "Sobrecarga"
+description = "Aumenta o raio da explosão em +30."
+rarity = 1
+target_ability_id = &"overload"
+modifiers = {
+"explosion_radius": 30.0
+}

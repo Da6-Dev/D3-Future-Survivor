@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://x5t087qap2kd"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"overload_mastery_epic"
+ability_name = "Sobrecarga"
+description = "Aumenta o bônus de velocidade de ataque em +15% e o dano da explosão em +5."
+rarity = 3
+target_ability_id = &"overload"
+modifiers = {
+"cooldown_reduction_percent": 0.15,
+"damage_amount": 5
+}

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"arc_drones_aggression_rare"
+ability_name = "VANTs de Arco"
+description = "Melhora os propulsores dos VANTs, aumentando sua velocidade e agressividade (Stiffness +5)."
+rarity = 2
+target_ability_id = &"arc_drones"
+modifiers = {
+"drone_stiffness": 5.0
+}

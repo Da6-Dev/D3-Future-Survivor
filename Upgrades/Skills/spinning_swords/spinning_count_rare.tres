@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://j54ch2yq7lxi"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_mhm8i"]
+
+[resource]
+script = ExtResource("1_mhm8i")
+id = &"spinning_count_rare"
+ability_name = "Espadas Orbitais"
+description = "Adiciona +1 espada ao vórtice."
+rarity = 2
+target_ability_id = &"spinning_swords"
+modifiers = {
+"sword_count": 1
+}
+metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

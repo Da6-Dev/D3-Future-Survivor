@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://nvdm8q1e4ecu"]
+
+[ext_resource type="Script" uid="uid://cx03h6d8w5fpp" path="res://Scripts/ui/upgrade_screen.gd" id="1_o5sws"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dyx81"]
+font_size = 30
+
+[node name="UpgradeScreen" type="CanvasLayer" groups=["upgrade_screen_group"]]
+script = ExtResource("1_o5sws")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Escolha um Upgrade!"
+label_settings = SubResource("LabelSettings_dyx81")
+horizontal_alignment = 1
+
+[node name="CardContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1

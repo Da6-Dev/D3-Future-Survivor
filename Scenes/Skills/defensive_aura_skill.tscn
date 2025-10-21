@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3534evn1yis"]
+
+[ext_resource type="Script" uid="uid://do7bujmobpcwy" path="res://Scripts/Skills/defensive_aura.gd" id="1_1ed6a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wlo5b"]
+radius = 32.0
+
+[node name="DefensiveAuraSkill" type="Area2D"]
+visibility_layer = 2
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("1_1ed6a")
+ability_id = &"defensive_aura"
+
+[node name="AuraVisual" type="Polygon2D" parent="."]
+color = Color(1, 0, 1, 0.43529412)
+polygon = PackedVector2Array(-16, -28, -8, -31, 0, -32, 8, -31, 11, -30, 16, -28, 20, -25, 23, -22, 27, -18, 31, -8, 32, 0, 31, 8, 28, 16, 23, 22, 16, 28, 9, 31, 0, 32, -8, 31, -16, 28, -22, 23, -24, 21, -28, 16, -31, 8, -32, 0, -31, -8, -28, -16, -25, -20, -22, -23)
+uv = PackedVector2Array(-16, -28, -8, -31, 0, -32, 8, -31, 11, -30, 16, -28, 20, -25, 23, -22, 27, -18, 31, -8, 32, 0, 31, 8, 28, 16, 23, 22, 16, 28, 9, 31, 0, 32, -8, 31, -16, 28, -22, 23, -24, 21, -28, 16, -31, 8, -32, 0, -31, -8, -28, -16, -25, -20, -22, -23)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wlo5b")

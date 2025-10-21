@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://bh3n16ajhipjo"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_jkknm"]
+
+[resource]
+script = ExtResource("1_jkknm")
+id = &"sword_knockback_uncommon"
+ability_name = "Ataque da Espada"
+description = "Aumenta a força do empurrão em +100."
+rarity = 1
+target_ability_id = &"sword_attack"
+modifiers = {
+"knockback_strength": 100
+}
+metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

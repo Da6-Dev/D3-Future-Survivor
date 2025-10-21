@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cokn214ucd3h7"]
+
+[ext_resource type="Script" uid="uid://bukjf4xve6ka6" path="res://Scripts/Skills/arc_drone.gd" id="1_irn1a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_irn1a"]
+radius = 40.0
+
+[node name="ArcDrone" type="Node2D"]
+script = ExtResource("1_irn1a")
+
+[node name="Visual" type="Polygon2D" parent="."]
+color = Color(0.8, 0.8, 0.8, 1)
+polygon = PackedVector2Array(-6, 6, 6, 6, 6, -6, -6, -6)
+
+[node name="SeparationArea" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationArea"]
+shape = SubResource("CircleShape2D_irn1a")

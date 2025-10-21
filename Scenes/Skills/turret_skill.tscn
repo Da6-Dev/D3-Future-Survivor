@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch6uwhj1syeby"]
+
+[ext_resource type="Script" uid="uid://bj4pylj1u38kt" path="res://Scripts/Skills/turret_skill.gd" id="1_oona0"]
+[ext_resource type="PackedScene" uid="uid://d1atjq0elupy6" path="res://Scenes/Skills/turret_object.tscn" id="2_tkrm1"]
+
+[node name="TurretSkill" type="Node2D"]
+script = ExtResource("1_oona0")
+turret_scene = ExtResource("2_tkrm1")
+ability_id = &"deploy_turret"

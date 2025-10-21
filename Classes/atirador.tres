@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PlayerClass" load_steps=3 format=3 uid="uid://db7i74vm05gsx"]
+
+[ext_resource type="Script" uid="uid://eohwjb1y0yn" path="res://Scripts/Resources/PlayerClass.gd" id="1_tqc4k"]
+[ext_resource type="PackedScene" uid="uid://dacuxsnoeh5nk" path="res://Scenes/Skills/pistol_skill.tscn" id="2_46rrm"]
+
+[resource]
+script = ExtResource("1_tqc4k")
+name_class = "Atirador"
+description = "Mais rápido, porém com menos vida. Começa com uma pistola que atira automaticamente no inimigo mais próximo."
+max_health = 80
+speed = 160.0
+starting_ability_scene = ExtResource("2_46rrm")
+metadata/_custom_type_script = "uid://eohwjb1y0yn"

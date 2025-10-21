@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"arc_drones_swarm_legendary"
+ability_name = "VANTs de Arco"
+description = "ENXAME! Adiciona +2 VANTs de uma vez."
+rarity = 4
+target_ability_id = &"arc_drones"
+modifiers = {
+"drone_count": 2
+}

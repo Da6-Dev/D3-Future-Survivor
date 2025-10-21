@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://o8taryiocnva"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_nviit"]
+
+[resource]
+script = ExtResource("1_nviit")
+id = &"aura_knockback_uncommon"
+ability_name = "Postura Defensiva"
+description = "Aumenta a força do empurrão da aura em +100."
+rarity = 1
+target_ability_id = &"defensive_aura"
+modifiers = {
+"knockback_strength": 100
+}
+metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

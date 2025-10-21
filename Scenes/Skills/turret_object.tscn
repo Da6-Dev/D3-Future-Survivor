@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1atjq0elupy6"]
+
+[ext_resource type="Texture2D" uid="uid://ccc1fq2w6h0dw" path="res://Art/Sprites/Turret/turret-sprites-deployment.png" id="1_cywtx"]
+[ext_resource type="Script" uid="uid://eythum3rl6ys" path="res://Scripts/Skills/turret_object.gd" id="1_jtems"]
+[ext_resource type="PackedScene" uid="uid://cwmt7ybk8lhnq" path="res://Scenes/Skills/turret_bullet.tscn" id="2_abi6k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtems"]
+atlas = ExtResource("1_cywtx")
+region = Rect2(378, 0, 54, 47)
+
+[node name="TurretObject" type="Node2D"]
+script = ExtResource("1_jtems")
+bullet_scene = ExtResource("2_abi6k")
+
+[node name="Visual" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_jtems")
+
+[node name="FireTimer" type="Timer" parent="."]
+
+[node name="DurationTimer" type="Timer" parent="."]
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(11, -12)

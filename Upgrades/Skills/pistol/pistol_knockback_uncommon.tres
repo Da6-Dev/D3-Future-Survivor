@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"pistol_knockback_uncommon"
+ability_name = "Pistola Automática"
+description = "Aumenta a força de empurrão dos projéteis."
+rarity = 1
+target_ability_id = &"pistol_shot"
+modifiers = {
+"knockback_strength": 150.0
+}

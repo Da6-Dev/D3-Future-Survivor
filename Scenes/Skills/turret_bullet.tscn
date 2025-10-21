@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwmt7ybk8lhnq"]
+
+[ext_resource type="Script" uid="uid://bp0a2cfjjfs47" path="res://Scripts/Skills/turret_bullet.gd" id="1_60s6a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_imr36"]
+size = Vector2(8, 4)
+
+[node name="TurretBullet" type="Area2D"]
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("1_60s6a")
+
+[node name="Visual" type="Polygon2D" parent="."]
+color = Color(0.5446004, 0.28363878, 0.088899754, 1)
+polygon = PackedVector2Array(4, -2, 4, 2, -4, 2, -4, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_imr36")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]

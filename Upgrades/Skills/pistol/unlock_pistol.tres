@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://bty72mxbvqxxm"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_1vtf2"]
+[ext_resource type="PackedScene" uid="uid://dacuxsnoeh5nk" path="res://Scenes/Skills/pistol_skill.tscn" id="1_mvjes"]
+
+[resource]
+script = ExtResource("1_1vtf2")
+id = &"unlock_pistol"
+ability_name = "NOVA: Pistola Automática"
+description = "Desbloqueia uma pistola que atira automaticamente no inimigo mais próximo."
+rarity = 2
+type = 0
+target_ability_id = &"pistol_shot"
+new_ability_scene = ExtResource("1_mvjes")
+metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

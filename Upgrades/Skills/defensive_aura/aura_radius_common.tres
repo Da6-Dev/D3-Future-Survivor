@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://ce6q388abxu8g"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_4esgf"]
+
+[resource]
+script = ExtResource("1_4esgf")
+id = &"aura_radius_common"
+ability_name = "Postura Defensiva"
+description = "Aumenta a área de efeito da aura em +20."
+target_ability_id = &"defensive_aura"
+modifiers = {
+"radius": 20
+}
+metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

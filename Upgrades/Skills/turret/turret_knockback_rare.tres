@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://bn1euug21scdt"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"turret_knockback_rare"
+ability_name = "Torreta Atiradora"
+description = "Aumenta a força de empurrão dos projéteis da torreta em +50."
+rarity = 2
+target_ability_id = &"deploy_turret"
+modifiers = {
+"knockback_strength": 50.0
+}

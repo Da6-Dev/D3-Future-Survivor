@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhfbcfq205etb"]
+
+[ext_resource type="Script" uid="uid://b3atg72ya5sy8" path="res://Scripts/Skills/paralyzing_shot_bullet.gd" id="1_igy67"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1nml"]
+size = Vector2(25, 20)
+
+[node name="ParalyzingShotBullet" type="Area2D"]
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("1_igy67")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-10, -8, 10, -8, 10, 8, -10, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w1nml")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-6, 1)
+rect = Rect2(-10, -14, 32, 26)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

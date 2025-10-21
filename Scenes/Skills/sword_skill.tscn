@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdcbgk4ql1wge"]
+
+[ext_resource type="Script" uid="uid://dsfxqx1mi5fkn" path="res://Scripts/Skills/sword_skill.gd" id="1_f4wqt"]
+
+[node name="SwordSkill" type="Node2D"]
+visibility_layer = 8
+script = ExtResource("1_f4wqt")
+ability_id = &"sword_attack"
+active_duration = 0.4
+damage_amount = 2
+requires_aiming = true
+
+[node name="SwordArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 16
+
+[node name="AttackAreaVisual" type="Polygon2D" parent="SwordArea"]
+polygon = PackedVector2Array(-13, -47, 52, -49, 72, -27, 83, -3, 75, 23, 52, 46, -13, 41, -9, 18, 25, 20, 34, 0, 25, -18, -10, -20)
+
+[node name="AttackAreaCollision" type="CollisionPolygon2D" parent="SwordArea"]
+polygon = PackedVector2Array(25, -18, -10, -20, -13, -47, 52, -49, 72, -27, 83, -3, 75, 23, 52, 46, -13, 41, -9, 18, 25, 20, 34, 0)

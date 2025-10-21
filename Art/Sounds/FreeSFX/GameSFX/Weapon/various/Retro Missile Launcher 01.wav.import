@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvbh6wqv6qfus"
+path="res://.godot/imported/Retro Missile Launcher 01.wav-ce8a3262af83eeafcc46f41f5b581f8b.sample"
+
+[deps]
+
+source_file="res://Art/Sounds/FreeSFX/GameSFX/Weapon/various/Retro Missile Launcher 01.wav"
+dest_files=["res://.godot/imported/Retro Missile Launcher 01.wav-ce8a3262af83eeafcc46f41f5b581f8b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

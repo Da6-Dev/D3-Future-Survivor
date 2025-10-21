@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://1vprki6fce03"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_ytbvh"]
+
+[resource]
+script = ExtResource("1_ytbvh")
+id = &"sword_damage_common"
+ability_name = "Ataque da Espada"
+description = "Aumenta o dano do ataque em +1."
+target_ability_id = &"sword_attack"
+modifiers = {
+"damage_amount": 1
+}
+metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

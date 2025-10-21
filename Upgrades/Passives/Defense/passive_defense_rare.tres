@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://c4tqmm4v740wp"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"passive_defense_rare"
+ability_name = "Passiva: Revestimento III"
+description = "Reduz todo o dano recebido em 7%."
+rarity = 2
+type = 2
+passive_stat_id = &"stat_defense"
+modifiers = {
+"damage_reduction": 0.07
+}

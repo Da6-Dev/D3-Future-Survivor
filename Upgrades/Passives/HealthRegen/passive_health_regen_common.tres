@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://co1do6cu3m7qs"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"passive_health_regen_common"
+ability_name = "Passiva: Recuperação"
+description = "Recupera 0.2 de vida por segundo."
+type = 2
+passive_stat_id = &"stat_health_regen"
+modifiers = {
+"health_regen": 0.2
+}

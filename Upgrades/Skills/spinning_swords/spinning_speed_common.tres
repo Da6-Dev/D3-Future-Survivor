@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://cqrbk1h5cq5fq"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_5hwev"]
+
+[resource]
+script = ExtResource("1_5hwev")
+id = &"spinning_speed_common"
+ability_name = "Espadas Orbitais"
+description = "Aumenta a velocidade de rotação das espadas."
+target_ability_id = &"spinning_swords"
+modifiers = {
+"rotation_speed": 0.3
+}
+metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

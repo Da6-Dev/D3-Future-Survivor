@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://b5t6jtijcfboo"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"passive_attack_speed_common"
+ability_name = "Passiva: Cadência"
+description = "Aumenta a velocidade de ataque de todas as habilidades em +4%."
+type = 2
+passive_stat_id = &"stat_attack_speed"
+modifiers = {
+"attack_speed": 0.04
+}

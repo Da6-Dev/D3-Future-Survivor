@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://u2lyo33r5kql"]
+
+[ext_resource type="Script" uid="uid://be51mvwswmjle" path="res://Scripts/Skills/spinning_swords_skills.gd" id="1_7ttgi"]
+[ext_resource type="PackedScene" uid="uid://cstqnmjeuyl0" path="res://Scenes/Skills/spinning_sword.tscn" id="2_2vtvf"]
+
+[node name="SpinningSwordsSkills" type="Node2D"]
+visibility_layer = 8
+script = ExtResource("1_7ttgi")
+sword_scene = ExtResource("2_2vtvf")
+sword_count = 1
+ability_id = &"spinning_swords"
+cooldown_time = 3.0
+active_duration = 2.0
+
+[node name="Pivot" type="Node2D" parent="."]

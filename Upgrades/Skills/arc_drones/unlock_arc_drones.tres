@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://0nwkrhqbjbyv"]
+
+[ext_resource type="PackedScene" uid="uid://d0cldneek2xed" path="res://Scenes/Skills/arc_drones_skill.tscn" id="1_pdam7"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"unlock_arc_drones"
+ability_name = "NOVA: VANTs de Arco"
+description = "Invoca VANTs que perseguem inimigos próximos, criando vigas elétricas de dano entre eles."
+rarity = 2
+type = 0
+target_ability_id = &"arc_drones"
+new_ability_scene = ExtResource("1_pdam7")

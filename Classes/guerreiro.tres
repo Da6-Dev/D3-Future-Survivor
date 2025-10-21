@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PlayerClass" load_steps=3 format=3 uid="uid://bkgqyf5y1rdfi"]
+
+[ext_resource type="Script" uid="uid://eohwjb1y0yn" path="res://Scripts/Resources/PlayerClass.gd" id="1_l544m"]
+[ext_resource type="PackedScene" uid="uid://bdcbgk4ql1wge" path="res://Scenes/Skills/sword_skill.tscn" id="2_6caev"]
+
+[resource]
+script = ExtResource("1_l544m")
+name_class = "Guerreiro"
+description = "Começa com mais vida e uma espada de curto alcance que atinge múltiplos alvos."
+max_health = 120
+speed = 120.0
+starting_ability_scene = ExtResource("2_6caev")
+metadata/_custom_type_script = "uid://eohwjb1y0yn"

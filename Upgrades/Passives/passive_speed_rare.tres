@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://dx641w8y1wn45"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"passive_speed_rare"
+ability_name = "Passiva: Agilidade"
+description = "Aumenta a velocidade de movimento base em +20."
+rarity = 2
+type = 2
+passive_stat_id = &"stat_speed"
+modifiers = {
+"speed": 20
+}

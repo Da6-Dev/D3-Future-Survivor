@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://dfgln62q7nk5n"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"passive_crit_chance_uncommon"
+ability_name = "Passiva: Foco II"
+description = "Aumenta a chance de acerto crítico em +5%."
+rarity = 1
+type = 2
+passive_stat_id = &"stat_crit_chance"
+modifiers = {
+"crit_chance": 0.05
+}

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq18yrw10arfn"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_dv71w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k4x02"]
+font_size = 25
+font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+
+[node name="HudHabilityPlaceholder" type="MarginContainer"]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 60.0
+offset_bottom = 60.0
+
+[node name="HabilityTexture" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = SubResource("CanvasTexture_dv71w")
+
+[node name="CooldownLabel" type="Label" parent="HabilityTexture"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_k4x02")
+horizontal_alignment = 1
+vertical_alignment = 1

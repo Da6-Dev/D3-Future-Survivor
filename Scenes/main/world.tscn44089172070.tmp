@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3l1vjfx18r4b"]
+
+[ext_resource type="PackedScene" uid="uid://dchh3dq4s4p65" path="res://Scenes/enemies/enemy_spawner.tscn" id="1_4hdv6"]
+[ext_resource type="PackedScene" uid="uid://cr6tgdhiv4r20" path="res://Scenes/ui/hud.tscn" id="2_rf3pu"]
+[ext_resource type="PackedScene" uid="uid://ush8hr6hjxs5" path="res://Scenes/ui/settings_menu.tscn" id="3_5f0hb"]
+[ext_resource type="PackedScene" uid="uid://bxcm1viko0bc2" path="res://Scenes/player/player.tscn" id="4_avow7"]
+[ext_resource type="PackedScene" uid="uid://nvdm8q1e4ecu" path="res://Scenes/ui/upgrade_screen.tscn" id="5_jpift"]
+
+[node name="World" type="Node2D"]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("1_4hdv6")]
+
+[node name="HUD" parent="." instance=ExtResource("2_rf3pu")]
+
+[node name="SettingsMenu" parent="." instance=ExtResource("3_5f0hb")]
+visible = false
+
+[node name="Player" parent="." instance=ExtResource("4_avow7")]
+
+[node name="UpgradeScreen" parent="." instance=ExtResource("5_jpift")]
+process_mode = 3
+visible = false

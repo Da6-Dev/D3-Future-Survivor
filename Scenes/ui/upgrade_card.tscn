@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://hsbka7hhhfdl"]
+
+[ext_resource type="Script" uid="uid://qfn15brs5d63" path="res://Scripts/ui/upgrade_card.gd" id="1_0dsk3"]
+
+[node name="UpgradeCard" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 400)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_0dsk3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="AbilityNameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Nome da Habilidade"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "Aqui vai a longa descrição do que este upgrade maravilhoso faz pelo jogador."
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChooseButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Escolher
+"

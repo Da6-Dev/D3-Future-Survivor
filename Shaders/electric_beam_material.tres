@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://du40p3l8b4yok"]
+
+[ext_resource type="Shader" uid="uid://d2jv7geg6atd2" path="res://Shaders/electric_beam.gdshader" id="1_2cu8t"]
+
+[resource]
+shader = ExtResource("1_2cu8t")
+shader_parameter/core_color = Color(1, 1, 1, 1)
+shader_parameter/glow_color = Color(0.2, 0.8, 1, 0.8)
+shader_parameter/core_width = 0.2
+shader_parameter/flicker_intensity = 0.6
+shader_parameter/flicker_speed = 8.0

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://b546s06cjue1h"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"paralyzing_shot_mastery_epic"
+ability_name = "Tiro Paralisante"
+description = "Aumenta o dano em +10 e a duração da paralisia em +1 segundo."
+rarity = 3
+target_ability_id = &"paralyzing_shot"
+modifiers = {
+"damage_amount": 10,
+"stun_duration": 1.0
+}

@@ -1,0 +1,496 @@
+[gd_scene load_steps=11 format=3 uid="uid://ush8hr6hjxs5"]
+
+[ext_resource type="Script" uid="uid://ulggkxepfiq0" path="res://Scripts/ui/settings_menu.gd" id="1_u1301"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u1301"]
+bg_color = Color(0, 0, 0, 0.75686276)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_7faqd"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_pcrn0"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_u1301"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_welbf"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_ynhrj"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_7k5s4"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_ci7w0"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_gcx5s"]
+font_size = 30
+
+[node name="SettingsMenu" type="CanvasLayer"]
+script = ExtResource("1_u1301")
+
+[node name="BackgroundDim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.25490198)
+
+[node name="SettingsPanel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(1200, 680)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -340.0
+offset_right = 600.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u1301")
+
+[node name="MainMargin" type="MarginContainer" parent="SettingsPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/MainMargin"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_7faqd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="MainContent" type="TabContainer" parent="SettingsPanel/MainMargin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+current_tab = 4
+
+[node name="Geral" type="VBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent"]
+visible = false
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 0
+
+[node name="LanguageOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral/LanguageOption"]
+layout_mode = 2
+text = "Idioma"
+label_settings = SubResource("LabelSettings_pcrn0")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral/LanguageOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="LanguageButton" type="OptionButton" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral/LanguageOption"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="UIScaleOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral/UIScaleOption"]
+layout_mode = 2
+text = "Tamanho da Interface"
+label_settings = SubResource("LabelSettings_u1301")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral/UIScaleOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="UIScaleSlider" type="HSlider" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral/UIScaleOption"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 1
+value = 50.0
+
+[node name="Gráficos" type="VBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent"]
+visible = false
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 1
+
+[node name="WindowModeOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/WindowModeOption"]
+layout_mode = 2
+text = "Modo de Janela"
+label_settings = SubResource("LabelSettings_welbf")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/WindowModeOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="WindowModeButton" type="OptionButton" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/WindowModeOption"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Tela Cheia"
+popup/item_0/id = 0
+popup/item_1/text = "Janela"
+popup/item_1/id = 1
+popup/item_2/text = "Janela sem Bordas"
+popup/item_2/id = 2
+
+[node name="Spacer2" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ResolutionOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/ResolutionOption"]
+layout_mode = 2
+text = "Resolução"
+label_settings = SubResource("LabelSettings_welbf")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/ResolutionOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="ResolutionButton" type="OptionButton" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/ResolutionOption"]
+layout_mode = 2
+
+[node name="Spacer3" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="VSyncOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/VSyncOption"]
+layout_mode = 2
+text = "Sincronização Vertical (VSync)"
+label_settings = SubResource("LabelSettings_welbf")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/VSyncOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="VSyncCheck" type="CheckButton" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/VSyncOption"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/icon_max_width = 64
+theme_override_constants/line_spacing = 0
+theme_override_constants/check_v_offset = 4
+
+[node name="Spacer4" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="FpsLimitOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/FpsLimitOption"]
+layout_mode = 2
+text = "Limite de FPS"
+label_settings = SubResource("LabelSettings_welbf")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/FpsLimitOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="FpsLimitSpinBox" type="SpinBox" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/FpsLimitOption"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ShadowQualityOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/ShadowQualityOption"]
+layout_mode = 2
+text = "Qualidade das Sombras"
+label_settings = SubResource("LabelSettings_welbf")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/ShadowQualityOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="ShadowQualityButton" type="OptionButton" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/ShadowQualityOption"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Baixa"
+popup/item_0/id = 0
+popup/item_1/text = "Média"
+popup/item_1/id = 1
+popup/item_2/text = "Alta"
+popup/item_2/id = 2
+
+[node name="Áudio" type="MarginContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_right = 300
+metadata/_tab_index = 2
+
+[node name="ÁudioContainer" type="VBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio"]
+layout_mode = 2
+alignment = 1
+
+[node name="MasterVolumeOption" type="VBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer/MasterVolumeOption"]
+layout_mode = 2
+text = "Volume Geral"
+label_settings = SubResource("LabelSettings_ynhrj")
+
+[node name="MasterVolumeSlider" type="HSlider" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer/MasterVolumeOption"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="MusicVolumeOption" type="VBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer/MusicVolumeOption"]
+layout_mode = 2
+text = "Música"
+label_settings = SubResource("LabelSettings_ynhrj")
+
+[node name="MusicVolumeSlider" type="HSlider" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer/MusicVolumeOption"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="SfxVolumeOption2" type="VBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer/SfxVolumeOption2"]
+layout_mode = 2
+text = "SFX"
+label_settings = SubResource("LabelSettings_ynhrj")
+
+[node name="SfxVolumeSlider" type="HSlider" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer/SfxVolumeOption2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Controles" type="ScrollContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent"]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 3
+
+[node name="ControlesMargin" type="MarginContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MouseSensitivityOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer/MouseSensitivityOption"]
+layout_mode = 2
+text = "Sensibilidade do Mouse"
+label_settings = SubResource("LabelSettings_7k5s4")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer/MouseSensitivityOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="MouseSensitivitySlider" type="HSlider" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer/MouseSensitivityOption"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="InvertYAxisOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer/InvertYAxisOption"]
+layout_mode = 2
+text = "Inverter Eixo Y"
+label_settings = SubResource("LabelSettings_ci7w0")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer/InvertYAxisOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="InvertYAxisCheck" type="CheckButton" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer/InvertYAxisOption"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/check_v_offset = 4
+
+[node name="Spacer2" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="Spacer4" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="KeybindingsLabel" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer"]
+layout_mode = 2
+text = "Mapeamento de Teclas"
+label_settings = SubResource("LabelSettings_ci7w0")
+
+[node name="Spacer3" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="KeybindingsGrid" type="GridContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 252
+theme_override_constants/v_separation = 30
+columns = 2
+
+[node name="Acessibilidade" type="VBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent"]
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 4
+
+[node name="ColorblindModeOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade/ColorblindModeOption"]
+layout_mode = 2
+text = "Modo Daltônico"
+label_settings = SubResource("LabelSettings_gcx5s")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade/ColorblindModeOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="ColorblindModeButton" type="OptionButton" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade/ColorblindModeOption"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Desativado"
+popup/item_0/id = 0
+popup/item_1/text = "Protanopia"
+popup/item_1/id = 1
+popup/item_2/text = "Deuteranopia"
+popup/item_2/id = 2
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="SubtitleSizeOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade/SubtitleSizeOption"]
+layout_mode = 2
+text = "Tamanho das Legendas"
+label_settings = SubResource("LabelSettings_gcx5s")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade/SubtitleSizeOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="SubtitleSizeSlider" type="HSlider" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade/SubtitleSizeOption"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ReduceMotionOption" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade/ReduceMotionOption"]
+layout_mode = 2
+text = "Reduzir Movimento de Tela"
+label_settings = SubResource("LabelSettings_gcx5s")
+
+[node name="Spacer" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade/ReduceMotionOption"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="ReduceMotionCheck" type="CheckBox" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent/Acessibilidade/ReduceMotionOption"]
+layout_mode = 2
+text = "Ativo"
+
+[node name="HSeparator" type="HSeparator" parent="SettingsPanel/MainMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="BottomButtons" type="HBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+alignment = 1
+
+[node name="ApplyButton" type="Button" parent="SettingsPanel/MainMargin/VBoxContainer/BottomButtons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Aplicar"
+
+[node name="Spacer2" type="Control" parent="SettingsPanel/MainMargin/VBoxContainer/BottomButtons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="SettingsPanel/MainMargin/VBoxContainer/BottomButtons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Voltar"

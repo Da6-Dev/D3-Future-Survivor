@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://bafhwunbqs6gu"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"pistol_damage_common"
+ability_name = "Pistola Automática"
+description = "Aumenta o dano dos projéteis em +2."
+target_ability_id = &"pistol_shot"
+modifiers = {
+"damage_amount": 2
+}

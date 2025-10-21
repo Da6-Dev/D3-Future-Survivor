@@ -173,8 +173,8 @@ func _apply_class_data(class_data: PlayerClass):
 	if class_data.starting_ability_scene is PackedScene:
 		var ability_instance: BaseAbility = class_data.starting_ability_scene.instantiate()
 		add_child(ability_instance)
+		ability_instance.set_player_reference(self)
 		ability_instance.total_attack_speed_multiplier += global_attack_speed_bonus
-		
 		var id = ability_instance.ability_id
 		if id == &"":
 			push_error("A habilidade instanciada não tem um 'ability_id'!")
@@ -208,11 +208,11 @@ func apply_upgrade(upgrade: AbilityUpgrade):
 	# -------------------------------------
 
 	if upgrade.type == AbilityUpgrade.UpgradeType.UNLOCK_NEW_ABILITY:
-		# ... (lógica de unlock permanece igual) ...
 		var scene_to_load = upgrade.new_ability_scene
 		if scene_to_load is PackedScene:
 			var ability_instance: BaseAbility = scene_to_load.instantiate()
 			add_child(ability_instance)
+			ability_instance.set_player_reference(self)
 			ability_instance.total_attack_speed_multiplier += global_attack_speed_bonus
 			var id = ability_instance.ability_id
 			active_abilities[id] = ability_instance
@@ -415,6 +415,8 @@ func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knock
 		shield_changed.emit(current_shield, max_shield)
 		print("Escudo absorveu %s de dano. Escudo restante: %s" % [absorbed_by_shield, current_shield])
 	# ---------------------------
+	if knockback_strength > 0:
+		velocity = knockback_direction * knockback_strength
 
 	# Se ainda houver dano após o escudo...
 	if damage_to_health > 0:
@@ -427,10 +429,6 @@ func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knock
 		animations.modulate = flash_color
 		invincibility_timer.start() # Timer de invencibilidade
 		# ----------------------------------------------------
-
-	# Knockback é aplicado mesmo se o escudo absorver tudo
-	if knockback_strength > 0 and not _is_invincible: # Evita knockback duplo
-		velocity = knockback_direction * knockback_strength
 
 	# Verifica morte
 	if current_health <= 0:

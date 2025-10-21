@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PlayerClass" load_steps=3 format=3 uid="uid://ckhbno54sg3qi"]
 
 [ext_resource type="Script" uid="uid://eohwjb1y0yn" path="res://Scripts/Resources/PlayerClass.gd" id="1_2i1xx"]
-[ext_resource type="PackedScene" uid="uid://ch6uwhj1syeby" path="res://Scenes/Skills/turret_skill.tscn" id="2_au2ts"]
+[ext_resource type="PackedScene" uid="uid://d0cldneek2xed" path="res://Scenes/Skills/arc_drones_skill.tscn" id="2_au2ts"]
 
 [resource]
 script = ExtResource("1_2i1xx")

@@ -276,3 +276,6 @@ func _spawn_circle(amount: int, radius: float):
 func _on_enemy_died(_enemy_node: CharacterBody2D):
 	current_active_enemies -= 1
 	current_active_enemies = maxi(0, current_active_enemies)
+
+func set_player_reference(p_player: Node):
+	player = p_player

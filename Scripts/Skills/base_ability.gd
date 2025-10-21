@@ -41,7 +41,6 @@ func _init() -> void:
 
 # _ready() agora só chama a função de setup da habilidade filha
 func _ready() -> void:
-	player = get_owner()
 	_ability_ready() # Chama a função que pode ser sobrescrita
 
 # Função vazia para ser sobrescrita pelas habilidades filhas
@@ -114,3 +113,6 @@ func get_time_left() -> float:
 		return _cooldown_timer.time_left
 	return 0.0
 # ------------------------------------------------------
+
+func set_player_reference(p_player: Node) -> void:
+	player = p_player

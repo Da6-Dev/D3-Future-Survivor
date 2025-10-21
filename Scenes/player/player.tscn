@@ -149,6 +149,7 @@ collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_v0iea")
 speed = 150.0
+max_health = 20000
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -19.999998)

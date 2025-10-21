@@ -72,8 +72,6 @@ shape = SubResource("CircleShape2D_hghv2")
 
 [node name="KnockbackTimer" type="Timer" parent="."]
 
-[node name="PlayerSearchTimer" type="Timer" parent="."]
-
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 one_shot = true
 

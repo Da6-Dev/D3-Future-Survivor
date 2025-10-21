@@ -21,6 +21,8 @@ config/features=PackedStringArray("4.5", "GL Compatibility")
 GameManager="*res://Scripts/main/game_manager.gd"
 SettingsManager="*res://Scripts/main/settings_manager.gd"
 GameSession="*res://Scripts/main/game_session.gd"
+EntityManager="*res://Scripts/main/entity_manager.gd"
+ResourceLoaderUtils="*res://Scripts/main/resource_loader_utils.gd"
 
 [display]
 

@@ -5,16 +5,13 @@ extends BaseAbility
 @export var explosion_knockback: float = 600.0
 
 @export_category("Overload Buff")
-@export var cooldown_reduction_percent: float = 0.3 # 30% de redução
-
-# active_duration é usado como a duração do buff
+@export var cooldown_reduction_percent: float = 0.3
 
 var camera: Camera2D
 var original_camera_zoom: Vector2
 
 func _ability_ready() -> void:
 	on_deactivated.connect(_on_buff_finished)
-	# Busca a câmera de forma segura
 	if is_instance_valid(player) and player.has_node("PlayerCamera"):
 		camera = player.get_node("PlayerCamera")
 		original_camera_zoom = camera.zoom
@@ -37,16 +34,14 @@ func _apply_player_buff():
 	if is_instance_valid(player) and player.has_method("apply_global_cooldown_modifier"):
 		player.apply_global_cooldown_modifier(1.0 - cooldown_reduction_percent, ability_id)
 
-	# Efeito de câmera: Zoom out rápido
 	if is_instance_valid(camera):
 		var tween = create_tween().set_trans(Tween.TRANS_SINE)
-		tween.tween_property(camera, "zoom", original_camera_zoom * 0.95, 0.2) # Zoom out 5%
+		tween.tween_property(camera, "zoom", original_camera_zoom * 0.95, 0.2)
 
 func _on_buff_finished():
 	if is_instance_valid(player) and player.has_method("remove_global_cooldown_modifier"):
 		player.remove_global_cooldown_modifier(ability_id)
 		
-	# Efeito de câmera: Retorno suave ao zoom original
 	if is_instance_valid(camera):
 		var tween = create_tween().set_trans(Tween.TRANS_SINE)
 		tween.tween_property(camera, "zoom", original_camera_zoom, 0.5)

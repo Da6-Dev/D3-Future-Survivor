@@ -1,4 +1,3 @@
-# Scripts/Skills/sword_skill.gd
 extends BaseAbility
 
 @export_category("Sword Skill Parameters")
@@ -7,8 +6,6 @@ extends BaseAbility
 @onready var visual_area: Polygon2D = $SwordArea/AttackAreaVisual
 @onready var collision_shape_2d: CollisionPolygon2D = $SwordArea/AttackAreaCollision
 @onready var attack_area: Area2D = $SwordArea
-
-# A variável 'player' é herdada da BaseAbility, mas inicializamos aqui
 
 func _ability_ready() -> void:
 	visual_area.visible = false
@@ -31,13 +28,11 @@ func _on_attack_finished() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	var target = area.get_owner()
 
-	# A verificação ainda é importante caso algo dê errado na inicialização
 	if not is_instance_valid(player):
-		push_warning("SwordSkill: _on_area_entered chamada, mas 'player' ainda é inválido!")
 		return
 
 	if target.has_method("take_damage"):
 		var knockback_direction = (target.global_position - global_position).normalized()
 
-		var final_damage = player.get_calculated_damage(damage_amount) # Agora 'player' deve ser válido
+		var final_damage = player.get_calculated_damage(damage_amount)
 		target.take_damage(final_damage, knockback_direction, knockback_strength)

@@ -1,13 +1,12 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://cw2wf8v3jsk4i"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
 [resource]
 script = ExtResource("1_script")
 id = &"passive_crit_damage_common"
 ability_name = "Passiva: Devastador"
 description = "Aumenta o dano de acertos críticos em +25%."
-rarity = 0
 type = 2
 passive_stat_id = &"stat_crit_damage"
 modifiers = {

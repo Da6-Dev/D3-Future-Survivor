@@ -1,24 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://hsbka7hhhfdl"]
+[gd_scene load_steps=6 format=3 uid="uid://hsbka7hhhfdl"]
 
 [ext_resource type="Script" uid="uid://qfn15brs5d63" path="res://Scripts/ui/upgrade_card.gd" id="1_0dsk3"]
 [ext_resource type="Theme" uid="uid://c0r8e3ecqnmxp" path="res://Art/HUD-UI/Tema.tres" id="1_l7ayb"]
+[ext_resource type="Shader" uid="uid://nvquyokkbi8u" path="res://Shaders/upgrade_card.gdshader" id="1_pkv8w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7ayb"]
+resource_local_to_scene = true
+shader = ExtResource("1_pkv8w")
+shader_parameter/base_color = Color(1, 1, 1, 1)
+shader_parameter/shine_color = Color(1, 1, 1, 0.4)
+shader_parameter/shine_progress = 0.0
+shader_parameter/shine_width = 0.15
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_l7ayb"]
-color = Color(0.5686275, 0.17254902, 0.7529412, 1)
-grow_begin = 48.0
-grow_end = 45.0
-thickness = 9
+color = Color(1, 1, 1, 1)
+grow_begin = 5.0
+grow_end = 5.0
+thickness = 3
 
 [node name="UpgradeCard" type="PanelContainer"]
-custom_minimum_size = Vector2(500, 400)
-offset_right = 389.7375
-offset_bottom = 591.2853
+process_mode = 3
+material = SubResource("ShaderMaterial_l7ayb")
+offset_right = 270.0
+offset_bottom = 395.0
+size_flags_vertical = 4
 theme = ExtResource("1_l7ayb")
 script = ExtResource("1_0dsk3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 28
+size_flags_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
 custom_minimum_size = Vector2(128, 128)
@@ -32,7 +45,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_l7ayb")
 
 [node name="AbilityNameLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 16
 text = "Nome da Habilidade"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -42,12 +55,8 @@ layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_l7ayb")
 
 [node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(190, 120)
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Aqui vai a longa descrição do que este upgrade maravilhoso faz pelo jogador."
 autowrap_mode = 2
-
-[node name="ChooseButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Escolher
-"

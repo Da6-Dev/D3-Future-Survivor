@@ -26,6 +26,7 @@ signal shield_changed(current_shield: float, max_shield: float)
 
 @onready var collision_shape: CollisionShape2D = $PhysicalCollision
 @onready var invincibility_timer: Timer = $InvincibilityTimer
+@onready var collect_sound : AudioStreamPlayer = $ColllectSound
 
 var active_abilities: Dictionary[StringName, BaseAbility] = {}
 var active_passives: Dictionary = {}
@@ -373,6 +374,7 @@ func has_empty_passive_slot() -> bool:
 
 func add_xp(amount: float) -> void:
 	current_xp += amount
+	collect_sound.play(0)
 	while current_xp >= xp_to_next_level:
 		level_up()
 	xp_changed.emit(current_xp, xp_to_next_level)

@@ -41,7 +41,7 @@ func _init() -> void:
 
 # _ready() agora só chama a função de setup da habilidade filha
 func _ready() -> void:
-	player = get_owner()
+	player = get_tree().get_first_node_in_group("player")
 	_ability_ready() # Chama a função que pode ser sobrescrita
 
 # Função vazia para ser sobrescrita pelas habilidades filhas

@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bxcm1viko0bc2"]
+[gd_scene load_steps=23 format=3 uid="uid://bxcm1viko0bc2"]
 
 [ext_resource type="Script" uid="uid://ckdivkb1dvitb" path="res://Scripts/player/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cv2w6dgxak7of" path="res://Art/Sprites/Player/ROBO_WITHOUT HANDS.png" id="2_eo61r"]
+[ext_resource type="AudioStream" uid="uid://d76uktuhl4c7" path="res://Art/Sounds/OriginalSFX/CollectSound.wav" id="3_mxepk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mxepk"]
 atlas = ExtResource("2_eo61r")
@@ -189,5 +190,8 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_eo61r")
+
+[node name="ColllectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mxepk")
 
 [connection signal="area_entered" from="CollectionArea" to="." method="_on_collection_area_area_entered"]

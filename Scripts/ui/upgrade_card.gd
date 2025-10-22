@@ -7,12 +7,19 @@ signal chosen(upgrade: AbilityUpgrade)
 @onready var ability_name_label: Label = $VBoxContainer/AbilityNameLabel
 @onready var description_label: Label = $VBoxContainer/DescriptionLabel
 @onready var choose_button: Button = $VBoxContainer/ChooseButton
+var spawn_tween : Tween
 
 var _upgrade_data: AbilityUpgrade
 
 func _ready() -> void:
 	# Conecta o sinal "pressed" do botão a uma função neste script.
 	choose_button.pressed.connect(_on_choose_button_pressed)
+	pivot_offset = get_rect().size / 2
+	
+	spawn_tween = create_tween()
+	spawn_tween.tween_property(self,"scale",Vector2(1.2,1.2),0.6).from(Vector2(0.4,0.4)).set_trans(Tween.TRANS_EXPO)
+	spawn_tween.tween_property(self,"scale",Vector2(1,1),0.1).set_ease(Tween.EASE_IN_OUT)
+	spawn_tween.play()
 
 # Função pública para popular a carta com os dados de um upgrade.
 func display_upgrade(upgrade: AbilityUpgrade) -> void:

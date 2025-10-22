@@ -11,6 +11,6 @@ rarity = 3
 target_ability_id = &"sword_attack"
 modifiers = {
 "attack_speed_multiplier": 0.15,
-"damage_amount": 3
+"damage_amount": 3.0
 }
 metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

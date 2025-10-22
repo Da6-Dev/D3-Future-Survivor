@@ -10,5 +10,5 @@ description = "Aumenta o dano do tiro em +5."
 rarity = 0
 target_ability_id = &"paralyzing_shot"
 modifiers = {
-"damage_amount": 5
+"damage_amount": 5.0
 }

@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-# --- Referências aos Nós ---
-# Continuamos pegando as referências com @onready
 @onready var fps_limit_spinbox: SpinBox = $"SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/FpsLimitOption/FpsLimitSpinBox"
 @onready var keybindings_grid: GridContainer = $"SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer/KeybindingsGrid"
 @onready var language_button: OptionButton = $SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral/LanguageOption/LanguageButton
@@ -14,7 +12,6 @@ extends CanvasLayer
 @onready var sfx_volume_slider: HSlider = $"SettingsPanel/MainMargin/VBoxContainer/MainContent/Áudio/ÁudioContainer/SfxVolumeOption2/SfxVolumeSlider"
 @onready var back_button: Button = $SettingsPanel/MainMargin/VBoxContainer/BottomButtons/BackButton
 @onready var apply_button: Button = $SettingsPanel/MainMargin/VBoxContainer/BottomButtons/ApplyButton
-
 
 var is_dirty = false
 var _action_to_rebind: StringName = &""
@@ -53,20 +50,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_pressed() and not event.is_echo():
-		# Se a tecla pressionada for ESC, cancela a redefinição
 		if event.keycode == KEY_ESCAPE:
 			_action_to_rebind = &""
-			_populate_keybindings() # Restaura o texto original do botão
+			_populate_keybindings()
 			get_viewport().set_input_as_handled()
 			return
 		
-		# Apaga a tecla antiga
 		InputMap.action_erase_events(_action_to_rebind)
-		# Adiciona a nova tecla
 		InputMap.action_add_event(_action_to_rebind, event)
 		
 		_action_to_rebind = &""
-		_populate_keybindings() # Atualiza a UI com a nova tecla
+		_populate_keybindings()
 		is_dirty = true
 		get_viewport().set_input_as_handled()
 
@@ -84,9 +78,7 @@ func close_menu() -> void:
 		is_dirty = false
 
 func _update_ui_from_settings() -> void:
-	# Gráficos
 	if fps_limit_spinbox: fps_limit_spinbox.value = SettingsManager.settings.graphics.fps_limit
-	# ... (resto da função que já existe) ...
 	if language_button: language_button.select(SettingsManager.settings.general.language_index)
 	if ui_scale_slider: ui_scale_slider.value = SettingsManager.settings.general.ui_scale
 	if window_mode_button: window_mode_button.select(SettingsManager.settings.graphics.window_mode)
@@ -109,20 +101,16 @@ func _update_ui_from_settings() -> void:
 func _populate_keybindings() -> void:
 	if not keybindings_grid: return
 	
-	# Limpa os botões/labels antigos
 	for child in keybindings_grid.get_children():
 		child.queue_free()
 	
-	# Para cada ação que queremos permitir que seja redefinida...
 	for action in ACTION_DISPLAY_NAMES.keys():
 		var action_name = ACTION_DISPLAY_NAMES[action]
 		
-		# Cria o label com o nome da ação
 		var label = Label.new()
 		label.text = action_name
 		keybindings_grid.add_child(label)
 		
-		# Cria o botão que irá mostrar a tecla atual e permitir a mudança
 		var button = Button.new()
 		button.text = _get_key_for_action(action)
 		button.pressed.connect(_on_rebind_button_pressed.bind(action, button))
@@ -135,7 +123,6 @@ func _get_key_for_action(action: StringName) -> String:
 	return "N/A"
 
 func _on_rebind_button_pressed(action: StringName, button_node: Button) -> void:
-	# Se já estamos esperando uma tecla para outra ação, cancela
 	if _action_to_rebind != &"":
 		_populate_keybindings()
 
@@ -153,13 +140,11 @@ func _on_apply_button_pressed() -> void:
 func _on_back_button_pressed() -> void:
 	close_menu()
 
-# --- Callbacks das Opções ---
 func _on_fps_limit_changed(value: float) -> void:
 	SettingsManager.settings.graphics.fps_limit = int(value)
-	SettingsManager.apply_graphics_settings() # Aplica em tempo real
+	SettingsManager.apply_graphics_settings()
 	is_dirty = true
 
-# ... (resto das funções de callback que já existem) ...
 func _on_language_selected(index: int) -> void:
 	SettingsManager.settings.general.language_index = index
 	is_dirty = true

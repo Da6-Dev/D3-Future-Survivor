@@ -14,4 +14,4 @@ polygon = PackedVector2Array(-4, 0, 0, -33, 5, 0, 7, 0, 7, 1, 2, 1, 2, 8, -1, 8,
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-4, 0, 0, -33, 5, 0, 7, 0, 7, 1, 2, 1, 2, 8, -1, 8, -1, 1, -6, 1, -6, 0)
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

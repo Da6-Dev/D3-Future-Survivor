@@ -10,6 +10,6 @@ description = "Aumenta o dano em +10 e a duração da paralisia em +1 segundo."
 rarity = 3
 target_ability_id = &"paralyzing_shot"
 modifiers = {
-"damage_amount": 10,
+"damage_amount": 10.0,
 "stun_duration": 1.0
 }

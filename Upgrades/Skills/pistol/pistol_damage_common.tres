@@ -9,5 +9,5 @@ ability_name = "Pistola Automática"
 description = "Aumenta o dano dos projéteis em +2."
 target_ability_id = &"pistol_shot"
 modifiers = {
-"damage_amount": 2
+"damage_amount": 2.0
 }

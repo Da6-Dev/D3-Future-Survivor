@@ -6,6 +6,7 @@
 [node name="PistolSkill" type="Node2D"]
 script = ExtResource("1_1fldg")
 bullet_scene = ExtResource("2_e14uj")
+knockback_strength = 150.0
 ability_id = &"pistol_shot"
 cooldown_time = 1.2
 damage_amount = 2

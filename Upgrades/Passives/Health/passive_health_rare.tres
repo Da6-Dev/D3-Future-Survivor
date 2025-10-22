@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://drfkh4jkxv3ql"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
 [resource]
 script = ExtResource("1_script")
@@ -11,5 +11,5 @@ rarity = 2
 type = 2
 passive_stat_id = &"stat_health"
 modifiers = {
-"max_health": 35
+"max_health": 35.0
 }

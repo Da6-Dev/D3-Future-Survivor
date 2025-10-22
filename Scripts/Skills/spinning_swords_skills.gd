@@ -1,7 +1,5 @@
 extends BaseAbility
 
-# As propriedades 'cooldown_time', 'damage_amount' e 'active_duration' são herdadas.
-# Elas devem ser configuradas na cena (.tscn) pelo Inspector.
 @export_category("Spinning Swords Parameters")
 @export var sword_scene: PackedScene
 @export var sword_count: int = 4
@@ -14,44 +12,34 @@ const SWORD_ROTATION_OFFSET: float = PI / 2
 
 @onready var pivot: Node2D = $Pivot
 
-# Dicionário para rastrear inimigos em cooldown de acerto.
 var _enemies_on_hit_cooldown: Dictionary = {}
 
-# Em vez de _ready, usamos _ability_ready para a configuração.
 func _ability_ready() -> void:
 	pivot.visible = false
 	_generate_swords()
-	
-	# Conecta à nova sinalização da BaseAbility para saber quando desativar.
 	on_deactivated.connect(_on_attack_finished)
 
-# Esta função é chamada pela BaseAbility quando a habilidade é ativada.
 func _on_activate(_params: Dictionary) -> void:
-	# Lógica para INICIAR o efeito visual/funcional da habilidade.
 	pivot.visible = true
 	_set_swords_monitoring_enabled(true)
 	_enemies_on_hit_cooldown.clear()
 
-# Processa a rotação apenas se a habilidade estiver na sua fase ativa.
 func _process(delta: float):
-	if is_active(): # Usa a nova função is_active() da BaseAbility
+	if is_active():
 		pivot.rotation += rotation_speed * delta
 
-# Esta função é chamada pelo sinal on_deactivated da BaseAbility.
 func _on_attack_finished():
-	# Lógica para PARAR o efeito visual/funcional da habilidade.
 	pivot.visible = false
 	_set_swords_monitoring_enabled(false)
 	_enemies_on_hit_cooldown.clear()
 
-# O restante das funções permanece o mesmo...
 func _on_sword_hit(body: Node, sword_node: Area2D):
 	if _enemies_on_hit_cooldown.has(body):
 		return
 
 	if body.has_method("take_damage"):
 		var knockback_direction: Vector2 = (body.global_position - sword_node.global_position).normalized()
-		var final_damage = player.get_calculated_damage(damage_amount)
+		var final_damage = player.get_calculated_damage(damage_amount) 
 		body.take_damage(final_damage, knockback_direction, knockback_strength)
 		
 		var hit_timer: SceneTreeTimer = get_tree().create_timer(HIT_COOLDOWN)
@@ -68,7 +56,6 @@ func regenerate_swords():
 
 func _generate_swords():
 	if not sword_scene:
-		push_error("A cena da espada (sword_scene) não está definida!")
 		return
 		
 	for i in range(sword_count):

@@ -14,36 +14,34 @@ const ABILITY_ICON_SCENE = preload("res://Scenes/ui/hud_hability_placeholder.tsc
 
 var _warning_tween: Tween
 var _seconds_elapsed: float = 0.0
-var _tracked_abilities: Dictionary = {} # Guarda {ability_instance: icon_instance}
+var _tracked_abilities: Dictionary = {}
 
 func _ready() -> void:
-	# Espera um frame para garantir que o player já existe na cena
 	await get_tree().process_frame
 	
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
-		# Conexões existentes
 		player.xp_changed.connect(_on_player_xp_changed)
 		player.level_changed.connect(_on_player_level_changed)
 		player.health_changed.connect(_on_player_health_changed)
-		_on_player_health_changed(player.current_health, player.max_health)
-		player.shield_changed.connect(_on_player_shield_changed)
 		
-		# Nova conexão para habilidades
+		# --- CORREÇÃO AQUI ---
+		# Lemos o max_health de 'current_stats'
+		_on_player_health_changed(player.current_health, player.current_stats.max_health)
+		# ---------------------
+		
+		player.shield_changed.connect(_on_player_shield_changed)
 		player.ability_added.connect(_on_ability_added)
 		
-		# Adiciona ícones para habilidades que o jogador já possa ter no início
 		for ability in player.active_abilities.values():
 			_on_ability_added(ability)
 
 func _process(delta: float) -> void:
-	# Atualiza o cronômetro
 	_seconds_elapsed += delta
 	var minutes: int = floori(_seconds_elapsed / 60)
 	var seconds: int = int(_seconds_elapsed) % 60
 	time_label.text = "%02d:%02d" % [minutes, seconds]
 
-	# Atualiza os contadores de cooldown no HUD
 	for ability in _tracked_abilities:
 		var icon = _tracked_abilities[ability]
 		var label: Label = icon.find_child("CooldownLabel")
@@ -55,7 +53,6 @@ func _process(delta: float) -> void:
 			label.visible = true
 			label.text = "%.1f" % ability.get_time_left()
 			
-			# Feedback visual: verde se estiver ativa, branco se estiver em cooldown
 			if ability.is_active():
 				texture.modulate = Color.LIME_GREEN
 			else:
@@ -68,8 +65,6 @@ func _on_ability_added(ability: BaseAbility):
 	var icon = ABILITY_ICON_SCENE.instantiate()
 	abilities_container.add_child(icon)
 	_tracked_abilities[ability] = icon
-	# Aqui você poderia adicionar lógica para carregar a textura correta para o ícone
-	# com base no 'ability.ability_id'
 
 func _on_player_xp_changed(current_xp: float, xp_to_next_level: float) -> void:
 	experience_bar.max_value = xp_to_next_level
@@ -81,26 +76,19 @@ func _on_player_level_changed(new_level: int) -> void:
 func _on_player_health_changed(current_health: int, max_health: int):
 	health_bar.max_value = max_health
 	health_bar.value = current_health
-	health_label.text = "%d/%d" % [current_health, max_health]
+	health_label.text = "%.0f/%.0f" % [current_health, max_health]
 
 func show_warning(text: String, duration: float = 2.5):
 	if not is_instance_valid(warning_label):
-		print("AVISO SPAWNER: ", text)
 		return
-	print("show_warning chamado com texto: ", text) # Print para depuração
-
+	EntityManager.trigger_shake(5.0, duration, 5.0)
 	warning_label.text = text
 	warning_label.visible = true
 
-	# --- CORREÇÃO DA LÓGICA DO TWEEN ---
-	# 1. Mata o tween anterior, se ele existir
 	if is_instance_valid(_warning_tween):
 		_warning_tween.kill()
 
-	# 2. Cria o novo tween e guarda na variável
 	_warning_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	# (Não precisamos mais adicionar como filho do label)
-	# ------------------------------------
 
 	warning_label.modulate = Color(1,1,1,0)
 	_warning_tween.tween_property(warning_label, "modulate:a", 1.0, 0.5)
@@ -108,12 +96,11 @@ func show_warning(text: String, duration: float = 2.5):
 	_warning_tween.tween_property(warning_label, "modulate:a", 0.0, 0.5)
 	_warning_tween.tween_callback(func():
 		warning_label.visible = false
-		# Define a variável como inválida quando o tween terminar
 		_warning_tween = null
 	)
 
 func _on_player_shield_changed(p_current_shield: float, p_max_shield: float):
-	if p_max_shield > 0: # Mostra a barra só se o jogador tiver escudo
+	if p_max_shield > 0:
 		shield_bar.visible = true
 		shield_label.visible = true
 		shield_bar.max_value = p_max_shield

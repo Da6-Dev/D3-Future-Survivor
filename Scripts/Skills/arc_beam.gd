@@ -24,8 +24,6 @@ func _ready() -> void:
 	for child in tendril_container.get_children():
 		if child is Line2D:
 			_tendrils.append(child)
-			child.width = 1.0
-			child.default_color = Color(0.9, 0.9, 1.0, randf_range(0.7, 0.9))
 
 	monitoring = false
 	collision_shape.disabled = true
@@ -84,10 +82,6 @@ func activate() -> void:
 		_pop_tween.kill()
 	_pop_tween = create_tween().set_parallel()
 
-	for tendril in _tendrils:
-		tendril.modulate = Color(1,1,1,0)
-		_pop_tween.tween_property(tendril, "modulate:a", tendril.default_color.a, 0.1)
-
 	_base_jitter = 8.0
 	_pop_tween.tween_property(self, "_base_jitter", 3.0, 0.2)
 
@@ -99,9 +93,6 @@ func deactivate() -> void:
 	if is_instance_valid(_pop_tween):
 		_pop_tween.kill()
 	_pop_tween = create_tween().set_parallel()
-
-	for tendril in _tendrils:
-		_pop_tween.tween_property(tendril, "modulate:a", 0.0, 0.2)
 
 	_pop_tween.tween_callback(func():
 		tendril_container.visible = false

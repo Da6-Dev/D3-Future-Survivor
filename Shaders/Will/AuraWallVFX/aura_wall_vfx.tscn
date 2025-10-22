@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://dksximxe65h6p"]
+
+[ext_resource type="Shader" uid="uid://blpaxb3qxsgg2" path="res://Shaders/Will/AuraWallVFX/aura_wall_vfx.tres" id="1_51fba"]
+[ext_resource type="Texture2D" uid="uid://d1wyqkt3ale36" path="res://Shaders/Will/StaticFire/LeLu's Noise Pack (FREE)/LeLu's Noise Pack/T_texr41.png" id="3_3hdqr"]
+[ext_resource type="Texture2D" uid="uid://dh4giechdtgcr" path="res://Shaders/Will/AuraWallVFX/TesteMaterialMaker_albedo.png" id="3_ocqag"]
+[ext_resource type="Texture2D" uid="uid://dqkwkt40xj8pu" path="res://Shaders/Will/VFXThunderTutorial/MuzzleEffect.png" id="4_3hdqr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f53ju"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_4aked"]
+_data = [Vector2(0, 0.96338), 0.0, 0.0, 0, 0, Vector2(0.517361, 0), 0.0, 0.0, 0, 0, Vector2(0.663194, 1), 0.0, 0.0, 0, 0, Vector2(0.888889, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ll16n"]
+curve = SubResource("Curve_4aked")
+
+[sub_resource type="Curve" id="Curve_aesgr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.211806, 1), 0.0, 0.0, 0, 0, Vector2(0.368056, 0), 0.0, 0.0, 0, 0, Vector2(0.493056, 1), 0.0, 0.0, 0, 0, Vector2(0.701389, 0.0295775), 0.0, 0.0, 0, 0, Vector2(0.78125, 1), 0.0, 0.0, 0, 0, Vector2(0.927083, 0), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_qqjnk"]
+curve = SubResource("Curve_aesgr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vumen"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 117.885
+flatness = 0.424
+initial_velocity_min = 82.28
+initial_velocity_max = 126.59
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -58.23
+radial_accel_max = 32.91
+tangential_accel_min = -45.99
+tangential_accel_max = 62.03
+scale_min = 0.01
+scale_max = 0.02
+scale_curve = SubResource("CurveTexture_qqjnk")
+color = Color(0.87451, 0.792157, 0, 1)
+alpha_curve = SubResource("CurveTexture_ll16n")
+turbulence_noise_scale = 3.512
+turbulence_noise_speed = Vector3(0, -1, 0)
+turbulence_influence_min = 0.035
+turbulence_influence_max = 0.27
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_snhyn"]
+shader = ExtResource("1_51fba")
+shader_parameter/ColorParameter = Color(1, 0.87058824, 0.32156864, 1)
+shader_parameter/FloatParameter = 0.0
+shader_parameter/Gradient2D = ExtResource("3_3hdqr")
+shader_parameter/Offset = Vector2(2, 1)
+shader_parameter/Texture2DParameter = ExtResource("4_3hdqr")
+
+[node name="AuraWallVFX" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_f53ju")
+amount = 10
+amount_ratio = 0.3022
+texture = ExtResource("3_ocqag")
+explosiveness = 0.26
+randomness = 0.26
+fixed_fps = 60
+trail_lifetime = 0.48
+process_material = SubResource("ParticleProcessMaterial_vumen")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_snhyn")
+offset_left = -45.0
+offset_top = -48.0
+offset_right = 46.0
+offset_bottom = 40.0

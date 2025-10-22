@@ -1,0 +1,50 @@
+[gd_scene load_steps=13 format=3 uid="uid://b2rjicqx0uco6"]
+
+[ext_resource type="Shader" uid="uid://v6j2cmmdb0ai" path="res://Shaders/Will/StaticFire/FireShader.tres" id="1_w4b4v"]
+[ext_resource type="Texture2D" uid="uid://p7cbubkdxcax" path="res://Shaders/Will/StaticFire/LeLu's Noise Pack (FREE)/LeLu's Noise Pack/T_Noise_Wf4.png" id="2_lmp1s"]
+[ext_resource type="Texture2D" uid="uid://cbj8orvj6ti37" path="res://Shaders/Will/StaticFire/LeLu's Noise Pack (FREE)/LeLu's Noise Pack/T_Gradient_circle22.jpg" id="3_x46ee"]
+
+[sub_resource type="Gradient" id="Gradient_plbl5"]
+offsets = PackedFloat32Array(0.0272727, 0.295455, 0.672727, 0.854545, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.834614, 0.834614, 0.834614, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v06hj"]
+gradient = SubResource("Gradient_plbl5")
+fill_from = Vector2(0.512821, 0)
+fill_to = Vector2(0.512821, 1)
+
+[sub_resource type="Gradient" id="Gradient_kw0w7"]
+offsets = PackedFloat32Array(0, 0.440909, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.372727, 0.372727, 0.372727, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oe3t7"]
+gradient = SubResource("Gradient_kw0w7")
+fill_from = Vector2(1, 0.84188)
+
+[sub_resource type="Gradient" id="Gradient_8br45"]
+offsets = PackedFloat32Array(0, 0.118182, 0.495455, 1)
+colors = PackedColorArray(0.879997, 0.336661, 0, 0, 0.837976, 0.239849, 6.73831e-07, 0.357798, 0.744588, 0.225783, 0.180878, 1, 1.5, 0.76, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i6jd3"]
+gradient = SubResource("Gradient_8br45")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjx4w"]
+shader = ExtResource("1_w4b4v")
+shader_parameter/Scale = Vector2(-0.668, 0.573)
+shader_parameter/Speed = Vector2(0, 1.47)
+shader_parameter/Texture1 = ExtResource("2_lmp1s")
+shader_parameter/Texture2 = SubResource("GradientTexture2D_v06hj")
+shader_parameter/Texture3 = ExtResource("3_x46ee")
+shader_parameter/Texture4 = SubResource("GradientTexture2D_oe3t7")
+shader_parameter/Texture5 = SubResource("GradientTexture1D_i6jd3")
+
+[sub_resource type="Gradient" id="Gradient_853eq"]
+offsets = PackedFloat32Array(0.751337, 1)
+colors = PackedColorArray(0.941176, 0.941176, 0.941176, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_672cp"]
+gradient = SubResource("Gradient_853eq")
+
+[node name="Sprite2D" type="Sprite2D"]
+material = SubResource("ShaderMaterial_pjx4w")
+texture = SubResource("GradientTexture2D_672cp")

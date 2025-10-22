@@ -60,7 +60,13 @@ var current_state: EnemyState = EnemyState.IDLE:
 			current_state = value
 			_enter_state(current_state)
 
+
 func _ready():
+	
+	var T : Tween = get_tree().create_tween()
+	
+	T.tween_property(self,"scale",Vector2(1,1),1.0).from(Vector2(0.3,0.3)).set_trans(Tween.TRANS_CUBIC)
+	
 	EntityManager.register_enemy(self)
 	current_health = max_health
 	knockback_timer.wait_time = knockback_duration
@@ -123,6 +129,12 @@ func _enter_state(new_state: EnemyState):
 		
 		EnemyState.DEAD:
 			EntityManager.unregister_enemy(self)
+			
+			var T : Tween = get_tree().create_tween()
+			T.set_parallel(true)
+			T.tween_property(self,"scale",Vector2(0,0),0.55).from(Vector2(1.5,1.5)).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
+			T.tween_property(self,"modulate",Color(1,1,1,0),0.55).from(Color(1,1,1,1)).set_trans(Tween.TRANS_LINEAR)
+			
 			velocity = Vector2.ZERO
 			set_physics_process(false)
 			if sprite:

@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ob5xuj0xt3lm"]
+
+[ext_resource type="Texture2D" uid="uid://dh4giechdtgcr" path="res://AuraWallVFX/TesteMaterialMaker_albedo.png" id="1"]
+
+[resource]
+albedo_texture = ExtResource("1")

@@ -8,6 +8,8 @@ signal mouse_exited_card()
 
 @onready var ability_name_label: Label = $VBoxContainer/AbilityNameLabel
 @onready var description_label: Label = $VBoxContainer/DescriptionLabel
+@onready var separator_2: HSeparator = $VBoxContainer/HSeparator2
+@onready var separator_3: HSeparator = $VBoxContainer/HSeparator3
 @onready var shine_color : Color = material.get_shader_parameter("shine_color")
 
 var idle_tween: Tween
@@ -42,14 +44,20 @@ func display_upgrade(upgrade: AbilityUpgrade) -> void:
 	description_label.text = upgrade.description
 	
 	var rarity_colors = {
-		AbilityUpgrade.Rarity.COMMON: Color.WHITE, AbilityUpgrade.Rarity.UNCOMMON: Color.GREEN,
-		AbilityUpgrade.Rarity.RARE: Color.BLUE, AbilityUpgrade.Rarity.EPIC: Color.PURPLE,
+		AbilityUpgrade.Rarity.COMMON: Color.WHITE, 
+		AbilityUpgrade.Rarity.UNCOMMON: Color.GREEN,
+		AbilityUpgrade.Rarity.RARE: Color.BLUE, 
+		AbilityUpgrade.Rarity.EPIC: Color.PURPLE,
 		AbilityUpgrade.Rarity.LEGENDARY: Color.ORANGE
 	}
 	var base_color = rarity_colors.get(upgrade.rarity, Color.WHITE)
 	
 	if material is ShaderMaterial:
 		material.set_shader_parameter("base_color", base_color)
+	if is_instance_valid(separator_2):
+		separator_2.modulate = base_color
+	if is_instance_valid(separator_3):
+		separator_3.modulate = base_color
 
 
 func play_idle_animation() -> void:

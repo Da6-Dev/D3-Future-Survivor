@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_script")
-id = &"pverload_tsar_legendary"
+id = &"pverload_tsar_legendary"
 ability_name = "Sobrecarga: TSAR BOMB"
 description = "TSAR BOMB! A explosão agora tem +15 de [b]DANO[/b], +300 de [b]FORÇA DO EMPURRÃO[/b] e aumenta a [b]DURAÇÃO DO BÔNUS[/b] em +3 segundos."
 rarity = 4

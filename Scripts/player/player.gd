@@ -19,6 +19,7 @@ var current_stats: PlayerStats
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 @onready var shield_recharge_timer: Timer = $ShieldRechargeTimer
 @onready var player_hurt : AudioStreamPlayer = $HitHurt
+@onready var collect_sound : AudioStreamPlayer = $CollectSound
 
 var active_abilities: Dictionary[StringName, BaseAbility] = {}
 var active_passives: Dictionary = {}
@@ -265,6 +266,7 @@ func has_empty_passive_slot() -> bool:
 	return active_passives.size() < current_stats.passive_slots
 
 func add_xp(amount: float) -> void:
+	collect_sound.play()
 	current_xp += amount
 	while current_xp >= xp_to_next_level:
 		level_up()

@@ -1,6 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://cokn214ucd3h7"]
+[gd_scene load_steps=9 format=3 uid="uid://cokn214ucd3h7"]
 
 [ext_resource type="Script" uid="uid://bukjf4xve6ka6" path="res://Scripts/Skills/arc_drone.gd" id="1_irn1a"]
+[ext_resource type="Texture2D" uid="uid://ds112mp7oq8mh" path="res://Art/Sprites/Drone/Drone.png" id="2_yry76"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbceo"]
+atlas = ExtResource("2_yry76")
+region = Rect2(0, 0, 20, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbuen"]
+atlas = ExtResource("2_yry76")
+region = Rect2(20, 0, 20, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67dl6"]
+atlas = ExtResource("2_yry76")
+region = Rect2(40, 0, 20, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imv4g"]
+atlas = ExtResource("2_yry76")
+region = Rect2(60, 0, 20, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xexf3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbceo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbuen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67dl6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imv4g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_irn1a"]
 radius = 40.0
@@ -9,8 +46,14 @@ radius = 40.0
 script = ExtResource("1_irn1a")
 
 [node name="Visual" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.8, 0.8, 0.8, 1)
 polygon = PackedVector2Array(-6, 6, 6, 6, 6, -6, -6, -6)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xexf3")
+autoplay = "default"
+frame_progress = 0.44258812
 
 [node name="SeparationArea" type="Area2D" parent="."]
 collision_layer = 128

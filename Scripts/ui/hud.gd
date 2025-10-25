@@ -27,7 +27,7 @@ var _bar_tweens: Dictionary = {}
 
 func _ready() -> void:
 	await get_tree().process_frame
-	
+
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.xp_changed.connect(_on_player_xp_changed)

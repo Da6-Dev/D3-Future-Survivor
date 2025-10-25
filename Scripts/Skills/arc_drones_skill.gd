@@ -27,6 +27,7 @@ extends BaseAbility
 @onready var pivot: Node2D = $Pivot
 @onready var drone_container: Node2D = $DroneContainer
 @onready var beam_container: Node2D = $BeamContainer
+@onready var drone_audio : AudioStreamPlayer = $ArcDroneHum
 
 var _drones: Array[Node2D] = []
 var _beams: Array[Area2D] = []
@@ -217,10 +218,12 @@ func _calculate_centroid(nodes: Array) -> Vector2:
 	return total_pos / valid_nodes
 
 func _on_activate(_params: Dictionary) -> void:
+	drone_audio.play()
 	for beam in _beams:
 		beam.activate()
 
 func _on_attack_finished() -> void:
+	drone_audio.stop()
 	for beam in _beams:
 		beam.deactivate()
 

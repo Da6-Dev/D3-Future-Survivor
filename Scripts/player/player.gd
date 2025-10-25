@@ -18,6 +18,7 @@ var current_stats: PlayerStats
 @onready var collision_shape: CollisionShape2D = $PhysicalCollision
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 @onready var shield_recharge_timer: Timer = $ShieldRechargeTimer
+@onready var player_hurt : AudioStreamPlayer = $HitHurt
 
 var active_abilities: Dictionary[StringName, BaseAbility] = {}
 var active_passives: Dictionary = {}
@@ -305,6 +306,7 @@ func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knock
 		velocity = knockback_direction * knockback_strength
 
 	if damage_to_health > 0:
+		player_hurt.play()
 		EntityManager.trigger_shake(15.0, 0.2, 25.0)
 		current_health -= damage_to_health
 		health_changed.emit(current_health, current_stats.max_health)

@@ -1,0 +1,101 @@
+[gd_scene load_steps=16 format=3 uid="uid://0llo7nw8oar3"]
+
+[ext_resource type="Shader" uid="uid://c4h1ndeb1wku6" path="res://Shaders/Will/VFXThunderTutorial/ThunderShader.tres" id="1_f2jr1"]
+[ext_resource type="Texture2D" uid="uid://vfk8k1ab8r4s" path="res://Shaders/Will/VFXThunderTutorial/VSFThunder.png" id="2_c7ib3"]
+[ext_resource type="Texture2D" uid="uid://dqkwkt40xj8pu" path="res://Shaders/Will/VFXThunderTutorial/MuzzleEffect.png" id="3_xa7px"]
+[ext_resource type="Texture2D" uid="uid://v2nj58c23iv1" path="res://Shaders/Will/VFXThunderTutorial/RayFlash.png" id="4_gun47"]
+
+[sub_resource type="Gradient" id="Gradient_j5ng5"]
+offsets = PackedFloat32Array(0, 0.05, 0.957692, 1)
+colors = PackedColorArray(0.0136929, 0.0136929, 0.0136929, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_muxbe"]
+gradient = SubResource("Gradient_j5ng5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0q3yr"]
+shader = ExtResource("1_f2jr1")
+shader_parameter/SmothStepParam = 0.0
+shader_parameter/Velocidade = Vector2(-1, 0)
+shader_parameter/BasicTexture = ExtResource("2_c7ib3")
+shader_parameter/Texture2DParameter = SubResource("GradientTexture2D_muxbe")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y42w5"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_hjvca"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.541667, 0.716197), 0.0, 0.0, 0, 0, Vector2(0.979167, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_i8n8g"]
+curve = SubResource("Curve_hjvca")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r41kr"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 19.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+orbit_velocity_min = -0.303
+orbit_velocity_max = 0.38
+gravity = Vector3(0, -98, 0)
+linear_accel_min = -15.19
+linear_accel_max = 44.3
+scale_min = 0.02
+scale_max = 0.04
+scale_curve = SubResource("CurveTexture_i8n8g")
+color = Color(0.972549, 0.745098, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qg825"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_37fmr"]
+_data = [Vector2(0.0381944, 0.121127), 0.0, 0.0, 0, 0, Vector2(0.135417, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pds3g"]
+curve = SubResource("Curve_37fmr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gqsli"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_pds3g")
+color = Color(1, 0.831373, 0.407843, 1)
+
+[node name="VFXThuder" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_0q3yr")
+points = PackedVector2Array(192, 59, 192, 320, 366.485, 213.797, 488.9, 75.3787, 893.244, 276.739, 1114.89, 158.18)
+width = 43.68
+default_color = Color(1.4761622, 1.1777245, 1.2685513, 1)
+texture_mode = 2
+joint_mode = 2
+
+[node name="Trails" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_y42w5")
+position = Vector2(1089.1, 176.478)
+rotation = 0.554455
+amount = 10
+texture = ExtResource("3_xa7px")
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_r41kr")
+
+[node name="MuzzleFlash" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_qg825")
+position = Vector2(1090.09, 175.467)
+amount = 1
+texture = ExtResource("4_gun47")
+lifetime = 0.14
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_gqsli")

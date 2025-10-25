@@ -17,24 +17,24 @@ script = ExtResource("1_x6y6f")
 
 [node name="Tendril1" type="Line2D" parent="TendrilContainer"]
 material = ExtResource("2_w4eaf")
-width = 5.0
+width = 15.0
 width_curve = SubResource("Curve_x6y6f")
-default_color = Color(0.9, 0.9, 1, 0.9)
-end_cap_mode = 2
+default_color = Color(0.41545746, 0.13652623, 0.9999688, 0.9019608)
+texture_mode = 2
 
 [node name="Tendril2" type="Line2D" parent="TendrilContainer"]
 material = ExtResource("2_w4eaf")
-width = 5.0
+width = 15.0
 width_curve = SubResource("Curve_x6y6f")
-default_color = Color(0.9, 0.9, 1, 0.9)
-end_cap_mode = 2
+default_color = Color(0.41545746, 0.13652623, 0.9999688, 0.9019608)
+texture_mode = 2
 
 [node name="Tendril3" type="Line2D" parent="TendrilContainer"]
 material = ExtResource("2_w4eaf")
-width = 5.0
+width = 15.0
 width_curve = SubResource("Curve_x6y6f")
-default_color = Color(0.9, 0.9, 1, 0.9)
-end_cap_mode = 2
+default_color = Color(0.41545746, 0.13652623, 0.9999688, 0.9019608)
+texture_mode = 2
 
 [node name="BeamCollision" type="CollisionPolygon2D" parent="."]
 

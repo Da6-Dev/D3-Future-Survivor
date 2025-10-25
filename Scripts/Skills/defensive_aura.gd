@@ -4,9 +4,10 @@ extends BaseAbility
 @export var base_damage_interval: float = 1.0
 @export var radius: float = 90.0
 @export var knockback_strength: float = 300.0
+const aura_base_size: Vector2 = Vector2(180,180)
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var aura_visual: Polygon2D = $AuraVisual
+@onready var aura_visual: ColorRect = $AuraWallVFX/ColorRect
 
 var _damage_timer: Timer
 var _targets_in_aura: Array[CharacterBody2D] = []
@@ -20,8 +21,6 @@ func _ability_ready() -> void:
 	for i in range(32):
 		var angle = i * TAU / 32
 		points.append(Vector2(cos(angle), sin(angle)) * radius)
-	aura_visual.polygon = points
-	aura_visual.color = Color(0.5, 0.8, 1.0, 0.3)
 
 	_damage_timer = Timer.new()
 	_damage_timer.wait_time = max(0.05, base_damage_interval / total_attack_speed_multiplier)
@@ -65,8 +64,16 @@ func update_radius():
 	for i in range(32):
 		var angle = i * TAU / 32
 		points.append(Vector2(cos(angle), sin(angle)) * radius)
-	aura_visual.polygon = points
-
+	
+	var new_radius = circle_shape.radius - 90
+	
+	if(new_radius == 0):
+		return
+	
+	var new_aura_visual_size = new_radius * 2
+	aura_visual.size = Vector2(new_aura_visual_size,new_aura_visual_size) + aura_base_size
+	aura_visual.position = (aura_visual.get_rect().size / 2) * -1 
+		
 func update_timers():
 	if is_instance_valid(_damage_timer):
 		_damage_timer.wait_time = max(0.05, base_damage_interval / total_attack_speed_multiplier)

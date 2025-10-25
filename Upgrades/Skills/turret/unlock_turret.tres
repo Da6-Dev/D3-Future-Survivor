@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://d35saljxymb3k"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=4 format=3 uid="uid://d35saljxymb3k"]
 
+[ext_resource type="Texture2D" uid="uid://4sohecu8hkmd" path="res://Art/Sprites/Icons/tile007.png" id="1_2cjqh"]
 [ext_resource type="PackedScene" uid="uid://ch6uwhj1syeby" path="res://Scenes/Skills/turret_skill.tscn" id="1_nok0q"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
@@ -9,6 +10,7 @@ id = &"unlock_turret"
 ability_name = "NOVA: Torreta Atiradora"
 description = "Constrói uma torreta automática que atira rapidamente nos inimigos próximos, empurrando-os."
 rarity = 2
+icon = ExtResource("1_2cjqh")
 type = 0
 target_ability_id = &"deploy_turret"
 new_ability_scene = ExtResource("1_nok0q")

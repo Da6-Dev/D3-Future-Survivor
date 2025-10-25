@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cldk6gynsmbl8" path="res://Scenes/Skills/arc_beam.tscn" id="2_jx5un"]
 [ext_resource type="PackedScene" uid="uid://cokn214ucd3h7" path="res://Scenes/Skills/arc_drone.tscn" id="3_720fh"]
 [ext_resource type="AudioStream" uid="uid://c3aslvuuri17g" path="res://Art/Sounds/OriginalSounds/ArcDroneHum.wav" id="4_3c7jv"]
+[ext_resource type="Texture2D" uid="uid://c2w3s6beyu4sy" path="res://Art/Sprites/Icons/tile001.png" id="4_3c7jv"]
 
 [node name="ArcDronesSkill" type="Node2D"]
 z_index = 10
@@ -11,6 +12,7 @@ script = ExtResource("1_445yc")
 beam_scene = ExtResource("2_jx5un")
 drone_scene = ExtResource("3_720fh")
 max_chase_radius = 250.0
+icon = ExtResource("4_3c7jv")
 ability_id = &"arc_drones"
 cooldown_time = 2.5
 active_duration = 0.5

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://v8trquc2apj0"]
+
+[ext_resource type="Texture2D" uid="uid://d8nuv7m4swwr" path="res://Art/Sprites/Icons/tile000.png" id="1_ahuk8"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"sword_legendary_shatter"
+ability_name = "Espada: Lâmina Explosiva"
+description = "Aumenta o **DANO**, **RECARGA**, **ÁREA** e **EMPURRÂO** da espada de forma significativa."
+rarity = 4
+icon = ExtResource("1_ahuk8")
+target_ability_id = &"sword_attack"
+modifiers = {
+"attack_speed_multiplier": 0.25,
+"damage_amount": 3.0,
+"knockback_strength": 50.0,
+"radius": 0.25
+}

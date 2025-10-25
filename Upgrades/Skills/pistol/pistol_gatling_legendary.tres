@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://tlrryjles5ro"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://tlrryjles5ro"]
 
+[ext_resource type="Texture2D" uid="uid://b5m1lrkoq3x3j" path="res://Art/Sprites/Icons/tile005.png" id="1_locj5"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
 [resource]
@@ -8,6 +9,7 @@ id = &"pistol_gatling_legendary"
 ability_name = "Pistola Automática"
 description = "Atira +2 projéteis e aumenta a cadência de tiro em 30%."
 rarity = 4
+icon = ExtResource("1_locj5")
 target_ability_id = &"pistol_shot"
 modifiers = {
 "attack_speed_multiplier": 0.3,

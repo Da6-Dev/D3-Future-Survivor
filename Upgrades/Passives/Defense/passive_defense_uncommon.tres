@@ -1,6 +1,11 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://36gf1s00q7vc"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=4 format=3 uid="uid://36gf1s00q7vc"]
 
+[ext_resource type="Texture2D" uid="uid://dfbmdqm6g2pyq" path="res://Art/Sprites/Icons/Stats-Sheet.png" id="1_lscet"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojh30"]
+atlas = ExtResource("1_lscet")
+region = Rect2(256, 0, 64, 64)
 
 [resource]
 script = ExtResource("1_script")
@@ -8,6 +13,7 @@ id = &"passive_defense_uncommon"
 ability_name = "Passiva: Revestimento II"
 description = "Reduz todo o dano recebido em 4%."
 rarity = 1
+icon = SubResource("AtlasTexture_ojh30")
 type = 2
 passive_stat_id = &"stat_defense"
 modifiers = {

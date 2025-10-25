@@ -1,7 +1,10 @@
 extends BaseAbility
 
 @export_category("Sword Skill Parameters")
-@export var knockback_strength: float = 500.0
+@export var knockback_strength: float = 150.0
+@export var radius: float = 1.0
+var shatter_chance: float = 0.0
+var shatter_damage_percent: float = 0.0
 
 @onready var visual_area: Polygon2D = $SwordArea/AttackAreaVisual
 @onready var collision_shape_2d: CollisionPolygon2D = $SwordArea/AttackAreaCollision
@@ -26,12 +29,16 @@ func _on_attack_finished() -> void:
 	collision_shape_2d.disabled = true
 
 func _on_area_entered(area: Area2D) -> void:
-	var target = area.get_owner()
-
 	if not is_instance_valid(player):
 		return
+
+	var target = area.get_owner()
 
 	if target.has_method("take_damage"):
 		var knockback_direction = (target.global_position - global_position).normalized()
 		var final_damage_payload = player.get_calculated_damage(damage_amount)
 		target.take_damage(final_damage_payload, knockback_direction, knockback_strength)
+		
+func update_radius():
+	if $SwordArea:
+		$SwordArea.scale = Vector2(radius, radius)

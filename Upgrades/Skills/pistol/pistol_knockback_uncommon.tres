@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://cnlbcya217cy4"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://b5m1lrkoq3x3j" path="res://Art/Sprites/Icons/tile005.png" id="1_q2u6d"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
 [resource]
 script = ExtResource("1_script")
@@ -8,6 +9,7 @@ id = &"pistol_knockback_uncommon"
 ability_name = "Pistola Automática"
 description = "Aumenta a força de empurrão dos projéteis."
 rarity = 1
+icon = ExtResource("1_q2u6d")
 target_ability_id = &"pistol_shot"
 modifiers = {
 "knockback_strength": 150.0

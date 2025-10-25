@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_es1ej")
-max_health = 80
+max_health = 1.0
 speed = 150.0
 ability_slots = 6

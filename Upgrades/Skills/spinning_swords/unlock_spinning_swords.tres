@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://dulafngw82w7b"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=4 format=3 uid="uid://dulafngw82w7b"]
 
 [ext_resource type="PackedScene" uid="uid://u2lyo33r5kql" path="res://Scenes/Skills/spinning_swords_skill.tscn" id="1_1jeo0"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_c1p3a"]
+[ext_resource type="Texture2D" uid="uid://cg6np1ekb5kcs" path="res://Art/Sprites/Icons/tile006.png" id="1_xxbna"]
 
 [resource]
 script = ExtResource("1_c1p3a")
@@ -9,6 +10,7 @@ id = &"unlock_spinning_swords"
 ability_name = "NOVA: Espadas Orbitais"
 description = "Invoca espadas que giram ao seu redor, causando dano a inimigos próximos."
 rarity = 2
+icon = ExtResource("1_xxbna")
 type = 0
 target_ability_id = &"spinning_swords"
 new_ability_scene = ExtResource("1_1jeo0")

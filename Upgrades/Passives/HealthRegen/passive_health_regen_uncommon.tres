@@ -1,6 +1,11 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://c0pbwi85gryyn"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=4 format=3 uid="uid://c0pbwi85gryyn"]
 
+[ext_resource type="Texture2D" uid="uid://dfbmdqm6g2pyq" path="res://Art/Sprites/Icons/Stats-Sheet.png" id="1_08upx"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lwc4"]
+atlas = ExtResource("1_08upx")
+region = Rect2(384, 0, 64, 64)
 
 [resource]
 script = ExtResource("1_script")
@@ -8,6 +13,7 @@ id = &"passive_health_regen_uncommon"
 ability_name = "Passiva: Recuperação II"
 description = "Recupera +0.3 de vida por segundo (total 0.5/s)."
 rarity = 1
+icon = SubResource("AtlasTexture_0lwc4")
 type = 2
 passive_stat_id = &"stat_health_regen"
 modifiers = {

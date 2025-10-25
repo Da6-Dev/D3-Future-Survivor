@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://dq431gofmeeal"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://dq431gofmeeal"]
 
+[ext_resource type="Texture2D" uid="uid://dvxowc46bve1j" path="res://Art/Sprites/Icons/tile003.png" id="1_4ok1q"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
 [resource]
@@ -7,6 +8,7 @@ script = ExtResource("1_script")
 id = &"overload_cooldown_common"
 ability_name = "Sobrecarga"
 description = "Reduz o tempo de recarga da Sobrecarga em 10%."
+icon = ExtResource("1_4ok1q")
 target_ability_id = &"overload"
 modifiers = {
 "attack_speed_multiplier": 0.1

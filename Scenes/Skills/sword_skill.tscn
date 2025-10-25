@@ -1,13 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdcbgk4ql1wge"]
+[gd_scene load_steps=3 format=3 uid="uid://bdcbgk4ql1wge"]
 
 [ext_resource type="Script" uid="uid://dsfxqx1mi5fkn" path="res://Scripts/Skills/sword_skill.gd" id="1_f4wqt"]
+[ext_resource type="Texture2D" uid="uid://d8nuv7m4swwr" path="res://Art/Sprites/Icons/tile000.png" id="2_1fbbh"]
 
 [node name="SwordSkill" type="Node2D"]
 visibility_layer = 8
 script = ExtResource("1_f4wqt")
+icon = ExtResource("2_1fbbh")
 ability_id = &"sword_attack"
 active_duration = 0.4
-damage_amount = 2
+damage_amount = 4.0
 requires_aiming = true
 
 [node name="SwordArea" type="Area2D" parent="."]

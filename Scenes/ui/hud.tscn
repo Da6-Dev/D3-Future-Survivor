@@ -4,7 +4,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_3gfia"]
 font_size = 25
-font_color = Color(18.892157, 18.892157, 18.892157, 1)
+font_color = Color(0.95, 0.95, 0.95, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_e0onf"]
 font_size = 20
@@ -28,10 +28,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
+mouse_filter = 2
 
 [node name="ExperienceContainer" type="BoxContainer" parent="Control"]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -39,20 +38,38 @@ offset_bottom = 40.0
 grow_horizontal = 2
 vertical = true
 
-[node name="ExperienceBar" type="ProgressBar" parent="Control/ExperienceContainer"]
-modulate = Color(0.16134548, 0.18903068, 0.99999994, 1)
-custom_minimum_size = Vector2(0, 40)
+[node name="BarWrapper" type="Control" parent="Control/ExperienceContainer"]
 layout_mode = 2
-show_percentage = false
+size_flags_vertical = 3
 
-[node name="LevelLabel" type="Label" parent="Control/ExperienceContainer/ExperienceBar"]
-custom_minimum_size = Vector2(0, 40)
+[node name="ExperienceBarDelayed" type="ProgressBar" parent="Control/ExperienceContainer/BarWrapper"]
+modulate = Color(0.12549, 0.14902, 0.784314, 0.5)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+show_percentage = false
+
+[node name="ExperienceBar" type="ProgressBar" parent="Control/ExperienceContainer/BarWrapper"]
+modulate = Color(0.160784, 0.188235, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+
+[node name="LevelLabel" type="Label" parent="Control/ExperienceContainer/BarWrapper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 20)
 text = "Level : 1"
 label_settings = SubResource("LabelSettings_3gfia")
 horizontal_alignment = 1
@@ -63,7 +80,7 @@ layout_mode = 1
 offset_left = 20.0
 offset_top = 60.0
 offset_right = 220.0
-offset_bottom = 120.0
+offset_bottom = 111.0
 vertical = true
 
 [node name="HealthLabel" type="Label" parent="Control/HealthContainer"]
@@ -71,20 +88,38 @@ layout_mode = 2
 text = "100/100"
 label_settings = SubResource("LabelSettings_e0onf")
 
-[node name="HealthBar" type="ProgressBar" parent="Control/HealthContainer"]
-modulate = Color(0.24205753, 1.0989867, 0.5456939, 1)
+[node name="BarWrapper" type="Control" parent="Control/HealthContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
+
+[node name="HealthBarDelayed" type="ProgressBar" parent="Control/HealthContainer/BarWrapper"]
+modulate = Color(0.815686, 0.121569, 0.121569, 0.5)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="Control/HealthContainer/BarWrapper"]
+modulate = Color(0.243137, 1, 0.545098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 value = 100.0
 show_percentage = false
 
 [node name="ShieldContainer" type="BoxContainer" parent="Control"]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 123.0
-offset_right = 219.0
-offset_bottom = 185.0
-alignment = 1
+layout_mode = 1
+offset_left = 20.0
+offset_top = 121.0
+offset_right = 220.0
+offset_bottom = 157.0
 vertical = true
 
 [node name="ShieldLabel" type="Label" parent="Control/ShieldContainer"]
@@ -92,10 +127,28 @@ layout_mode = 2
 label_settings = SubResource("LabelSettings_e0onf")
 horizontal_alignment = 1
 
-[node name="ShieldBar" type="ProgressBar" parent="Control/ShieldContainer"]
-modulate = Color(0, 0.19183265, 1.0989991, 1)
+[node name="BarWrapper" type="Control" parent="Control/ShieldContainer"]
 custom_minimum_size = Vector2(200, 15)
 layout_mode = 2
+
+[node name="ShieldBarDelayed" type="ProgressBar" parent="Control/ShieldContainer/BarWrapper"]
+modulate = Color(0, 0.14902, 0.784314, 0.5)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+
+[node name="ShieldBar" type="ProgressBar" parent="Control/ShieldContainer/BarWrapper"]
+modulate = Color(0, 0.192157, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 show_percentage = false
 
 [node name="MoneyContainer" type="BoxContainer" parent="Control"]
@@ -144,13 +197,15 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+offset_top = -25.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 vertical = true
 
 [node name="WaveWarningLabel" type="Label" parent="Control/WarningsContainer"]
 visible = false
-modulate = Color(0.8191932, 0.12984228, 9.62615e-08, 1)
+modulate = Color(0.819608, 0.129412, 0, 1)
 layout_mode = 2
 text = "Uma horda está a caminho."
 label_settings = SubResource("LabelSettings_6fbih")
@@ -165,9 +220,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -30.0
+offset_left = -100.0
 offset_top = -80.0
-offset_right = 30.0
+offset_right = 100.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0

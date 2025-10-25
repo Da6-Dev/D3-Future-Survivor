@@ -1,6 +1,11 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=4 format=3 uid="uid://6pomsjjnyxjb"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dfbmdqm6g2pyq" path="res://Art/Sprites/Icons/Stats-Sheet.png" id="1_y144t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_al1cj"]
+atlas = ExtResource("1_y144t")
+region = Rect2(448, 0, 64, 64)
 
 [resource]
 script = ExtResource("1_script")
@@ -8,6 +13,7 @@ id = &"passive_shield_uncommon"
 ability_name = "Passiva: Barreira II"
 description = "Adiciona +20 pontos de escudo (total 35)."
 rarity = 1
+icon = SubResource("AtlasTexture_al1cj")
 type = 2
 passive_stat_id = &"stat_shield"
 modifiers = {

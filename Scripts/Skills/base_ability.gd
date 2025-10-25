@@ -5,6 +5,7 @@ signal on_cooldown_started
 signal on_cooldown_finished
 signal on_deactivated
 
+@export var icon: Texture2D
 @export var ability_id: StringName
 @export var cooldown_time: float = 1.0
 @export var active_duration: float = 0.0

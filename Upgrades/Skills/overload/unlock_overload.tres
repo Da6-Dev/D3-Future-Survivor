@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://dilp7qgxvurp3"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=4 format=3 uid="uid://dilp7qgxvurp3"]
 
+[ext_resource type="Texture2D" uid="uid://dvxowc46bve1j" path="res://Art/Sprites/Icons/tile003.png" id="1_ouivs"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://coumkc3xbkquh" path="res://Scenes/Skills/overload_skill.tscn" id="2_scene"]
 
@@ -9,6 +10,7 @@ id = &"unlock_overload"
 ability_name = "NOVA: Sobrecarga"
 description = "Cria uma explosão que empurra inimigos. Aumenta a velocidade de ataque de todas as habilidades por um curto período."
 rarity = 2
+icon = ExtResource("1_ouivs")
 type = 0
 target_ability_id = &"overload"
 new_ability_scene = ExtResource("2_scene")

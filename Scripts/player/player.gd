@@ -66,7 +66,6 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	
-	# --- LENDO DOS NOVOS STATS ---
 	if current_stats.health_regen_rate > 0.0 and current_health < current_stats.max_health:
 		_health_regen_accumulator += current_stats.health_regen_rate * delta
 
@@ -217,24 +216,18 @@ func apply_upgrade(upgrade: AbilityUpgrade):
 			_apply_passive_stat(upgrade)
 	
 func _apply_passive_stat(upgrade: AbilityUpgrade):
-	# --- ESTA É A FUNÇÃO OTIMIZADA ---
-	
 	for key in upgrade.modifiers:
 		var modifier_value = upgrade.modifiers[key]
-		
-		# Lógica especial para stats com efeitos colaterais
 		match key:
 			"max_health":
 				var health_gain = int(modifier_value)
 				current_stats.max_health += health_gain
-				current_health += health_gain # Cura o jogador
+				current_health += health_gain
 				health_changed.emit(current_health, current_stats.max_health)
 
 			"attack_speed":
 				var speed_increase_percent = float(modifier_value)
 				current_stats.global_attack_speed_bonus += speed_increase_percent
-				
-				# Aplica o bônus a todas as habilidades JÁ ATIVAS
 				for ability in active_abilities.values():
 					ability.total_attack_speed_multiplier += speed_increase_percent
 					if ability.has_method("update_timers"):
@@ -259,7 +252,6 @@ func _apply_passive_stat(upgrade: AbilityUpgrade):
 				current_stats.global_damage_multiplier += damage_gain_percent
 				
 			_:
-				# O 'if' aqui previne que os stats já tratados sejam adicionados duas vezes
 				var handled_keys = ["health_regen", "health_regen_rate", "global_damage"]
 				if (key in current_stats) and (not key in handled_keys):
 					var current_value = current_stats.get(key)

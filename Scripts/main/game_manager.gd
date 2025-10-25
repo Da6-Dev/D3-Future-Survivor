@@ -142,20 +142,13 @@ func _on_settings_close():
 func _on_player_game_over(time_survived: float, final_stats: PlayerStats,
 						 final_upgrades: Dictionary, final_passives: Dictionary,
 						 final_level: int, final_xp: float, final_xp_needed: float):
-
-	# --- ADIÇÃO AQUI ---
-	# Pausa o jogo assim que o sinal de game over for recebido
 	pause_game()
-	# --- FIM DA ADIÇÃO ---
 
-	# Busca a tela de Game Over registrada
 	var go_screen = EntityManager.get_game_over_screen()
 	if is_instance_valid(go_screen):
-		# Chama a função na tela de Game Over para mostrar os dados
 		go_screen.show_game_over(time_survived, final_stats, final_upgrades,
 								 final_passives, final_level, final_xp, final_xp_needed)
 	else:
-		# Fallback: Se a tela não for encontrada, apenas volta ao menu
 		printerr("Tela de Game Over não encontrada!")
-		unpause_game() # Despausa antes de mudar de cena no fallback
+		unpause_game()
 		get_tree().change_scene_to_file("res://Scenes/main/main_menu.tscn")

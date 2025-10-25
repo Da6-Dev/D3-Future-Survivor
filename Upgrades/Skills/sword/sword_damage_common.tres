@@ -7,7 +7,7 @@
 script = ExtResource("1_ytbvh")
 id = &"sword_damage_common"
 ability_name = "Espada: Lâmina Afiada"
-description = "Aumenta o **DANO** da espada em +2."
+description = "Aumenta o [b]DANO[/b] da espada em +2."
 icon = ExtResource("1_gofiv")
 target_ability_id = &"sword_attack"
 modifiers = {

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://b6x7y81aa0c1e"]
+
+[ext_resource type="Texture2D" uid="uid://4sohecu8hkmd" path="res://Art/Sprites/Icons/tile007.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"turret_duration_common"
+ability_name = "Torreta: Bateria Padrão"
+description = "Bateria extra. Aumenta o [b]TEMPO DE ATIVIDADE[/b] da torreta em +3 segundos."
+rarity = 0
+icon = ExtResource("1_icon")
+target_ability_id = &"deploy_turret"
+modifiers = {
+"duration": 3.0
+}

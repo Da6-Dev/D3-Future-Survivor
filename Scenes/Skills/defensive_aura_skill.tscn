@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3534evn1yis"]
+[gd_scene load_steps=5 format=3 uid="uid://d3534evn1yis"]
 
 [ext_resource type="Script" uid="uid://do7bujmobpcwy" path="res://Scripts/Skills/defensive_aura.gd" id="1_1ed6a"]
 [ext_resource type="PackedScene" uid="uid://dksximxe65h6p" path="res://Shaders/Will/AuraWallVFX/aura_wall_vfx.tscn" id="2_hcqo8"]
+[ext_resource type="Texture2D" uid="uid://bunpy08q700h3" path="res://Art/Sprites/Icons/tile002.png" id="2_v00uy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wlo5b"]
 radius = 90.0
@@ -11,7 +12,7 @@ visibility_layer = 2
 collision_layer = 32
 collision_mask = 16
 script = ExtResource("1_1ed6a")
-icon = ExtResource("2_hcqo8")
+icon = ExtResource("2_v00uy")
 ability_id = &"defensive_aura"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

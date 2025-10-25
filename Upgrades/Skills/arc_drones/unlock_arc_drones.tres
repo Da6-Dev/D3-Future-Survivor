@@ -8,7 +8,7 @@
 script = ExtResource("1_script")
 id = &"unlock_arc_drones"
 ability_name = "NOVA: VANTs de Arco"
-description = "Invoca VANTs que perseguem inimigos próximos, criando vigas elétricas de dano entre eles."
+description = "[b]DESBLOQUEIA[/b] VANTs que perseguem inimigos próximos, criando vigas elétricas de [b]DANO[/b] entre eles."
 rarity = 2
 icon = ExtResource("1_hwui5")
 type = 0

@@ -6,8 +6,9 @@
 [resource]
 script = ExtResource("1_script")
 id = &"turret_fire_rate_common"
-ability_name = "Torreta Atiradora"
-description = "Aumenta a cadência de tiro da torreta em 15%."
+ability_name = "Torreta: Servomotores"
+description = "Servomotores mais rápidos. Aumenta a [b]CADÊNCIA DE TIRO[/b] da torreta em 15%."
+rarity = 0
 icon = ExtResource("1_i04hq")
 target_ability_id = &"deploy_turret"
 modifiers = {

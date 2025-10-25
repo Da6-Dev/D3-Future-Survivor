@@ -6,12 +6,13 @@
 [resource]
 script = ExtResource("1_script")
 id = &"paralyzing_shot_mastery_epic"
-ability_name = "Tiro Paralisante"
-description = "Aumenta o dano em +10 e a duração da paralisia em +1 segundo."
+ability_name = "Tiro: Maestria"
+description = "Maestria de Atirador. Aumenta o [b]DANO[/b] em +10 e a [b]DURAÇÃO DA PARALISIA[/b] em +1 segundo, além de melhorar a [b]VELOCIDADE DE ATAQUE[/b] em 20%."
 rarity = 3
 icon = ExtResource("1_466co")
 target_ability_id = &"paralyzing_shot"
 modifiers = {
 "damage_amount": 10.0,
-"stun_duration": 1.0
+"stun_duration": 1.0,
+"attack_speed_multiplier": 0.2
 }

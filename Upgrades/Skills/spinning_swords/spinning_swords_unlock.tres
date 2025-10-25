@@ -8,10 +8,9 @@
 script = ExtResource("1_c1p3a")
 id = &"unlock_spinning_swords"
 ability_name = "NOVA: Espadas Orbitais"
-description = "Invoca espadas que giram ao seu redor, causando dano a inimigos próximos."
+description = "[b]DESBLOQUEIA[/b] espadas que giram ao seu redor, causando [b]DANO[/b] e [b]EMPATE[/b] contínuos aos inimigos."
 rarity = 2
 icon = ExtResource("1_xxbna")
 type = 0
 target_ability_id = &"spinning_swords"
 new_ability_scene = ExtResource("1_1jeo0")
-metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

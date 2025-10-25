@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"paralyzing_shot_duration_uncommon"
-ability_name = "Tiro Paralisante"
-description = "Aumenta a duração da paralisia em +0.5 segundos."
+ability_name = "Tiro: Neurotoxina"
+description = "Aumenta a [b]DURAÇÃO DA PARALISIA[/b] em +0.5 segundos."
 rarity = 1
 icon = ExtResource("1_pckxy")
 target_ability_id = &"paralyzing_shot"

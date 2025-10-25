@@ -8,10 +8,13 @@ var player: CharacterBody2D
 var available_upgrades: Array[AbilityUpgrade] = []
 var is_game_paused: bool = false
 var _is_upgrade_signal_connected: bool = false
+var _pending_level_ups: int = 0
 
 func _ready() -> void:
+	set_process_unhandled_input(true)
+	
 	_load_upgrades_from_disk()
-	await get_tree().process_frame
+	get_tree().scene_changed.connect(_on_scene_changed)
 	_find_and_connect_player()
 
 func _find_and_connect_player():
@@ -19,9 +22,6 @@ func _find_and_connect_player():
 	if is_instance_valid(player):
 		if not player.game_over.is_connected(_on_player_game_over):
 			player.game_over.connect(_on_player_game_over)
-	else:
-		await get_tree().create_timer(0.1).timeout
-		_find_and_connect_player()
 
 func pause_game():
 	is_game_paused = true
@@ -32,6 +32,10 @@ func unpause_game():
 	get_tree().paused = false
 
 func begin_level_up():
+	if is_game_paused:
+		_pending_level_ups += 1
+		return
+	
 	if not is_instance_valid(player):
 		player = get_tree().get_first_node_in_group("player")
 		if not player:
@@ -89,6 +93,10 @@ func on_upgrade_chosen(chosen_upgrade: AbilityUpgrade):
 	if is_instance_valid(player):
 		player.apply_upgrade(chosen_upgrade)
 	unpause_game()
+	
+	if _pending_level_ups > 0:
+		_pending_level_ups -= 1
+		call_deferred("begin_level_up")
 
 func _load_upgrades_from_disk() -> void:
 	available_upgrades.clear()
@@ -113,10 +121,13 @@ func _connect_pause_signals():
 			settings_menu.back_pressed.connect(_on_settings_close)
 
 func _unhandled_input(event: InputEvent):
-	if event.is_action_pressed("ui_pause"):
-
+	if event.is_action("ui_pause") and event.is_pressed() and not event.is_echo():
+		
 		var pause_menu = EntityManager.get_pause_menu()
+		
+		# Esta verificação agora deve funcionar, pois o menu teve tempo de se registrar.
 		if not is_instance_valid(pause_menu):
+			print("Pause failed: Pause menu instance is invalid.")
 			return
 
 		if not is_game_paused:
@@ -152,3 +163,13 @@ func _on_player_game_over(time_survived: float, final_stats: PlayerStats,
 		printerr("Tela de Game Over não encontrada!")
 		unpause_game()
 		get_tree().change_scene_to_file("res://Scenes/main/main_menu.tscn")
+
+func _on_scene_changed():
+	player = null
+	upgrade_screen = null
+	_is_upgrade_signal_connected = false
+	_pending_level_ups = 0
+	
+	unpause_game()
+
+	_find_and_connect_player()

@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"sword_legendary_shatter"
-ability_name = "Espada: Lâmina Explosiva"
-description = "Aumenta o **DANO**, **RECARGA**, **ÁREA** e **EMPURRÂO** da espada de forma significativa."
+ability_name = "Espada: Lâmina dos Deuses"
+description = "Aumenta o [b]DANO[/b], [b]RECARGA[/b], [b]ÁREA[/b] e [b]EMPURRÂO[/b] da espada de forma significativa."
 rarity = 4
 icon = ExtResource("1_ahuk8")
 target_ability_id = &"sword_attack"

@@ -61,7 +61,7 @@ script = ExtResource("1_ne2fo")
 explosion_radius = 100.0
 icon = ExtResource("2_5pw2l")
 ability_id = &"overload"
-cooldown_time = 12.0
+cooldown_time = 10.0
 active_duration = 5.0
 
 [node name="SfxDownsampled" type="AudioStreamPlayer" parent="."]

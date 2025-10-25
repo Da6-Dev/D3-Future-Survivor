@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"arc_drones_duration_uncommon"
-ability_name = "VANTs de Arco"
-description = "Aumenta o tempo de atividade das vigas elétricas em +0.25 segundos."
+ability_name = "VANTs: Bateria"
+description = "Aumenta o [b]TEMPO DE ATIVIDADE[/b] das vigas elétricas em +0.25 segundos."
 rarity = 1
 icon = ExtResource("1_igxyv")
 target_ability_id = &"arc_drones"

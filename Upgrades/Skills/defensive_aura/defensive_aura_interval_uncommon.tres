@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://bv8nbdipysci7"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bunpy08q700h3" path="res://Art/Sprites/Icons/tile002.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"defensive_aura_interval_uncommon"
+ability_name = "Aura: Frequência"
+description = "Aumenta a [b]VELOCIDADE DE ATAQUE[/b] (pulsos) em 15%."
+rarity = 1
+icon = ExtResource("2_icon")
+target_ability_id = &"defensive_aura"
+modifiers = {
+"attack_speed_multiplier": 0.15
+}

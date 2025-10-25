@@ -8,7 +8,7 @@
 script = ExtResource("1_script")
 id = &"unlock_overload"
 ability_name = "NOVA: Sobrecarga"
-description = "Cria uma explosão que empurra inimigos. Aumenta a velocidade de ataque de todas as habilidades por um curto período."
+description = "[b]DESBLOQUEIA[/b] uma explosão que causa [b]DANO[/b] e [b]EMPATE[/b], e concede [b]VELOCIDADE DE ATAQUE[/b] global por um curto período."
 rarity = 2
 icon = ExtResource("1_ouivs")
 type = 0

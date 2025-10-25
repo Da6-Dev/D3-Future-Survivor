@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://dknl2a3k4jcxp"]
+
+[ext_resource type="Texture2D" uid="uid://bunpy08q700h3" path="res://Art/Sprites/Icons/tile002.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"defensive_aura_farmer_legendary"
+ability_name = "Farmador de Aura"
+description = "FARMADOR DE AURA! Aumenta massivamente a [b]ÁREA DE EFEITO[/b] em +50 e a [b]VELOCIDADE DE ATAQUE[/b] em 40%."
+rarity = 4
+icon = ExtResource("1_icon")
+target_ability_id = &"defensive_aura"
+modifiers = {
+"attack_speed_multiplier": 0.4,
+"radius": 50.0,
+}

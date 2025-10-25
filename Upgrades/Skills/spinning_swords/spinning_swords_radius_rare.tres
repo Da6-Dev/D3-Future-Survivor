@@ -6,12 +6,11 @@
 [resource]
 script = ExtResource("1_tn42j")
 id = &"spinning_radius_rare"
-ability_name = "Espadas Orbitais"
-description = "Aumenta o raio de órbita das espadas."
+ability_name = "Espadas: Expansão Orbital"
+description = "Expande a órbita, aumentando o [b]RAIO[/b] das espadas em +20."
 rarity = 2
 icon = ExtResource("1_d3r3y")
 target_ability_id = &"spinning_swords"
 modifiers = {
-"radius": 20
+"radius": 20.0
 }
-metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://mvpvb76yn25w" path="res://Player/Stats/atirador_stats.tres" id="1_icjcy"]
 [ext_resource type="Script" uid="uid://eohwjb1y0yn" path="res://Scripts/Resources/PlayerClass.gd" id="1_tqc4k"]
-[ext_resource type="PackedScene" uid="uid://ch6uwhj1syeby" path="res://Scenes/Skills/turret_skill.tscn" id="3_icjcy"]
+[ext_resource type="PackedScene" uid="uid://dacuxsnoeh5nk" path="res://Scenes/Skills/pistol_skill.tscn" id="3_icjcy"]
 
 [resource]
 script = ExtResource("1_tqc4k")

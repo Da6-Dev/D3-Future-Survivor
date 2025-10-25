@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c3iks1b5kfqgb" path="res://Scripts/Skills/arc_drones_skill.gd" id="1_445yc"]
 [ext_resource type="PackedScene" uid="uid://cldk6gynsmbl8" path="res://Scenes/Skills/arc_beam.tscn" id="2_jx5un"]
 [ext_resource type="PackedScene" uid="uid://cokn214ucd3h7" path="res://Scenes/Skills/arc_drone.tscn" id="3_720fh"]
-[ext_resource type="AudioStream" uid="uid://c3aslvuuri17g" path="res://Art/Sounds/OriginalSounds/ArcDroneHum.wav" id="4_3c7jv"]
 [ext_resource type="Texture2D" uid="uid://c2w3s6beyu4sy" path="res://Art/Sprites/Icons/tile001.png" id="4_3c7jv"]
 
 [node name="ArcDronesSkill" type="Node2D"]
@@ -14,8 +13,9 @@ drone_scene = ExtResource("3_720fh")
 max_chase_radius = 250.0
 icon = ExtResource("4_3c7jv")
 ability_id = &"arc_drones"
-cooldown_time = 2.5
+cooldown_time = 1.7
 active_duration = 0.5
+damage_amount = 2.0
 
 [node name="Pivot" type="Node2D" parent="."]
 
@@ -24,5 +24,4 @@ active_duration = 0.5
 [node name="BeamContainer" type="Node2D" parent="."]
 
 [node name="ArcDroneHum" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_3c7jv")
 volume_db = -5.581

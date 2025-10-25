@@ -24,6 +24,7 @@ const UPGRADE_ICON_SCENE = preload("res://Scenes/ui/upgrade_display_icon.tscn")
 @onready var quit_confirmation_dialog: ConfirmationDialog = $QuitConfirmationDialog
 
 var _active_tween: Tween
+var _last_focused_control: Control = null
 
 func _ready() -> void:
 	EntityManager.register_pause_menu(self)
@@ -53,6 +54,9 @@ func open_menu():
 	
 	_active_tween.tween_property(panel_container, "modulate:a", 1.0, 0.3)
 	_active_tween.tween_property(panel_container, "scale", Vector2.ONE, 0.3)
+	
+	_last_focused_control = get_viewport().gui_get_focus_owner()
+	resume_button.call_deferred("grab_focus")
 
 
 func _update_stats_display():
@@ -163,7 +167,9 @@ func _create_upgrade_icon(upgrade: AbilityUpgrade, delay: float = 0.0):
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_pause") and visible:
+	# *** CORREÇÃO AQUI ***
+	# Trocado de 'event.is_action_just_pressed' para 'event.is_action' + 'event.is_pressed'
+	if event.is_action("ui_pause") and event.is_pressed() and not event.is_echo() and visible:
 		if not quit_confirmation_dialog.visible:
 			_on_resume_pressed()
 			get_viewport().set_input_as_handled()
@@ -183,6 +189,10 @@ func _on_resume_pressed():
 	
 	hide()
 	GameManager.unpause_game()
+	
+	if is_instance_valid(_last_focused_control):
+		_last_focused_control.call_deferred("grab_focus")
+	_last_focused_control = null
 
 func _on_quit_button_pressed():
 	quit_confirmation_dialog.popup_centered()
@@ -190,6 +200,8 @@ func _on_quit_button_pressed():
 func _on_quit_confirmed():
 	if _active_tween and _active_tween.is_running():
 		_active_tween.kill()
+		
+	_last_focused_control = null # Limpa o foco ao sair
 
 	_active_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	_active_tween.set_parallel(true)

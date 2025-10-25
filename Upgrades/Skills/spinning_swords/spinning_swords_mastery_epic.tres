@@ -6,13 +6,13 @@
 [resource]
 script = ExtResource("1_kti4j")
 id = &"spinning_mastery_epic"
-ability_name = "Espadas Orbitais"
-description = "Aumenta a duração em +1s e o dano em +2."
+ability_name = "Espadas: Maestria"
+description = "Aumenta o [b]DANO[/b] em +5, o [b]RAIO[/b] em +15 e a [b]VELOCIDADE DE ROTAÇÃO[/b] em 0.3."
 rarity = 3
 icon = ExtResource("1_e7p4e")
 target_ability_id = &"spinning_swords"
 modifiers = {
-"active_duration": 1,
-"damage": 2.0
+"damage_amount": 5.0,
+"radius": 15.0,
+"rotation_speed": 0.3
 }
-metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

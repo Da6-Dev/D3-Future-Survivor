@@ -6,12 +6,12 @@
 [resource]
 script = ExtResource("1_script")
 id = &"overload_mastery_epic"
-ability_name = "Sobrecarga"
-description = "Aumenta o bônus de velocidade de ataque em +15% e o dano da explosão em +5."
+ability_name = "Sobrecarga: Maestria"
+description = "Maestria de Sobrecarga. Aumenta o [b]DANO[/b] em +10 e o bônus de [b]VELOCIDADE DE ATAQUE[/b] em +10%."
 rarity = 3
 icon = ExtResource("1_dvf4s")
 target_ability_id = &"overload"
 modifiers = {
-"cooldown_reduction_percent": 0.15,
-"damage_amount": 5.0
+"cooldown_reduction_percent": 0.1,
+"damage_amount": 10.0
 }

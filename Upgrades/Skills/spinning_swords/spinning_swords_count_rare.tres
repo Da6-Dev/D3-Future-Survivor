@@ -6,12 +6,11 @@
 [resource]
 script = ExtResource("1_mhm8i")
 id = &"spinning_count_rare"
-ability_name = "Espadas Orbitais"
-description = "Adiciona +1 espada ao vórtice."
+ability_name = "Espadas: Lâmina Extra"
+description = "Forja uma nova lâmina, adicionando [b]+1 ESPADA[/b] ao vórtice."
 rarity = 2
 icon = ExtResource("1_hklb5")
 target_ability_id = &"spinning_swords"
 modifiers = {
 "sword_count": 1
 }
-metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

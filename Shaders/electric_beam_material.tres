@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://du40p3l8b4yok"]
 
-[ext_resource type="Shader" uid="uid://c4h1ndeb1wku6" path="res://Shaders/Will/VFXThunderTutorial/ThunderShader.tres" id="1_231xp"]
+[ext_resource type="Shader" uid="uid://cinqblw54ydba" path="res://Shaders/Will/VFXThunderTutorial/ThunderShader.tres" id="1_231xp"]
 [ext_resource type="Texture2D" uid="uid://vfk8k1ab8r4s" path="res://Shaders/Will/VFXThunderTutorial/VSFThunder.png" id="2_r8amu"]
 
 [sub_resource type="Gradient" id="Gradient_j00kh"]

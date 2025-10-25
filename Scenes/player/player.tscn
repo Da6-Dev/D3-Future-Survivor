@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://bxcm1viko0bc2"]
+[gd_scene load_steps=24 format=3 uid="uid://bxcm1viko0bc2"]
 
 [ext_resource type="Script" uid="uid://ckdivkb1dvitb" path="res://Scripts/player/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cv2w6dgxak7of" path="res://Art/Sprites/Player/ROBO_WITHOUT HANDS.png" id="2_eo61r"]
 [ext_resource type="Texture2D" uid="uid://c7maseuxgwo1d" path="res://Art/Sprites/Player/Engenheiro.png" id="3_e41v5"]
 [ext_resource type="Script" uid="uid://jjkw21xruqq8" path="res://Scripts/camera/camera_shaker.gd" id="3_mxepk"]
 [ext_resource type="AudioStream" uid="uid://bs5rm40yha4va" path="res://Art/Sounds/OriginalSounds/hitHurt.wav" id="5_ca0mu"]
+[ext_resource type="AudioStream" uid="uid://d76uktuhl4c7" path="res://Art/Sounds/OriginalSounds/OriginalSFX/CollectSound.wav" id="6_6upyo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mxepk"]
 atlas = ExtResource("2_eo61r")
@@ -186,5 +187,8 @@ shape = SubResource("CapsuleShape2D_eo61r")
 [node name="HitHurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ca0mu")
 volume_db = -14.205
+
+[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6upyo")
 
 [connection signal="area_entered" from="CollectionArea" to="." method="_on_collection_area_area_entered"]

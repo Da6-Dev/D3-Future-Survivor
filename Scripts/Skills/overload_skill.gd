@@ -9,6 +9,9 @@ extends BaseAbility
 
 var camera: Camera2D
 var original_camera_zoom: Vector2
+@onready var sfx_explosion : AudioStreamPlayer = $SfxDownsampled
+@onready var explosion_collider : Area2D = $Area2D
+@onready var explosion_effect : GPUParticles2D = $Explosion
 
 func _ability_ready() -> void:
 	on_deactivated.connect(_on_buff_finished)
@@ -48,20 +51,22 @@ func _on_active_duration_finished():
 	on_deactivated.emit()
 
 func _on_activate(_params: Dictionary) -> void:
-	EntityManager.trigger_shake(25.0, 0.4, 15.0)
+	EntityManager.trigger_shake(70.0, 0.65, 125.0)
+	
+	sfx_explosion.play()
 	_create_explosion_effect()
 	_apply_explosion_knockback()
 	_apply_player_buff()
 
 func _apply_explosion_knockback():
-	var enemies = get_tree().get_nodes_in_group("enemies")
-	for enemy in enemies:
-		if global_position.distance_to(enemy.global_position) <= explosion_radius:
-			if enemy.has_method("take_damage"):
-				var direction = (enemy.global_position - global_position).normalized()
-				var final_damage = player.get_calculated_damage(damage_amount)
-				enemy.take_damage(final_damage, direction, explosion_knockback)
-
+	var bodies = explosion_collider.get_overlapping_bodies()
+	
+	for a in range(bodies.size()):
+		if bodies[a].is_in_group("enemies"):
+			var knockback_direction = (bodies[a].global_position - global_position).normalized()
+			var final_damage_payload = player.get_calculated_damage(damage_amount)
+			bodies[a].take_damage(final_damage_payload, knockback_direction, 1350)
+	
 func _apply_player_buff():
 	if is_instance_valid(player) and player.has_method("apply_global_cooldown_modifier"):
 		player.apply_global_cooldown_modifier(1.0 - cooldown_reduction_percent, ability_id)
@@ -80,16 +85,5 @@ func _on_buff_finished():
 		tween.tween_property(camera, "zoom", original_camera_zoom, 0.5)
 
 func _create_explosion_effect():
-	var tween = create_tween()
-	var visual_ring = Polygon2D.new()
-	var points = PackedVector2Array()
-	for i in range(32):
-		var angle = i * TAU / 32
-		points.append(Vector2(cos(angle), sin(angle)) * explosion_radius)
-	
-	visual_ring.polygon = points
-	visual_ring.color = Color(1.0, 0.8, 0.2, 0.8)
-	add_child(visual_ring)
-	
-	tween.tween_property(visual_ring, "color:a", 0.0, 0.25).set_trans(Tween.TRANS_QUINT)
-	tween.tween_callback(visual_ring.queue_free)
+	explosion_effect.restart(true)
+	explosion_effect.emitting = true

@@ -1,14 +1,15 @@
 extends Node2D
 
 @export var bullet_scene: PackedScene
-@export var fire_rate: float = 0.2
+@export var fire_rate: float = 0.6
 @export var duration: float = 10.0
 @export var attack_range: float = 400.0
 
-@onready var visual: Node2D = $Visual
+@onready var visual: AnimatedSprite2D = $Visual
 @onready var fire_timer: Timer = $FireTimer
 @onready var duration_timer: Timer = $DurationTimer
 @onready var muzzle: Marker2D = $Muzzle
+
 var player: Node = null
 
 var _target: Node2D = null
@@ -73,7 +74,7 @@ func _aim_at_target(delta: float):
 	if abs(target_direction_x) > 1.0:
 		should_flip = (target_direction_x < 0)
 	
-	if visual is Sprite2D or visual is AnimatedSprite2D:
+	if visual is AnimatedSprite2D:
 		visual.flip_h = should_flip
 	elif "scale" in visual:
 		var target_scale_x = -1.0 if should_flip else 1.0
@@ -90,6 +91,7 @@ func _shoot() -> void:
 	get_tree().root.add_child(bullet)
 	bullet.player = player
 	bullet.global_position = muzzle.global_position
+	visual.play("atirar")
 	
 	var shoot_direction = muzzle.global_position.direction_to(_target.global_position)
 	bullet.set_direction(shoot_direction)

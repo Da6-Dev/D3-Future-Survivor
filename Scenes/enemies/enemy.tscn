@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://47vojuad7auk"]
+[gd_scene load_steps=12 format=3 uid="uid://47vojuad7auk"]
 
 [ext_resource type="Script" uid="uid://dwp34fyd7wdcw" path="res://Scripts/enemies/enemy.gd" id="1_notgg"]
 [ext_resource type="Texture2D" uid="uid://7pykul6q1p0v" path="res://Art/Sprites/Enemy/Idle/Spr_Idle.png" id="2_cpjt6"]
 [ext_resource type="Texture2D" uid="uid://f37ykyxexsit" path="res://Art/Sprites/Crown/gold.png" id="2_we58l"]
+[ext_resource type="AudioStream" uid="uid://bqu2fhcr7n30g" path="res://Art/Sounds/OriginalSounds/laserShoot.wav" id="4_we58l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_slefu"]
 atlas = ExtResource("2_we58l")
@@ -24,6 +25,11 @@ radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hghv2"]
 radius = 36.013885
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_we58l"]
+random_pitch = 2.42
+streams_count = 1
+stream_0/stream = ExtResource("4_we58l")
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
@@ -81,6 +87,12 @@ one_shot = true
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 visibility_layer = 4
 scale = Vector2(3, 3)
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_we58l")
+volume_db = -18.326
+pitch_scale = 1.56
+bus = &"SFX"
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

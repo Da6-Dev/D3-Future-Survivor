@@ -37,6 +37,7 @@ const PLAYER_GROUP: String = "player"
 @onready var melee_attack_area: Area2D = $MeleeAttackArea
 @onready var crown_icon: Sprite2D = $CrownIcon
 @onready var stun_timer: Timer = $StunTimer
+@onready var hit_sound : AudioStreamPlayer = $HitSound
 
 var _can_attack: bool = true
 var is_miniboss: bool = false
@@ -230,6 +231,7 @@ func take_damage(damage_payload: Dictionary, knockback_direction: Vector2 = Vect
 	if is_crit:
 		EntityManager.trigger_shake(10.0, 0.1, 30.0)
 	set_health(current_health - amount)
+	hit_sound.play()
 	
 	# Não aplicar knockback se já estiver em um estado de "paralisia"
 	if current_state != EnemyState.DEAD and current_state != EnemyState.STUNNED and incoming_knockback_strength > 0:

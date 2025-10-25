@@ -33,7 +33,7 @@ size_flags_vertical = 0
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+[node name="UpgradeIcon" type="TextureRect" parent="VBoxContainer"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 4

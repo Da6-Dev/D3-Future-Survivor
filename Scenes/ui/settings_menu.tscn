@@ -44,6 +44,7 @@ font_size = 30
 font_size = 30
 
 [node name="SettingsMenu" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_u1301")
 
 [node name="BackgroundDim" type="ColorRect" parent="."]
@@ -90,10 +91,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 4
+current_tab = 0
+deselect_enabled = true
 
 [node name="Geral" type="VBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent"]
-visible = false
 layout_mode = 2
 alignment = 1
 metadata/_tab_index = 0
@@ -402,6 +403,7 @@ theme_override_constants/v_separation = 30
 columns = 2
 
 [node name="Acessibilidade" type="VBoxContainer" parent="SettingsPanel/MainMargin/VBoxContainer/MainContent"]
+visible = false
 layout_mode = 2
 alignment = 1
 metadata/_tab_index = 4
@@ -482,6 +484,7 @@ alignment = 1
 [node name="ApplyButton" type="Button" parent="SettingsPanel/MainMargin/VBoxContainer/BottomButtons"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+focus_neighbor_right = NodePath("../BackButton")
 theme_override_font_sizes/font_size = 20
 text = "Aplicar"
 

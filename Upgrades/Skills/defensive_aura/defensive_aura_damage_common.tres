@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://beafcpb84core"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://beafcpb84core"]
 
+[ext_resource type="Texture2D" uid="uid://bunpy08q700h3" path="res://Art/Sprites/Icons/tile002.png" id="1_e1ehj"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_yrho4"]
 
 [resource]
@@ -7,6 +8,7 @@ script = ExtResource("1_yrho4")
 id = &"defensive_aura_damage_common"
 ability_name = "Postura Defensiva"
 description = "Aumenta o dano da aura em +1."
+icon = ExtResource("1_e1ehj")
 target_ability_id = &"defensive_aura"
 modifiers = {
 "damage_amount": 1.0

@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal xp_changed(current_xp: float, xp_to_next_level: float)
 signal level_changed(new_level: int)
 signal health_changed(current_health: float, max_health: float)
-signal died
+signal game_over(time_survived: float, final_stats: PlayerStats, final_upgrades: Dictionary, final_passives: Dictionary, final_level: int, final_xp: float, final_xp_needed: float)
 signal ability_added(ability: BaseAbility)
 signal shield_changed(current_shield: float, max_shield: float)
 
@@ -27,38 +27,45 @@ var current_shield: float = 0.0
 var applied_upgrades_map: Dictionary = {}
 var last_direction: Vector2 = Vector2.RIGHT
 var _is_invincible: bool = false
-var current_health: int
+var current_health: float
 var current_xp: float = 0.0
-var xp_to_next_level: float = 3.0
+var xp_to_next_level: float = 5.0
 var level: int = 1
 var _is_dead: bool = false
+var _time_elapsed: float = 0.0
 
 func _ready() -> void:
 	EntityManager.register_player(self)
 	if GameSession.chosen_class:
 		_apply_class_data(GameSession.chosen_class)
 	else:
-		var fallback_class = load("res://Classes/guerreiro.tres")
-		_apply_class_data(fallback_class)
-	
+		var fallback_class = load("res://Player/Classes/guerreiro.tres")
+		if fallback_class:
+			_apply_class_data(fallback_class)
+		else:
+			push_error("Classe padrão não encontrada!")
+			base_stats = PlayerStats.new()
+			current_stats = base_stats.duplicate()
+			current_health = current_stats.max_health
+
+
 	update_last_direction_from_input()
 	invincibility_timer.wait_time = invincibility_duration
 	invincibility_timer.timeout.connect(_on_invincibility_timer_timeout)
 	shield_recharge_timer.timeout.connect(_on_shield_recharge_timer_timeout)
-	
-	# Emite os valores iniciais
+
 	health_changed.emit(current_health, current_stats.max_health)
 	xp_changed.emit(current_xp, xp_to_next_level)
 	level_changed.emit(level)
 	shield_changed.emit(current_shield, current_stats.max_shield)
 
 func _physics_process(delta: float) -> void:
+	_time_elapsed += delta
 	if _is_dead:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
 	
-	# --- LENDO DOS NOVOS STATS ---
 	if current_stats.health_regen_rate > 0.0 and current_health < current_stats.max_health:
 		_health_regen_accumulator += current_stats.health_regen_rate * delta
 
@@ -120,7 +127,6 @@ func _apply_class_data(class_data: PlayerClass):
 		self.current_stats = PlayerStats.new()
 
 	self.current_health = self.current_stats.max_health
-	# ------------------------------------
 
 	if class_data.starting_ability_scene is PackedScene:
 		var ability_instance: BaseAbility = class_data.starting_ability_scene.instantiate()
@@ -210,24 +216,18 @@ func apply_upgrade(upgrade: AbilityUpgrade):
 			_apply_passive_stat(upgrade)
 	
 func _apply_passive_stat(upgrade: AbilityUpgrade):
-	# --- ESTA É A FUNÇÃO OTIMIZADA ---
-	
 	for key in upgrade.modifiers:
 		var modifier_value = upgrade.modifiers[key]
-		
-		# Lógica especial para stats com efeitos colaterais
 		match key:
 			"max_health":
 				var health_gain = int(modifier_value)
 				current_stats.max_health += health_gain
-				current_health += health_gain # Cura o jogador
+				current_health += health_gain
 				health_changed.emit(current_health, current_stats.max_health)
 
 			"attack_speed":
 				var speed_increase_percent = float(modifier_value)
 				current_stats.global_attack_speed_bonus += speed_increase_percent
-				
-				# Aplica o bônus a todas as habilidades JÁ ATIVAS
 				for ability in active_abilities.values():
 					ability.total_attack_speed_multiplier += speed_increase_percent
 					if ability.has_method("update_timers"):
@@ -252,7 +252,6 @@ func _apply_passive_stat(upgrade: AbilityUpgrade):
 				current_stats.global_damage_multiplier += damage_gain_percent
 				
 			_:
-				# O 'if' aqui previne que os stats já tratados sejam adicionados duas vezes
 				var handled_keys = ["health_regen", "health_regen_rate", "global_damage"]
 				if (key in current_stats) and (not key in handled_keys):
 					var current_value = current_stats.get(key)
@@ -273,7 +272,7 @@ func add_xp(amount: float) -> void:
 func level_up() -> void:
 	level += 1
 	current_xp -= xp_to_next_level
-	xp_to_next_level *= 1.5
+	xp_to_next_level = round(xp_to_next_level * 1.25)
 	level_changed.emit(level)
 	get_node("/root/GameManager").begin_level_up()
 
@@ -315,10 +314,10 @@ func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knock
 		animations.modulate = flash_color
 		invincibility_timer.start()
 
-	if current_health <= 0:
+	if current_health <= 0 and not _is_dead:
 		_is_dead = true
 		animations.play("Death")
-		emit_signal("died")
+		emit_signal("game_over", _time_elapsed, current_stats, applied_upgrades_map, active_passives, level, current_xp, xp_to_next_level)
 		set_physics_process(false)
 		collision_shape.set_deferred("disabled", true)
 

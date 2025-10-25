@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3o7c6hswx1v0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_z1hgt"]
+bg_color = Color(0.12549, 0.12549, 0.141176, 0.898039) # Exemplo: Cinza escuro semi-opaco
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.329412, 0.329412, 0.360784, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Theme" id="Theme_gcybp"]
+RichTextLabel/font_sizes/normal_font_size = 14
+
+[node name="UpgradeTooltip" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_z1hgt")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TooltipLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_gcybp")
+bbcode_enabled = true
+text = "[b]Nome do Upgrade[/b]
+
+Esta é a descrição do que o upgrade faz."
+fit_content = true
+autowrap_mode = 0 # Desabilita autowrap para controle manual com \n se necessário

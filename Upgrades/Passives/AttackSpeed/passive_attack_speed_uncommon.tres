@@ -1,6 +1,11 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://7pg8yii0g4sv"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=4 format=3 uid="uid://7pg8yii0g4sv"]
 
+[ext_resource type="Texture2D" uid="uid://dfbmdqm6g2pyq" path="res://Art/Sprites/Icons/Stats-Sheet.png" id="1_7vd32"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi8j2"]
+atlas = ExtResource("1_7vd32")
+region = Rect2(0, 0, 64, 64)
 
 [resource]
 script = ExtResource("1_script")
@@ -8,6 +13,7 @@ id = &"passive_attack_speed_uncommon"
 ability_name = "Passiva: Cadência II"
 description = "Aumenta a velocidade de ataque de todas as habilidades em +8%."
 rarity = 1
+icon = SubResource("AtlasTexture_oi8j2")
 type = 2
 passive_stat_id = &"stat_attack_speed"
 modifiers = {

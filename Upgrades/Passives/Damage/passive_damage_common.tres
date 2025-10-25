@@ -1,12 +1,18 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://p6u64npdcoi5"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=4 format=3 uid="uid://p6u64npdcoi5"]
 
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dfbmdqm6g2pyq" path="res://Art/Sprites/Icons/Stats-Sheet.png" id="1_xyqic"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35cwx"]
+atlas = ExtResource("1_xyqic")
+region = Rect2(192, 0, 64, 64)
 
 [resource]
 script = ExtResource("1_script")
 id = &"passive_damage_common"
 ability_name = "Passiva: Potência"
 description = "Aumenta todo o dano em +5%."
+icon = SubResource("AtlasTexture_35cwx")
 type = 2
 passive_stat_id = &"stat_global_damage"
 modifiers = {

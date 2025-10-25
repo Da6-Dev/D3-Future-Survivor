@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://o8taryiocnva"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://o8taryiocnva"]
 
+[ext_resource type="Texture2D" uid="uid://bunpy08q700h3" path="res://Art/Sprites/Icons/tile002.png" id="1_j2l80"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_nviit"]
 
 [resource]
@@ -8,6 +9,7 @@ id = &"aura_knockback_uncommon"
 ability_name = "Postura Defensiva"
 description = "Aumenta a força do empurrão da aura em +100."
 rarity = 1
+icon = ExtResource("1_j2l80")
 target_ability_id = &"defensive_aura"
 modifiers = {
 "knockback_strength": 100

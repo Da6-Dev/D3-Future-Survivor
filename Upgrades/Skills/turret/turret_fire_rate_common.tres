@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://bfnyajxlq5o3e"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://bfnyajxlq5o3e"]
 
+[ext_resource type="Texture2D" uid="uid://4sohecu8hkmd" path="res://Art/Sprites/Icons/tile007.png" id="1_i04hq"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
 [resource]
@@ -7,6 +8,7 @@ script = ExtResource("1_script")
 id = &"turret_fire_rate_common"
 ability_name = "Torreta Atiradora"
 description = "Aumenta a cadência de tiro da torreta em 15%."
+icon = ExtResource("1_i04hq")
 target_ability_id = &"deploy_turret"
 modifiers = {
 "fire_rate_multiplier": 0.15

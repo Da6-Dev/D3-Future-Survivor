@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://hvb2pcvrucwg"]
 
+[ext_resource type="Texture2D" uid="uid://jokivhu2kg38" path="res://Art/Sprites/Icons/tile004.png" id="1_pckxy"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
 [resource]
@@ -8,6 +9,7 @@ id = &"paralyzing_shot_duration_uncommon"
 ability_name = "Tiro Paralisante"
 description = "Aumenta a duração da paralisia em +0.5 segundos."
 rarity = 1
+icon = ExtResource("1_pckxy")
 target_ability_id = &"paralyzing_shot"
 modifiers = {
 "stun_duration": 0.5

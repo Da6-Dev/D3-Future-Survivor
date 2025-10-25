@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://b5sh0xkjjxrbx"]
+
+[ext_resource type="Texture2D" uid="uid://d8nuv7m4swwr" path="res://Art/Sprites/Icons/tile000.png" id="1_bd8oh"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"sword_area_common"
+ability_name = "Espada: Alcance"
+description = "Aumenta a **ÁREA** da espada em 10%."
+icon = ExtResource("1_bd8oh")
+target_ability_id = &"sword_attack"
+modifiers = {
+"radius": 0.1
+}

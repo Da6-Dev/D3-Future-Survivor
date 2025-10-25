@@ -14,7 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.034066956, 3.8381266e-05, 0.12018225, 0.41960785)
+color = Color(0.023529412, 0, 0.039215688, 0.80784315)
 metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect"]

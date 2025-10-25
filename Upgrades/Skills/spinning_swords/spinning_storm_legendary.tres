@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://b2bgxpbrtf5iq"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://b2bgxpbrtf5iq"]
 
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_60si0"]
+[ext_resource type="Texture2D" uid="uid://cg6np1ekb5kcs" path="res://Art/Sprites/Icons/tile006.png" id="1_kijwo"]
 
 [resource]
 script = ExtResource("1_60si0")
@@ -8,6 +9,7 @@ id = &"spinning_storm_legendary"
 ability_name = "Espadas Orbitais"
 description = "Adiciona +2 espadas e aumenta a velocidade de rotação"
 rarity = 4
+icon = ExtResource("1_kijwo")
 target_ability_id = &"spinning_swords"
 modifiers = {
 "rotation_speed": 0.5,

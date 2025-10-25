@@ -1,0 +1,213 @@
+[gd_scene load_steps=2 format=3 uid="uid://3inoiq1n8weu"]
+
+[ext_resource type="Script" uid="uid://c6dh0p565dtyw" path="res://Scripts/ui/pause_menu.gd" id="1_miudh"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_miudh")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="UpgradesPanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 500)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/UpgradesPanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/UpgradesPanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/HBoxContainer/UpgradesPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Habilidades e Upgrades"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/HBoxContainer/UpgradesPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/HBoxContainer/UpgradesPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="UpgradesGrid" type="GridContainer" parent="PanelContainer/HBoxContainer/UpgradesPanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 5
+
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "Continuar"
+
+[node name="SettingsButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "Configurações"
+
+[node name="QuitButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "Menu Inicial"
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="StatsPanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 500)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/StatsPanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Status Atuais"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatsGridContainer" type="GridContainer" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="LabelLevel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "Nível:"
+
+[node name="LevelLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="LabelXP" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "XP:"
+
+[node name="XpLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "0 / 10"
+
+[node name="LabelHealth" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "Vida Máxima:"
+
+[node name="HealthLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "100"
+
+[node name="LabelShield" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "Escudo Máximo:"
+
+[node name="ShieldLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="LabelRegen" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "Regeneração:"
+
+[node name="RegenLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "0 /s"
+
+[node name="LabelSpeed" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "Velocidade:"
+
+[node name="SpeedLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "300"
+
+[node name="LabelDmgRedux" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "Redução Dano:"
+
+[node name="DmgReduxLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "0%"
+
+[node name="LabelDmgMult" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "Dano Global:"
+
+[node name="DmgMultLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "+0%"
+
+[node name="LabelAtkSpd" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "Vel. Ataque:"
+
+[node name="AtkSpdLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "+0%"
+
+[node name="LabelCritChance" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "Chance Crítico:"
+
+[node name="CritChanceLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "0%"
+
+[node name="LabelCritDmg" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "Dano Crítico:"
+
+[node name="CritDmgLabel" type="Label" parent="PanelContainer/HBoxContainer/StatsPanelContainer/MarginContainer/VBoxContainer/StatsGridContainer"]
+layout_mode = 2
+text = "x2.0"
+
+[node name="QuitConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "Confirmar Saída"
+initial_position = 1
+dialog_text = "Tem certeza que deseja sair?
+Todo o progresso da partida atual será perdido."
+cancel_button_text = "Não"

@@ -10,3 +10,5 @@ enemy_scene = ExtResource("2_8h7h8")
 [node name="SpawnTimer" type="Timer" parent="."]
 
 [node name="DifficultyTimer" type="Timer" parent="."]
+
+[node name="EndlessTimer" type="Timer" parent="."]

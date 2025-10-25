@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal back_pressed
+
 @onready var fps_limit_spinbox: SpinBox = $"SettingsPanel/MainMargin/VBoxContainer/MainContent/Gráficos/FpsLimitOption/FpsLimitSpinBox"
 @onready var keybindings_grid: GridContainer = $"SettingsPanel/MainMargin/VBoxContainer/MainContent/Controles/ControlesMargin/VBoxContainer/KeybindingsGrid"
 @onready var language_button: OptionButton = $SettingsPanel/MainMargin/VBoxContainer/MainContent/Geral/LanguageOption/LanguageButton
@@ -13,8 +15,12 @@ extends CanvasLayer
 @onready var back_button: Button = $SettingsPanel/MainMargin/VBoxContainer/BottomButtons/BackButton
 @onready var apply_button: Button = $SettingsPanel/MainMargin/VBoxContainer/BottomButtons/ApplyButton
 
+@onready var tab_container: TabContainer = $SettingsPanel/MainMargin/VBoxContainer/MainContent
+
 var is_dirty = false
 var _action_to_rebind: StringName = &""
+var _button_to_rebind: Button = null
+var _last_focused_control: Control = null
 
 const ACTION_DISPLAY_NAMES = {
 	"move_up": "Mover para Cima",
@@ -24,6 +30,7 @@ const ACTION_DISPLAY_NAMES = {
 }
 
 func _ready() -> void:
+	EntityManager.register_settings_menu(self)
 	hide()
 
 	if back_button: back_button.pressed.connect(_on_back_button_pressed)
@@ -44,38 +51,67 @@ func _ready() -> void:
 	_populate_resolutions()
 	_populate_languages()
 	_populate_keybindings()
-
+	
+	tab_container.focus_mode = Control.FOCUS_ALL
+	
 func _unhandled_input(event: InputEvent) -> void:
-	if _action_to_rebind == &"" or not event is InputEventKey:
-		return
+	if _action_to_rebind != &"":
+		if event is InputEventKey and event.is_pressed() and not event.is_echo():
+			if event.keycode == KEY_ESCAPE:
+				_cancel_rebind() 
+				get_viewport().set_input_as_handled()
+				return 
 
-	if event.is_pressed() and not event.is_echo():
-		if event.keycode == KEY_ESCAPE:
-			_action_to_rebind = &""
-			_populate_keybindings()
+			for action in ACTION_DISPLAY_NAMES.keys():
+				if action == _action_to_rebind:
+					continue
+				if InputMap.action_has_event(action, event):
+					InputMap.action_erase_event(action, event)
+			
+			InputMap.action_erase_events(_action_to_rebind)
+			InputMap.action_add_event(_action_to_rebind, event)
+			
+			is_dirty = true
+			_cancel_rebind() 
 			get_viewport().set_input_as_handled()
 			return
 		
-		InputMap.action_erase_events(_action_to_rebind)
-		InputMap.action_add_event(_action_to_rebind, event)
+		if event is InputEventMouseButton and event.is_pressed():
+			if is_instance_valid(_button_to_rebind) and not _button_to_rebind.get_rect().has_point(event.position):
+				_cancel_rebind()
+			return
 		
-		_action_to_rebind = &""
-		_populate_keybindings()
-		is_dirty = true
+		get_viewport().set_input_as_handled()
+		return
+		
+	if event.is_action_pressed("ui_pause") and visible:
+		_on_back_button_pressed()
 		get_viewport().set_input_as_handled()
 
 func open_menu() -> void:
+	_last_focused_control = get_viewport().gui_get_focus_owner()
 	show()
-	get_tree().paused = true
 	_update_ui_from_settings()
+	tab_container.call_deferred("grab_focus")
+
+func _cancel_rebind():
+	_action_to_rebind = &""
+	if is_instance_valid(_button_to_rebind):
+		var action_name = _button_to_rebind.get_meta("action_name")
+		_button_to_rebind.text = _get_key_for_action(action_name)
+	
+	_button_to_rebind = null
 
 func close_menu() -> void:
 	hide()
-	get_tree().paused = false
 	if is_dirty:
 		SettingsManager.load_settings()
 		SettingsManager.apply_settings()
 		is_dirty = false
+		
+	if is_instance_valid(_last_focused_control):
+		_last_focused_control.call_deferred("grab_focus")
+	_last_focused_control = null
 
 func _update_ui_from_settings() -> void:
 	if fps_limit_spinbox: fps_limit_spinbox.value = SettingsManager.settings.graphics.fps_limit
@@ -101,6 +137,9 @@ func _update_ui_from_settings() -> void:
 func _populate_keybindings() -> void:
 	if not keybindings_grid: return
 	
+	if _action_to_rebind != &"":
+		_cancel_rebind()
+		
 	for child in keybindings_grid.get_children():
 		child.queue_free()
 	
@@ -114,6 +153,7 @@ func _populate_keybindings() -> void:
 		var button = Button.new()
 		button.text = _get_key_for_action(action)
 		button.pressed.connect(_on_rebind_button_pressed.bind(action, button))
+		button.set_meta("action_name", action)
 		keybindings_grid.add_child(button)
 
 func _get_key_for_action(action: StringName) -> String:
@@ -124,21 +164,27 @@ func _get_key_for_action(action: StringName) -> String:
 
 func _on_rebind_button_pressed(action: StringName, button_node: Button) -> void:
 	if _action_to_rebind != &"":
-		_populate_keybindings()
+		_cancel_rebind()
 
 	_action_to_rebind = action
+	_button_to_rebind = button_node 
 	button_node.text = "Pressione uma tecla..."
+	
+	button_node.release_focus()
 
 func _on_apply_button_pressed() -> void:
+	_cancel_rebind() 
 	if is_dirty:
 		SettingsManager.save_settings()
 		SettingsManager.apply_settings()
 		is_dirty = false
-	hide()
-	get_tree().paused = false
+	close_menu()
+	emit_signal("back_pressed")
 
 func _on_back_button_pressed() -> void:
+	_cancel_rebind() 
 	close_menu()
+	emit_signal("back_pressed")
 
 func _on_fps_limit_changed(value: float) -> void:
 	SettingsManager.settings.graphics.fps_limit = int(value)

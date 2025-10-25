@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"overload_buff_duration_rare"
-ability_name = "Sobrecarga"
-description = "Aumenta a duração do bônus de velocidade de ataque em +2 segundos."
+ability_name = "Sobrecarga: Estabilizador"
+description = "Bateria estabilizada. Aumenta a [b]DURAÇÃO DO BÔNUS[/b] de velocidade em +2 segundos."
 rarity = 2
 icon = ExtResource("1_tdm1w")
 target_ability_id = &"overload"

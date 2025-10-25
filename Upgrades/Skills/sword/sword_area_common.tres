@@ -7,7 +7,7 @@
 script = ExtResource("1_script")
 id = &"sword_area_common"
 ability_name = "Espada: Alcance"
-description = "Aumenta a **ÁREA** da espada em 10%."
+description = "Aumenta a [b]ÁREA[/b] da espada em 10%."
 icon = ExtResource("1_bd8oh")
 target_ability_id = &"sword_attack"
 modifiers = {

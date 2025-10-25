@@ -6,13 +6,12 @@
 [resource]
 script = ExtResource("1_60si0")
 id = &"spinning_storm_legendary"
-ability_name = "Espadas Orbitais"
-description = "Adiciona +2 espadas e aumenta a velocidade de rotação"
+ability_name = "Espadas: TEMPESTADE"
+description = "TEMPESTADE DE LÂMINAS! Adiciona [b]+2 ESPADAS[/b] e aumenta a [b]VELOCIDADE DE ROTAÇÃO[/b] em 0.7."
 rarity = 4
 icon = ExtResource("1_kijwo")
 target_ability_id = &"spinning_swords"
 modifiers = {
-"rotation_speed": 0.5,
+"rotation_speed": 0.7,
 "sword_count": 2
 }
-metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

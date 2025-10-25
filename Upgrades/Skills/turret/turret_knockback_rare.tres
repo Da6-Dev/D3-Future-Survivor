@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"turret_knockback_rare"
-ability_name = "Torreta Atiradora"
-description = "Aumenta a força de empurrão dos projéteis da torreta em +50."
+ability_name = "Torreta: Munição Pesada"
+description = "Munição de alto calibre. Aumenta a [b]FORÇA DO EMPURRÃO[/b] dos projéteis em +50."
 rarity = 2
 icon = ExtResource("1_n06al")
 target_ability_id = &"deploy_turret"

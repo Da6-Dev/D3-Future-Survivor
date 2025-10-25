@@ -7,7 +7,7 @@
 script = ExtResource("1_script")
 id = &"sword_cooldown_rare"
 ability_name = "Espada: Ataque Rápido"
-description = "Reduz a **RECARGA** da espada em 20%."
+description = "Reduz a [b]RECARGA[/b] da espada em 20%."
 rarity = 2
 icon = ExtResource("1_5yr06")
 target_ability_id = &"sword_attack"

@@ -54,9 +54,11 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_l7ayb")
 
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(190, 120)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
 text = "Aqui vai a longa descrição do que este upgrade maravilhoso faz pelo jogador."
 autowrap_mode = 2

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://cxm3f7g3vx26v"]
+
+[ext_resource type="Texture2D" uid="uid://c2w3s6beyu4sy" path="res://Art/Sprites/Icons/tile001.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"arc_drones_mastery_epic"
+ability_name = "VANTs: Maestria"
+description = "Aumenta o [b]DANO[/b] em +4, a [b]VELOCIDADE DE ATAQUE[/b] (tick) em 15% e o [b]ALCANCE[/b] em +50."
+rarity = 3
+icon = ExtResource("1_icon")
+target_ability_id = &"arc_drones"
+modifiers = {
+"damage_amount": 4.0,
+"hit_cooldown": 0.15,
+"max_chase_radius": 50.0
+}

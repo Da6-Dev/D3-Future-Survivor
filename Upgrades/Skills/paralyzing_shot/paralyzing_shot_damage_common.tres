@@ -6,8 +6,9 @@
 [resource]
 script = ExtResource("1_script")
 id = &"paralyzing_shot_damage_common"
-ability_name = "Tiro Paralisante"
-description = "Aumenta o dano do tiro em +5."
+ability_name = "Tiro: Calibre"
+description = "Aumenta o [b]DANO[/b] base do projétil em +5."
+rarity = 0
 icon = ExtResource("1_v2jrw")
 target_ability_id = &"paralyzing_shot"
 modifiers = {

@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"arc_drones_swarm_legendary"
-ability_name = "VANTs de Arco"
-description = "ENXAME! Adiciona +2 VANTs de uma vez."
+ability_name = "VANTs: Enxame"
+description = "ENXAME! Adiciona [b]+2 VANTs[/b] de uma vez."
 rarity = 4
 icon = ExtResource("1_x4tes")
 target_ability_id = &"arc_drones"

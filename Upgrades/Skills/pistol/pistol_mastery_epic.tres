@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"pistol_mastery_epic"
-ability_name = "Pistola Automática"
-description = "Aumenta o dano em +5 e a cadência de tiro em 15%."
+ability_name = "Pistola: Maestria"
+description = "Maestria de Pistoleiro. Aumenta o [b]DANO[/b] em +5 e a [b]CADÊNCIA DE TIRO[/b] em 15%."
 rarity = 3
 icon = ExtResource("1_stuwp")
 target_ability_id = &"pistol_shot"

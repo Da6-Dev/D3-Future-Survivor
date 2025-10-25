@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://b5s3v8f1m2p4q"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cg6np1ekb5kcs" path="res://Art/Sprites/Icons/tile006.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"spinning_knockback_common"
+ability_name = "Espadas: Impacto"
+description = "Aumenta a [b]FORÇA DO EMPURRÃO[/b] das espadas em +100."
+rarity = 0
+icon = ExtResource("2_icon")
+target_ability_id = &"spinning_swords"
+modifiers = {
+"knockback_strength": 100.0
+}

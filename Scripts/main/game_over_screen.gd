@@ -6,6 +6,7 @@ const UPGRADE_ICON_SCENE = preload("res://Scenes/ui/upgrade_display_icon.tscn")
 @onready var time_label: Label = %TimeLabel
 @onready var level_xp_label: Label = %LevelXpLabel
 @onready var return_button: Button = %ReturnButton
+@onready var restart_button: Button = %RestartButton
 @onready var upgrades_grid: GridContainer = %UpgradesGrid
 
 @onready var health_label: Label = %GameOverHealthLabel
@@ -27,6 +28,7 @@ var _target_center_pos_y: float = -1.0
 func _ready() -> void:
 	EntityManager.register_game_over_screen(self)
 	return_button.pressed.connect(_on_return_button_pressed)
+	restart_button.pressed.connect(_on_restart_button_pressed)
 	hide()
 	
 	await get_tree().process_frame
@@ -159,5 +161,29 @@ func _on_return_button_pressed() -> void:
 
 	await _active_tween.finished
 
-	get_tree().paused = false
+	if GameManager:
+		GameManager.unpause_game()
+	else:
+		get_tree().paused = false
+		
 	get_tree().change_scene_to_file("res://Scenes/main/main_menu.tscn")
+
+func _on_restart_button_pressed() -> void:
+	if _active_tween and _active_tween.is_running():
+		_active_tween.kill()
+
+	_active_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	_active_tween.set_parallel(true)
+	
+	_active_tween.tween_property(panel_container, "modulate:a", 0.0, 0.3)
+	
+	_active_tween.tween_property(panel_container, "position:y", -panel_container.size.y, 0.3)
+
+	await _active_tween.finished
+
+	if GameManager:
+		GameManager.unpause_game()
+	else:
+		get_tree().paused = false # Fallback
+
+	get_tree().change_scene_to_file("res://Scenes/main/world.tscn")

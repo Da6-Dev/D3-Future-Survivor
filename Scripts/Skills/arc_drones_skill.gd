@@ -7,6 +7,7 @@ extends BaseAbility
 @export var radius: float = 80.0
 @export var drone_count: int = 2
 @export var knockback_strength: float = 200.0
+@export var hit_cooldown: float = 0.5
 
 @export_group("Spring Physics (Movement Juice)")
 @export var drone_stiffness: float = 10.0
@@ -116,6 +117,7 @@ func _generate_drones_and_beams() -> void:
 	_drones.clear()
 	_beams.clear()
 	_drone_targets.clear()
+	var home_angle_step = TAU / drone_count
 
 	for i in range(drone_count):
 		var drone: Node2D = drone_scene.instantiate()
@@ -126,9 +128,11 @@ func _generate_drones_and_beams() -> void:
 			drone.max_squash_amount = self.max_squash_amount
 			drone.squash_speed_cap = self.squash_speed_cap
 		
-		drone.global_position = global_position
+		var home_angle = pivot.rotation + (i * home_angle_step)
+		var home_pos = player.global_position + Vector2(radius, 0).rotated(home_angle)
+		drone.global_position = home_pos
 		drone.set_meta("velocity", Vector2.ZERO) 
-		
+		drone.set_meta("last_pos", home_pos)
 		drone_container.add_child(drone)
 		_drones.append(drone)
 		_drone_targets[drone] = null
@@ -138,10 +142,14 @@ func _generate_drones_and_beams() -> void:
 		beam.damage_amount = self.damage_amount
 		beam.knockback_strength = self.knockback_strength
 		beam.player = self.player
+		beam.hit_cooldown = self.hit_cooldown
 		beam_container.add_child(beam)
 		_beams.append(beam)
 
 func _find_targets() -> void:
+	if not is_inside_tree():
+		return
+	
 	var all_enemies = EntityManager.get_active_enemies()
 	
 	var assigned_enemies = []
@@ -229,3 +237,17 @@ func _on_attack_finished() -> void:
 
 func regenerate_drones():
 	_generate_drones_and_beams()
+
+func update_damage():
+	for beam in _beams:
+		if is_instance_valid(beam):
+			beam.damage_amount = self.damage_amount
+
+func _exit_tree() -> void:
+	if is_instance_valid(_target_find_timer):
+		_target_find_timer.stop()
+
+func update_hit_cooldown():
+	for beam in _beams:
+		if is_instance_valid(beam):
+			beam.hit_cooldown = self.hit_cooldown

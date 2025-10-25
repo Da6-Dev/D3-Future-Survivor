@@ -7,7 +7,7 @@ signal mouse_exited_card()
 @export var _upgrade_data: AbilityUpgrade
 
 @onready var ability_name_label: Label = $VBoxContainer/AbilityNameLabel
-@onready var description_label: Label = $VBoxContainer/DescriptionLabel
+@onready var description_label: RichTextLabel = $VBoxContainer/DescriptionLabel
 @onready var ability_icon_rect: TextureRect = $VBoxContainer/UpgradeIcon
 @onready var separator_2: HSeparator = $VBoxContainer/HSeparator2
 @onready var separator_3: HSeparator = $VBoxContainer/HSeparator3

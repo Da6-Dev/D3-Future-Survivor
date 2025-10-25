@@ -18,25 +18,6 @@ var _total_fire_rate_multiplier: float = 1.0
 
 var _bullet_modifiers: Dictionary = {}
 
-func initialize_with_upgrades(upgrades: Array[AbilityUpgrade]):
-	_total_fire_rate_multiplier = 1.0
-	for upgrade in upgrades:
-		if upgrade.modifiers.has("fire_rate_multiplier"):
-			_total_fire_rate_multiplier += upgrade.modifiers["fire_rate_multiplier"]
-
-	for upgrade in upgrades:
-		for key in upgrade.modifiers:
-			if key == "fire_rate_multiplier":
-				continue 
-
-			var modifier_value = upgrade.modifiers[key]
-			
-			if key in self:
-				var current_value = get(key)
-				set(key, current_value + modifier_value)
-			else:
-				_bullet_modifiers[key] = _bullet_modifiers.get(key, 0.0) + modifier_value
-
 func _ready() -> void:
 	if not bullet_scene:
 		queue_free()
@@ -55,6 +36,13 @@ func _ready() -> void:
 	duration_timer.start()
 	
 	_muzzle_default_pos_x = muzzle.position.x
+
+func fire_rate_multiplier(amount):
+	fire_rate -= amount
+
+func duration_multiplier(amount):
+	duration += amount
+	print("durantion changed")
 
 func _process(delta: float) -> void:
 	_find_target()

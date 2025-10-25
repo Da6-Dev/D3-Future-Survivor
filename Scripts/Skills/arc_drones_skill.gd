@@ -130,7 +130,6 @@ func _generate_drones_and_beams() -> void:
 		
 		var home_angle = pivot.rotation + (i * home_angle_step)
 		var home_pos = player.global_position + Vector2(radius, 0).rotated(home_angle)
-		drone.global_position = home_pos
 		drone.set_meta("velocity", Vector2.ZERO) 
 		drone.set_meta("last_pos", home_pos)
 		drone_container.add_child(drone)

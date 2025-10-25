@@ -10,7 +10,7 @@ ability_name = "Torreta: Maestria"
 description = "Maestria em Engenharia. Aumenta o [b]DANO[/b] em +2, a [b]DURAÇÃO[/b] em +3s e a [b]CADÊNCIA[/b] em 20%."
 rarity = 3
 icon = ExtResource("1_xrwcb")
-target_ability_id = &"deploy_turret"
+target_ability_id = &"duration"
 modifiers = {
 "damage_amount": 2.0,
 "duration": 3.0,

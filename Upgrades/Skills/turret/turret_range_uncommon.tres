@@ -10,7 +10,7 @@ ability_name = "Torreta: Sensor Óptico"
 description = "Melhora os sensores, aumentando o [b]ALCANCE[/b] de aquisição de alvos em +100."
 rarity = 1
 icon = ExtResource("1_u3nyx")
-target_ability_id = &"deploy_turret"
+target_ability_id = &"attack_range"
 modifiers = {
 "attack_range": 100.0
 }

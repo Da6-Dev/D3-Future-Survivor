@@ -7,7 +7,7 @@ signal enemy_spawned(enemy_node: CharacterBody2D)
 @export var spawn_interval_base: float = 3.0
 @export var spawn_interval_variance: float = 0.8
 @export var spawn_radius: float = 700.0
-@export var max_enemies_on_screen: int = 20
+@export var max_enemies_on_screen: int = 400
 @export var spawn_amount_per_wave: int = 1
 
 @export_group("Miniboss Settings")
@@ -23,6 +23,7 @@ signal enemy_spawned(enemy_node: CharacterBody2D)
 
 var player: CharacterBody2D = null
 var current_active_enemies: int = 0
+var endless_mode_scaling = 1.15
 
 var spawn_timeline: Array[Dictionary] = [
 	# --- FASE 1: Aquecimento (0s - 90s) ---
@@ -116,9 +117,11 @@ func _on_event_timer_timeout():
 			
 		var event = spawn_timeline[_current_timeline_index]
 		_execute_spawn_event(event)
-		if event.get("time", 0.0) >= 600 and not _is_endless_mode:
+		if event.get("time", 0.0) >= 200 and not _is_endless_mode:
 			_is_endless_mode = true
 			endless_timer.start()
+			max_enemies_on_screen += 100
+			spawn_interval_base = 0.25
 		_current_timeline_index += 1
 
 func _execute_spawn_event(event: Dictionary):
@@ -183,7 +186,7 @@ func _spawn_enemy(force_miniboss: bool = false):
 	var spawn_direction = Vector2.RIGHT.rotated(random_angle)
 	var spawn_position = player.global_position + spawn_direction * current_radius
 
-	var enemy_instance = enemy_scene.instantiate() as CharacterBody2D
+	var enemy_instance = enemy_scene.instantiate() as Enemy
 	if not enemy_instance: return
 
 	var is_miniboss = force_miniboss or (randf() < miniboss_chance)
@@ -206,6 +209,12 @@ func _spawn_enemy(force_miniboss: bool = false):
 		enemy_instance.died.connect(_on_enemy_died, CONNECT_ONE_SHOT)
 
 	current_active_enemies += 1
+	
+	if(_is_endless_mode):
+		enemy_instance.max_health += 2 * endless_mode_scaling
+		enemy_instance.speed = 130
+		enemy_instance.current_health = enemy_instance.max_health
+		endless_mode_scaling += 0.25
 	emit_signal("enemy_spawned", enemy_instance)
 
 func _spawn_burst(amount: int, radius_variance: float):

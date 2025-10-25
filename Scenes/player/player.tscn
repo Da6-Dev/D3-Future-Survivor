@@ -1,8 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://bxcm1viko0bc2"]
+[gd_scene load_steps=25 format=3 uid="uid://bxcm1viko0bc2"]
 
 [ext_resource type="Script" uid="uid://ckdivkb1dvitb" path="res://Scripts/player/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cv2w6dgxak7of" path="res://Art/Sprites/Player/ROBO_WITHOUT HANDS.png" id="2_eo61r"]
-[ext_resource type="Texture2D" uid="uid://c7maseuxgwo1d" path="res://Art/Sprites/Player/Engenheiro.png" id="3_e41v5"]
 [ext_resource type="Script" uid="uid://jjkw21xruqq8" path="res://Scripts/camera/camera_shaker.gd" id="3_mxepk"]
 [ext_resource type="AudioStream" uid="uid://bs5rm40yha4va" path="res://Art/Sounds/OriginalSounds/hitHurt.wav" id="5_ca0mu"]
 [ext_resource type="AudioStream" uid="uid://d76uktuhl4c7" path="res://Art/Sounds/OriginalSounds/OriginalSFX/CollectSound.wav" id="6_6upyo"]
@@ -36,12 +35,20 @@ atlas = ExtResource("2_eo61r")
 region = Rect2(32, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3oqc"]
-atlas = ExtResource("3_e41v5")
-region = Rect2(0, 0, 22, 39)
+atlas = ExtResource("2_eo61r")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p8lfk"]
-atlas = ExtResource("3_e41v5")
-region = Rect2(22, 0, 22, 39)
+atlas = ExtResource("2_eo61r")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uawwb"]
+atlas = ExtResource("2_eo61r")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ag54m"]
+atlas = ExtResource("2_eo61r")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7b1g"]
 atlas = ExtResource("2_eo61r")
@@ -98,10 +105,16 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p8lfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uawwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ag54m")
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 3.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -143,7 +156,7 @@ position = Vector2(0, -12)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_g7b1g")
 animation = &"Idle"
-frame_progress = 0.29120502
+frame_progress = 0.8882676
 
 [node name="PhysicalCollision" type="CollisionShape2D" parent="."]
 visible = false
@@ -175,7 +188,7 @@ one_shot = true
 [node name="ShieldRechargeTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." groups=["player"]]
 visible = false
 collision_layer = 8
 collision_mask = 64

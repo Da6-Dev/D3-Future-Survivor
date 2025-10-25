@@ -222,7 +222,7 @@ func apply_upgrade(upgrade: AbilityUpgrade):
 func _apply_modifier_to_ability(target_ability: BaseAbility, upgrade: AbilityUpgrade):
 	var needs_special_handling = false
 	var needs_timer_update = false
-
+	
 	for key in upgrade.modifiers:
 		var modifier_value = upgrade.modifiers[key]
 
@@ -230,9 +230,6 @@ func _apply_modifier_to_ability(target_ability: BaseAbility, upgrade: AbilityUpg
 			var current_mult = target_ability.get("total_attack_speed_multiplier")
 			target_ability.set("total_attack_speed_multiplier", current_mult + modifier_value)
 			needs_timer_update = true
-		elif not key in target_ability:
-			printerr("Upgrade '%s' tenta modificar propriedade '%s' inexistente na habilidade '%s'." % [upgrade.id, key, target_ability.ability_id])
-			continue 
 		else:
 			var current_value = target_ability.get(key)
 			# Lógica especial para 'hit_cooldown' (redução percentual)
@@ -264,7 +261,17 @@ func _apply_modifier_to_ability(target_ability: BaseAbility, upgrade: AbilityUpg
 		if key == "hit_cooldown":
 			if target_ability.has_method("update_hit_cooldown"):
 				target_ability.update_hit_cooldown()
-			
+
+		if key == "fire_rate_multiplier":
+			if target_ability.has_method("fire_rate_multiplier"):
+				target_ability.fire_rate_multiplier(modifier_value)
+		if key == "duration":
+			if target_ability.has_method("duration_multiplier"):
+				target_ability.duration(modifier_value)
+		if key == "attack_range":
+			if target_ability.has_method("attack_range"):
+				target_ability.attack_range(modifier_value)
+
 	if needs_special_handling:
 		if target_ability.has_method("regenerate_swords"):
 			target_ability.regenerate_swords()
@@ -389,16 +396,17 @@ func _on_collection_area_area_entered(area: Area2D) -> void:
 			area.set_target(self)
 
 func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knockback_strength: float = 0.0):
+	
 	if _is_invincible or _is_dead:
 		return
 
 	if current_stats.max_shield > 0:
 		shield_recharge_timer.start(current_stats.shield_recharge_delay)
-
+	
 	var damage_after_reduction = amount * current_stats.damage_reduction_multiplier
-	# Garante que o dano seja pelo menos 1, a menos que a redução seja 100% ou mais
-	var incoming_damage = max(1.0, damage_after_reduction) if current_stats.damage_reduction_multiplier < 1.0 else 0.0
-
+	# Garante que o dano seja pelo menos 1
+	var incoming_damage = max(1.0, damage_after_reduction)
+	
 	var damage_to_health = incoming_damage
 
 	if current_shield > 0:

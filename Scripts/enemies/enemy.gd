@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Enemy
 
 signal died(enemy_node: CharacterBody2D)
 
@@ -274,7 +275,6 @@ func _attack():
 		
 		if target.is_in_group("player") and target.has_method("take_damage"):
 			var payload = get_damage_payload()
-			
 			target.take_damage(
 				payload.get("amount", 1.0),
 				payload.get("direction", Vector2.ZERO),

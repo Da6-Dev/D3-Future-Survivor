@@ -76,7 +76,6 @@ animations = [{
 [node name="TurretObject" type="Node2D"]
 script = ExtResource("1_jtems")
 bullet_scene = ExtResource("2_abi6k")
-fire_rate = 0.6
 
 [node name="Visual" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_i1pck")

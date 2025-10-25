@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3l1vjfx18r4b"]
+[gd_scene load_steps=10 format=3 uid="uid://d3l1vjfx18r4b"]
 
 [ext_resource type="PackedScene" uid="uid://dchh3dq4s4p65" path="res://Scenes/enemies/enemy_spawner.tscn" id="1_4hdv6"]
 [ext_resource type="PackedScene" uid="uid://cr6tgdhiv4r20" path="res://Scenes/ui/hud.tscn" id="2_rf3pu"]
 [ext_resource type="PackedScene" uid="uid://ush8hr6hjxs5" path="res://Scenes/ui/settings_menu.tscn" id="3_5f0hb"]
 [ext_resource type="PackedScene" uid="uid://bxcm1viko0bc2" path="res://Scenes/player/player.tscn" id="4_avow7"]
 [ext_resource type="PackedScene" uid="uid://nvdm8q1e4ecu" path="res://Scenes/ui/upgrade_screen.tscn" id="5_jpift"]
-[ext_resource type="PackedScene" uid="uid://3inoiq1n8weu" path="res://Scenes/ui/pause_menu.tscn" id="6_5f0hb"]
+[ext_resource type="PackedScene" path="res://Scenes/ui/pause_menu.tscn" id="6_5f0hb"]
 [ext_resource type="PackedScene" uid="uid://bpmqts2kb3ddo" path="res://Scenes/world/world_generator.tscn" id="6_rf3pu"]
 [ext_resource type="PackedScene" uid="uid://bjo1anfid5eit" path="res://Scenes/main/game_over_screen.tscn" id="7_avow7"]
+[ext_resource type="AudioStream" uid="uid://dxxd6p1jfx7m8" path="res://Art/Sounds/OriginalSounds/MusPrincipal.ogg" id="9_jpift"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -33,5 +34,10 @@ visible = false
 
 [node name="GameOverScreen" parent="." instance=ExtResource("7_avow7")]
 
+[node name="MusPrincipal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_jpift")
+volume_db = -18.142
+autoplay = true
+bus = &"Music"
+
 [node name="Player" parent="." instance=ExtResource("4_avow7")]
-visibility_layer = 2

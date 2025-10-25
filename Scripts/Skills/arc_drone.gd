@@ -10,6 +10,9 @@ var squash_speed_cap: float = 500.0
 func _ready():
 	if not visual:
 		return
+		
+	var bodie : CharacterBody2D  = get_tree().get_first_node_in_group("player")
+	global_position = bodie.global_position
 
 func update_visual_animations(velocity: Vector2, time: float, index: int, delta: float):
 	if not is_instance_valid(visual):

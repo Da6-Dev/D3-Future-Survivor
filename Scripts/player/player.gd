@@ -18,6 +18,7 @@ var current_stats: PlayerStats
 @onready var collision_shape: CollisionShape2D = $PhysicalCollision
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 @onready var shield_recharge_timer: Timer = $ShieldRechargeTimer
+@onready var player_hurt : AudioStreamPlayer = $HitHurt
 
 var active_abilities: Dictionary[StringName, BaseAbility] = {}
 var active_passives: Dictionary = {}
@@ -29,7 +30,7 @@ var last_direction: Vector2 = Vector2.RIGHT
 var _is_invincible: bool = false
 var current_health: int
 var current_xp: float = 0.0
-var xp_to_next_level: float = 3.0
+var xp_to_next_level: float = 8.0
 var level: int = 1
 var _is_dead: bool = false
 
@@ -273,7 +274,7 @@ func add_xp(amount: float) -> void:
 func level_up() -> void:
 	level += 1
 	current_xp -= xp_to_next_level
-	xp_to_next_level *= 1.5
+	xp_to_next_level = xp_to_next_level * 1.15;
 	level_changed.emit(level)
 	get_node("/root/GameManager").begin_level_up()
 
@@ -306,6 +307,7 @@ func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knock
 		velocity = knockback_direction * knockback_strength
 
 	if damage_to_health > 0:
+		player_hurt.play()
 		EntityManager.trigger_shake(15.0, 0.2, 25.0)
 		current_health -= damage_to_health
 		health_changed.emit(current_health, current_stats.max_health)

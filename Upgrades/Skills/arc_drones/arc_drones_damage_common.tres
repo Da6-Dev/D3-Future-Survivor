@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"arc_drones_damage_common"
-ability_name = "VANTs de Arco"
-description = "Aumenta o dano da viga elétrica em +2."
+ability_name = "VANTs: Potência"
+description = "Aumenta o [b]DANO[/b] da viga elétrica em +2."
 icon = ExtResource("1_i8wmd")
 target_ability_id = &"arc_drones"
 modifiers = {

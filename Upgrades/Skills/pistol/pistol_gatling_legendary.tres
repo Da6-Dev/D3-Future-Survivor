@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"pistol_gatling_legendary"
-ability_name = "Pistola Automática"
-description = "Atira +2 projéteis e aumenta a cadência de tiro em 30%."
+ability_name = "Pistola: GATLING"
+description = "GATLING! Adiciona [b]+2 PROJÉTEIS[/b] por disparo e aumenta a [b]CADÊNCIA DE TIRO[/b] em 30%."
 rarity = 4
 icon = ExtResource("1_locj5")
 target_ability_id = &"pistol_shot"

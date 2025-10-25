@@ -6,8 +6,9 @@
 [resource]
 script = ExtResource("1_script")
 id = &"pistol_damage_common"
-ability_name = "Pistola Automática"
-description = "Aumenta o dano dos projéteis em +2."
+ability_name = "Pistola: Munição"
+description = "Munição Melhorada. Aumenta o [b]DANO[/b] base dos projéteis em +2."
+rarity = 0
 icon = ExtResource("1_6jnfp")
 target_ability_id = &"pistol_shot"
 modifiers = {

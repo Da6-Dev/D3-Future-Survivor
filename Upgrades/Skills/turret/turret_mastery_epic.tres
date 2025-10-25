@@ -6,12 +6,13 @@
 [resource]
 script = ExtResource("1_script")
 id = &"turret_mastery_epic"
-ability_name = "Torreta Atiradora"
-description = "Aumenta a cadência de tiro em 20% e a duração em +3 segundos."
+ability_name = "Torreta: Maestria"
+description = "Maestria em Engenharia. Aumenta o [b]DANO[/b] em +2, a [b]DURAÇÃO[/b] em +3s e a [b]CADÊNCIA[/b] em 20%."
 rarity = 3
 icon = ExtResource("1_xrwcb")
 target_ability_id = &"deploy_turret"
 modifiers = {
+"damage_amount": 2.0,
 "duration": 3.0,
 "fire_rate_multiplier": 0.2
 }

@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"arc_drones_count_rare"
-ability_name = "VANTs de Arco"
-description = "Adiciona +1 VANT ao enxame, criando uma nova viga de dano."
+ability_name = "VANTs: Unidade Extra"
+description = "Adiciona [b]+1 VANT[/b] ao enxame, criando uma nova viga de [b]DANO[/b]."
 rarity = 2
 icon = ExtResource("1_cykoh")
 target_ability_id = &"arc_drones"

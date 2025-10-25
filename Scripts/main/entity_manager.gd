@@ -7,6 +7,17 @@ var pause_menu: CanvasLayer = null
 var settings_menu: CanvasLayer = null
 var game_over_screen: CanvasLayer = null
 
+# --- FUNÇÃO ADICIONADA ---
+# Esta função limpa todo o estado do EntityManager.
+# É chamada pelo GameManager quando a cena é trocada.
+func reset() -> void:
+	active_enemies.clear()
+	player = null
+	camera_shaker = null
+	pause_menu = null
+	settings_menu = null
+	game_over_screen = null
+
 func register_enemy(enemy: Node2D) -> void:
 	if not enemy in active_enemies:
 		active_enemies.append(enemy)
@@ -23,8 +34,9 @@ func register_player(p_player: Node2D) -> void:
 		camera_shaker = null
 
 func unregister_player() -> void:
-	player = null
-	camera_shaker = null
+	# --- MODIFICADO ---
+	# Em vez de limpar manualmente, apenas chamamos a função reset.
+	reset()
 
 func get_player() -> Node2D:
 	return player

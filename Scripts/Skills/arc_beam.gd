@@ -4,11 +4,11 @@ extends Area2D
 @onready var crackle_timer: Timer = $CrackleTimer
 @onready var collision_shape: CollisionPolygon2D = $BeamCollision
 
-var damage_amount: int = 1
+var damage_amount: int = 2
 var knockback_strength: float = 100.0
 var player: Node = null
 
-var _hit_cooldown: float = 0.5
+@export var hit_cooldown: float = 0.5
 var _enemies_on_hit_cooldown: Dictionary = {}
 var _pop_tween: Tween
 
@@ -113,7 +113,7 @@ func _on_area_entered(area: Area2D):
 		else:
 			payload = {"amount": damage_amount, "is_critical": false}
 		target.take_damage(payload, knockback_dir, knockback_strength)
-		var hit_timer: SceneTreeTimer = get_tree().create_timer(_hit_cooldown)
+		var hit_timer: SceneTreeTimer = get_tree().create_timer(hit_cooldown)
 		_enemies_on_hit_cooldown[target] = hit_timer
 		await hit_timer.timeout
 		if _enemies_on_hit_cooldown.has(target):

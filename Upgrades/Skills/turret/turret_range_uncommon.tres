@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"turret_range_uncommon"
-ability_name = "Torreta Atiradora"
-description = "Aumenta o alcance de aquisição de alvos da torreta em +100."
+ability_name = "Torreta: Sensor Óptico"
+description = "Melhora os sensores, aumentando o [b]ALCANCE[/b] de aquisição de alvos em +100."
 rarity = 1
 icon = ExtResource("1_u3nyx")
 target_ability_id = &"deploy_turret"

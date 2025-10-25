@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://d1p8g5h7qxvou"]
+
+[ext_resource type="Texture2D" uid="uid://b5m1lrkoq3x3j" path="res://Art/Sprites/Icons/tile005.png" id="1_q2u6d"]
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"pistol_force_common"
+ability_name = "Pistola: Pólvora"
+description = "Pólvora Potente. Aumenta a [b]FORÇA DO EMPURRÃO[/b] dos projéteis em +50."
+rarity = 0
+icon = ExtResource("1_q2u6d")
+target_ability_id = &"pistol_shot"
+modifiers = {
+"knockback_strength": 50.0
+}

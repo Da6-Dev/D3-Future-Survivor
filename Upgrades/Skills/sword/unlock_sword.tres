@@ -8,7 +8,7 @@
 script = ExtResource("1_d612c")
 id = &"unlock_sword_attack"
 ability_name = "Nova: Ataque da Espada"
-description = "Desbloqueia habilidade de espada, que cria um ataque em formato de onda na direção do inimigo."
+description = "[b]DESBLOQUEIA[/b] habilidade de espada, que cria um ataque em formato de onda na direção do inimigo."
 rarity = 2
 icon = ExtResource("1_43ea1")
 type = 0

@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"pistol_knockback_uncommon"
-ability_name = "Pistola Automática"
-description = "Aumenta a força de empurrão dos projéteis."
+ability_name = "Pistola: Projéteis Pesados"
+description = "Projéteis mais pesados aumentam a [b]FORÇA DO EMPURRÃO[/b] em +150."
 rarity = 1
 icon = ExtResource("1_q2u6d")
 target_ability_id = &"pistol_shot"

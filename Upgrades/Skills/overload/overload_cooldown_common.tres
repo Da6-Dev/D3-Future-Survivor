@@ -6,8 +6,9 @@
 [resource]
 script = ExtResource("1_script")
 id = &"overload_cooldown_common"
-ability_name = "Sobrecarga"
-description = "Reduz o tempo de recarga da Sobrecarga em 10%."
+ability_name = "Sobrecarga: Reator"
+description = "Ajustes no reator. Aumenta a [b]VELOCIDADE DE RECARGA[/b] em 10%."
+rarity = 0
 icon = ExtResource("1_4ok1q")
 target_ability_id = &"overload"
 modifiers = {

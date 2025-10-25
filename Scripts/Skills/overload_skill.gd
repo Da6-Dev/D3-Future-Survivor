@@ -16,6 +16,37 @@ func _ability_ready() -> void:
 		camera = player.get_node("PlayerCamera")
 		original_camera_zoom = camera.zoom
 
+# --- NOVO OVERRIDE ---
+# Substitui a função 'activate' da BaseAbility
+func activate(params: Dictionary = {}) -> void:
+	if _is_unavailable:
+		return
+
+	_is_unavailable = true
+	_on_activate(params) # Isso dispara a explosão e o buff
+
+	# Inicia o timer de DURAÇÃO DO BUFF (normal)
+	if active_duration > 0:
+		_active_duration_timer.wait_time = active_duration
+		_active_duration_timer.start()
+	else:
+		# Se não há duração, chama o término do buff imediatamente
+		call_deferred("_on_active_duration_finished")
+
+	# --- ESTA É A MUDANÇA ---
+	# Inicia o timer de COOLDOWN (em paralelo com a duração)
+	var final_cooldown = max(0.01, cooldown_time / total_attack_speed_multiplier) * cooldown_modifier
+	if final_cooldown > 0:
+		_cooldown_timer.wait_time = final_cooldown
+		_cooldown_timer.start()
+		on_cooldown_started.emit()
+	else:
+		# Se o cooldown for zero, chama o timeout imediatamente.
+		_on_cooldown_timeout()
+
+func _on_active_duration_finished():
+	on_deactivated.emit()
+
 func _on_activate(_params: Dictionary) -> void:
 	EntityManager.trigger_shake(25.0, 0.4, 15.0)
 	_create_explosion_effect()
@@ -40,6 +71,7 @@ func _apply_player_buff():
 		tween.tween_property(camera, "zoom", original_camera_zoom * 0.95, 0.2)
 
 func _on_buff_finished():
+	# Esta função (que já existia) é chamada pelo 'on_deactivated.emit()'
 	if is_instance_valid(player) and player.has_method("remove_global_cooldown_modifier"):
 		player.remove_global_cooldown_modifier(ability_id)
 		

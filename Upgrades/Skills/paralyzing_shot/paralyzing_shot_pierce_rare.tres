@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"paralyzing_shot_pierce_rare"
-ability_name = "Tiro Paralisante"
-description = "O projétil agora perfura +2 inimigos."
+ability_name = "Tiro: Perfurante"
+description = "Projétil de alta densidade agora atravessa [b]+2 INIMIGOS[/b]."
 rarity = 2
 icon = ExtResource("1_bgcj1")
 target_ability_id = &"paralyzing_shot"

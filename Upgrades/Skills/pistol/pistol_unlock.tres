@@ -8,10 +8,9 @@
 script = ExtResource("1_1vtf2")
 id = &"unlock_pistol"
 ability_name = "NOVA: Pistola Automática"
-description = "Desbloqueia uma pistola que atira automaticamente no inimigo mais próximo."
+description = "[b]DESBLOQUEIA[/b] uma pistola automática que dispara projéteis de [b]DANO[/b] no inimigo mais próximo."
 rarity = 2
 icon = ExtResource("1_5nfq8")
 type = 0
 target_ability_id = &"pistol_shot"
 new_ability_scene = ExtResource("1_mvjes")
-metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

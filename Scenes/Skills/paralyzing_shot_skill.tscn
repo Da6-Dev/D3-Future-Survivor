@@ -12,3 +12,4 @@ knockback_strength = 50.0
 icon = ExtResource("3_h1jp1")
 ability_id = &"paralyzing_shot"
 cooldown_time = 2.0
+damage_amount = 4.0

@@ -7,7 +7,7 @@
 script = ExtResource("1_cuhwh")
 id = &"sword_mastery_epic"
 ability_name = "Espada: Maestria"
-description = "Aumenta o **DANO** em +5 e reduz a **RECARGA** em 15%."
+description = "Aumenta o [b]DANO[/b] em +5 e reduz a [b]RECARGA[/b] em 15%."
 rarity = 3
 icon = ExtResource("1_eagaf")
 target_ability_id = &"sword_attack"

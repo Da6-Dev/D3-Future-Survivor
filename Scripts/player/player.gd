@@ -34,6 +34,7 @@ var xp_to_next_level: float = 5.0
 var level: int = 1
 var _is_dead: bool = false
 var _time_elapsed: float = 0.0
+var _is_initialized: bool = false
 
 func _ready() -> void:
 	EntityManager.register_player(self)
@@ -59,6 +60,7 @@ func _ready() -> void:
 	xp_changed.emit(current_xp, xp_to_next_level)
 	level_changed.emit(level)
 	shield_changed.emit(current_shield, current_stats.max_shield)
+	_is_initialized = true
 
 func _physics_process(delta: float) -> void:
 	_time_elapsed += delta
@@ -131,11 +133,15 @@ func _apply_class_data(class_data: PlayerClass):
 
 	if class_data.starting_ability_scene is PackedScene:
 		var ability_instance: BaseAbility = class_data.starting_ability_scene.instantiate()
-		add_child(ability_instance)
-		ability_instance.set_player_reference(self)
+		
+		# --- CORREÇÃO DE ORDEM (classe inicial) ---
+		ability_instance.set_player_reference(self) # Define a referência ANTES
+		add_child(ability_instance) # Adiciona DEPOIS
+		
 		ability_instance.total_attack_speed_multiplier += current_stats.global_attack_speed_bonus
 		var id = ability_instance.ability_id
 		if id == &"":
+			push_warning("Habilidade inicial da classe %s não tem ability_id definido!" % class_data.name_class)
 			return
 			
 		active_abilities[id] = ability_instance
@@ -152,7 +158,8 @@ func update_last_direction_from_input() -> void:
 	if input_direction.length() > 0:
 		last_direction = input_direction.normalized()
 	else:
-		last_direction = Vector2.RIGHT
+		# Mantém a última direção válida se não houver input
+		pass # Ou poderia definir um padrão como Vector2.RIGHT se preferir
 
 func apply_upgrade(upgrade: AbilityUpgrade):
 	var target_id = upgrade.target_ability_id
@@ -164,46 +171,38 @@ func apply_upgrade(upgrade: AbilityUpgrade):
 		var scene_to_load = upgrade.new_ability_scene
 		if scene_to_load is PackedScene:
 			var ability_instance: BaseAbility = scene_to_load.instantiate()
-			add_child(ability_instance)
+			if not ability_instance:
+				printerr("Falha ao instanciar a cena da habilidade: ", scene_to_load.resource_path)
+				return
+
+			# --- CORREÇÃO DE ORDEM (upgrade) ---
+			# 1. Definir a referência do player PRIMEIRO
 			ability_instance.set_player_reference(self)
+			
+			# 2. Aplicar bônus de velocidade de ataque
 			ability_instance.total_attack_speed_multiplier += current_stats.global_attack_speed_bonus
+			
+			# 3. Adicionar à árvore de cena (isso chama _ready)
+			add_child(ability_instance)
+			
 			var id = ability_instance.ability_id
+			if id == &"":
+				push_warning("Habilidade desbloqueada (%s) não tem ability_id definido!" % upgrade.id)
+				# Decide se remove ou deixa, dependendo da sua lógica
+				# ability_instance.queue_free() # Exemplo: remover se não tiver ID
+				return
+				
 			active_abilities[id] = ability_instance
 			emit_signal("ability_added", ability_instance)
+			
+			# Aplica upgrades existentes para esta nova habilidade, se houver
+			_reapply_upgrades_for_ability(id)
+
 
 	elif upgrade.type == AbilityUpgrade.UpgradeType.UPGRADE_EXISTING_ABILITY:
 		var target_ability = active_abilities.get(upgrade.target_ability_id)
 		if is_instance_valid(target_ability):
-			var needs_special_handling = false
-			var needs_timer_update = false
-
-			for key in upgrade.modifiers:
-				var modifier_value = upgrade.modifiers[key]
-
-				if key == "attack_speed_multiplier":
-					var current_mult = target_ability.get("total_attack_speed_multiplier")
-					target_ability.set("total_attack_speed_multiplier", current_mult + modifier_value)
-					needs_timer_update = true
-				elif not key in target_ability:
-					continue 
-				else:
-					var current_value = target_ability.get(key)
-					target_ability.set(key, current_value + modifier_value)
-
-				if key == "sword_count" or key == "radius" or key == "drone_count":
-					needs_special_handling = true
-
-			if needs_special_handling:
-				if target_ability.has_method("regenerate_swords"):
-					target_ability.regenerate_swords()
-				if target_ability.has_method("update_radius"):
-					target_ability.update_radius()
-				if target_ability.has_method("regenerate_drones"):
-					target_ability.regenerate_drones()
-
-			if needs_timer_update:
-				if target_ability.has_method("update_timers"):
-					target_ability.update_timers()
+			_apply_modifier_to_ability(target_ability, upgrade)
 					
 	elif upgrade.type == AbilityUpgrade.UpgradeType.APPLY_PASSIVE_STAT:
 		var stat_id = upgrade.passive_stat_id
@@ -211,71 +210,176 @@ func apply_upgrade(upgrade: AbilityUpgrade):
 		if not active_passives.has(stat_id):
 			if has_empty_passive_slot():
 				active_passives[stat_id] = [upgrade]
-				_apply_passive_stat(upgrade)
+				_apply_passive_stat_modifier(upgrade)
+			else:
+				push_warning("Tentativa de adicionar passiva '%s' sem slot disponível." % stat_id)
 		else:
 			active_passives[stat_id].append(upgrade)
-			_apply_passive_stat(upgrade)
-	
-func _apply_passive_stat(upgrade: AbilityUpgrade):
+			_apply_passive_stat_modifier(upgrade)
+
+# Função auxiliar para aplicar modificadores a uma habilidade existente
+func _apply_modifier_to_ability(target_ability: BaseAbility, upgrade: AbilityUpgrade):
+	var needs_special_handling = false
+	var needs_timer_update = false
+
 	for key in upgrade.modifiers:
 		var modifier_value = upgrade.modifiers[key]
+
+		if key == "attack_speed_multiplier":
+			var current_mult = target_ability.get("total_attack_speed_multiplier")
+			target_ability.set("total_attack_speed_multiplier", current_mult + modifier_value)
+			needs_timer_update = true
+		elif not key in target_ability:
+			printerr("Upgrade '%s' tenta modificar propriedade '%s' inexistente na habilidade '%s'." % [upgrade.id, key, target_ability.ability_id])
+			continue 
+		else:
+			var current_value = target_ability.get(key)
+			# Lógica especial para 'hit_cooldown' (redução percentual)
+			if key == "hit_cooldown":
+				# Garantir que o modificador seja interpretado como redução percentual
+				# Ex: 0.1 significa 10% mais rápido (multiplica por 0.9)
+				target_ability.set(key, current_value * (1.0 - modifier_value))
+			# Lógica especial para 'cooldown_reduction_percent' (buff overload)
+			elif key == "cooldown_reduction_percent":
+				target_ability.set(key, current_value + modifier_value) # Soma percentuais
+			# Lógica padrão (adição)
+			else:
+				# Tratar diferentes tipos
+				if typeof(current_value) == TYPE_FLOAT:
+					target_ability.set(key, float(current_value) + float(modifier_value))
+				elif typeof(current_value) == TYPE_INT:
+					target_ability.set(key, int(current_value) + int(modifier_value))
+				else:
+					printerr("Tipo não suportado '%s' para modificador '%s' no upgrade '%s'" % [typeof(current_value), key, upgrade.id])
+
+		# Chamadas de atualização específicas
+		if key == "damage_amount":
+			if target_ability.has_method("update_damage"):
+				target_ability.update_damage()
+
+		if key == "sword_count" or key == "radius" or key == "drone_count":
+			needs_special_handling = true
+		
+		if key == "hit_cooldown":
+			if target_ability.has_method("update_hit_cooldown"):
+				target_ability.update_hit_cooldown()
+			
+	if needs_special_handling:
+		if target_ability.has_method("regenerate_swords"):
+			target_ability.regenerate_swords()
+		if target_ability.has_method("update_radius"):
+			target_ability.update_radius()
+		if target_ability.has_method("regenerate_drones"):
+			target_ability.regenerate_drones()
+
+	if needs_timer_update:
+		if target_ability.has_method("update_timers"):
+			target_ability.update_timers()
+
+# Função auxiliar para reaplicar upgrades a uma habilidade recém-adicionada
+func _reapply_upgrades_for_ability(ability_id: StringName):
+	if applied_upgrades_map.has(ability_id):
+		var target_ability = active_abilities.get(ability_id)
+		if is_instance_valid(target_ability):
+			var upgrades_to_apply = applied_upgrades_map[ability_id]
+			for upgrade in upgrades_to_apply:
+				# Só aplica se for upgrade existente (não o de unlock)
+				if upgrade.type == AbilityUpgrade.UpgradeType.UPGRADE_EXISTING_ABILITY:
+					_apply_modifier_to_ability(target_ability, upgrade)
+
+# Função auxiliar para aplicar modificadores de status passivos
+func _apply_passive_stat_modifier(upgrade: AbilityUpgrade):
+	var health_before = current_stats.max_health
+	var shield_before = current_stats.max_shield
+
+	for key in upgrade.modifiers:
+		var modifier_value = upgrade.modifiers[key]
+		
+		# --- Lógica de aplicação dos status passivos ---
 		match key:
 			"max_health":
-				var health_gain = int(modifier_value)
-				current_stats.max_health += health_gain
-				current_health += health_gain
-				health_changed.emit(current_health, current_stats.max_health)
-
-			"attack_speed":
+				current_stats.max_health += float(modifier_value)
+			"speed":
+				current_stats.speed += float(modifier_value)
+			"damage_reduction_multiplier":
+				# Redução é multiplicativa (10% = multiplicar por 0.9)
+				current_stats.damage_reduction_multiplier *= (1.0 - float(modifier_value))
+			"health_regen_rate":
+				current_stats.health_regen_rate += float(modifier_value)
+			"global_damage_multiplier":
+				current_stats.global_damage_multiplier += float(modifier_value)
+			"global_attack_speed_bonus":
 				var speed_increase_percent = float(modifier_value)
 				current_stats.global_attack_speed_bonus += speed_increase_percent
+				# Aplicar bônus global a todas as habilidades existentes
 				for ability in active_abilities.values():
-					ability.total_attack_speed_multiplier += speed_increase_percent
-					if ability.has_method("update_timers"):
-						ability.update_timers()
-						
-			"damage_reduction":
-				var reduction_percent = float(modifier_value)
-				current_stats.damage_reduction_multiplier *= (1.0 - reduction_percent)
-				
-			"shield":
-				var shield_gain = float(modifier_value)
-				current_stats.max_shield += shield_gain
-				current_shield += shield_gain 
-				shield_changed.emit(current_shield, current_stats.max_shield)
-
-			"health_regen":
-				var regen_gain = float(modifier_value)
-				current_stats.health_regen_rate += regen_gain
-				
-			"global_damage":
-				var damage_gain_percent = float(modifier_value)
-				current_stats.global_damage_multiplier += damage_gain_percent
-				
+					if is_instance_valid(ability):
+						# Apenas adiciona o bônus do upgrade atual
+						ability.total_attack_speed_multiplier += speed_increase_percent 
+						if ability.has_method("update_timers"):
+							ability.update_timers()
+			"crit_chance":
+				current_stats.crit_chance += float(modifier_value)
+			"crit_damage":
+				current_stats.crit_damage += float(modifier_value)
+			"max_shield":
+				current_stats.max_shield += float(modifier_value)
+			"shield_recharge_delay":
+				current_stats.shield_recharge_delay *= (1.0 - float(modifier_value)) # Redução percentual
+				current_stats.shield_recharge_delay = max(0.1, current_stats.shield_recharge_delay) # Evitar delay zero/negativo
+			"shield_recharge_rate":
+				current_stats.shield_recharge_rate += float(modifier_value)
+			"ability_slots":
+				current_stats.ability_slots += int(modifier_value)
+			"passive_slots":
+				current_stats.passive_slots += int(modifier_value)
 			_:
-				var handled_keys = ["health_regen", "health_regen_rate", "global_damage"]
-				if (key in current_stats) and (not key in handled_keys):
-					var current_value = current_stats.get(key)
-					current_stats.set(key, current_value + modifier_value)
+				printerr("Status passivo desconhecido '%s' no upgrade '%s'" % [key, upgrade.id])
+
+	# Atualizar vida/escudo atual e emitir sinais se max mudou
+	var health_diff = current_stats.max_health - health_before
+	if health_diff > 0:
+		current_health += health_diff
+		health_changed.emit(current_health, current_stats.max_health)
+	
+	var shield_diff = current_stats.max_shield - shield_before
+	if shield_diff > 0:
+		current_shield += shield_diff
+		shield_changed.emit(current_shield, current_stats.max_shield)
+
 
 func has_empty_ability_slot() -> bool:
 	return active_abilities.size() < current_stats.ability_slots
 
 func has_empty_passive_slot() -> bool:
+	# Considera o número de *tipos* de passivas, não o número total de upgrades passivos
 	return active_passives.size() < current_stats.passive_slots
 
 func add_xp(amount: float) -> void:
+	if _is_dead: return # Não ganha XP se morto
 	current_xp += amount
 	while current_xp >= xp_to_next_level:
 		level_up()
 	xp_changed.emit(current_xp, xp_to_next_level)
 
 func level_up() -> void:
+	if not _is_initialized or _is_dead: # Não upa se não inicializado ou morto
+		# Se não inicializado, acumula XP para o primeiro level up real
+		if not _is_initialized:
+			current_xp += xp_to_next_level 
+		return
+		
 	level += 1
 	current_xp -= xp_to_next_level
 	xp_to_next_level = round(xp_to_next_level * 1.25)
 	level_changed.emit(level)
-	get_node("/root/GameManager").begin_level_up()
+	# Garante que GameManager exista antes de chamar
+	var game_manager = get_node_or_null("/root/GameManager")
+	if game_manager:
+		game_manager.begin_level_up()
+	else:
+		printerr("GameManager não encontrado para iniciar o level up!")
+
 
 func _on_collection_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("xp_orbs"):
@@ -290,9 +394,8 @@ func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knock
 		shield_recharge_timer.start(current_stats.shield_recharge_delay)
 
 	var damage_after_reduction = amount * current_stats.damage_reduction_multiplier
-	var incoming_damage = damage_after_reduction
-	if incoming_damage < 1:
-		incoming_damage = 1
+	# Garante que o dano seja pelo menos 1, a menos que a redução seja 100% ou mais
+	var incoming_damage = max(1.0, damage_after_reduction) if current_stats.damage_reduction_multiplier < 1.0 else 0.0
 
 	var damage_to_health = incoming_damage
 
@@ -309,22 +412,31 @@ func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knock
 		player_hurt.play()
 		EntityManager.trigger_shake(15.0, 0.2, 25.0)
 		current_health -= damage_to_health
+		current_health = max(0, current_health) # Evitar vida negativa
 		health_changed.emit(current_health, current_stats.max_health)
 		_is_invincible = true
 
 		animations.play("Hurt")
-		animations.modulate = flash_color
+		# Usar tween para o flash para não interferir com a animação "Hurt"
+		var tween = create_tween().set_parallel()
+		tween.tween_property(animations, "modulate", flash_color, 0.1)
+		tween.chain().tween_property(animations, "modulate", Color.WHITE, 0.1).set_delay(invincibility_duration - 0.1)
+
 		invincibility_timer.start()
 
 	if current_health <= 0 and not _is_dead:
 		_is_dead = true
-		animations.play("Death")
+		animations.play("Death") # Assume que existe uma animação de morte
+		await animations.animation_finished # Espera a animação de morte terminar (opcional)
 		emit_signal("game_over", _time_elapsed, current_stats, applied_upgrades_map, active_passives, level, current_xp, xp_to_next_level)
-		set_physics_process(false)
+		# Não desabilitar physics process imediatamente se tiver animação de morte
+		# set_physics_process(false) 
 		collision_shape.set_deferred("disabled", true)
 
+
 func _on_invincibility_timer_timeout():
-	animations.modulate = Color.WHITE
+	# Modulate é controlado pelo tween agora
+	# animations.modulate = Color.WHITE 
 	_is_invincible = false
 
 func _exit_tree() -> void:
@@ -334,7 +446,7 @@ func apply_global_cooldown_modifier(modifier: float, source_ability_id: StringNa
 	for id in active_abilities:
 		if id == source_ability_id:
 			continue
-		var ability = active_abilities[id]
+		var ability = active_abilities.get(id)
 		if is_instance_valid(ability):
 			ability.cooldown_modifier = modifier
 
@@ -342,15 +454,12 @@ func remove_global_cooldown_modifier(source_ability_id: StringName):
 	for id in active_abilities:
 		if id == source_ability_id:
 			continue
-		var ability = active_abilities[id]
+		var ability = active_abilities.get(id)
 		if is_instance_valid(ability):
 			ability.cooldown_modifier = 1.0
 
 func get_upgrades_for_ability(ability_id: StringName) -> Array:
-	if applied_upgrades_map.has(ability_id):
-		return applied_upgrades_map[ability_id]
-	else:
-		return []
+	return applied_upgrades_map.get(ability_id, [])
 
 func get_calculated_damage(base_damage: float) -> Dictionary:
 	var final_damage = base_damage * current_stats.global_damage_multiplier
@@ -366,4 +475,5 @@ func get_calculated_damage(base_damage: float) -> Dictionary:
 	}
 
 func _on_shield_recharge_timer_timeout():
+	# A lógica de recarga está no _physics_process
 	pass

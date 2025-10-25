@@ -57,8 +57,9 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if _action_to_rebind != &"":
 		if event is InputEventKey and event.is_pressed() and not event.is_echo():
-			if event.keycode == KEY_ESCAPE:
-				_cancel_rebind() 
+			# Esta lógica para cancelar o rebind está correta
+			if event.is_action("ui_pause") or event.keycode == KEY_ESCAPE:
+				_on_back_button_pressed() # A função _on_back_button_pressed já chama _cancel_rebind
 				get_viewport().set_input_as_handled()
 				return 
 
@@ -84,7 +85,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 		
-	if event.is_action_pressed("ui_pause") and visible:
+	# *** CORREÇÃO AQUI ***
+	# Trocado de 'event.is_action_just_pressed' para 'event.is_action' + 'event.is_pressed'
+	if event.is_action("ui_pause") and event.is_pressed() and not event.is_echo() and visible:
 		_on_back_button_pressed()
 		get_viewport().set_input_as_handled()
 

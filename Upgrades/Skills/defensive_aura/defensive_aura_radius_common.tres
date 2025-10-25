@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://ce6q388abxu8g"]
+
+[ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bunpy08q700h3" path="res://Art/Sprites/Icons/tile002.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"defensive_aura_radius_common"
+ability_name = "Aura: Expansão"
+description = "Aumenta a [b]ÁREA DE EFEITO[/b] da aura em +15."
+rarity = 0
+icon = ExtResource("2_icon")
+target_ability_id = &"defensive_aura"
+modifiers = {
+"radius": 15.0
+}

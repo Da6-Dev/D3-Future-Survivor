@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource("1_script")
-id = &"turret_duration_uncommon"
-ability_name = "Torreta Atiradora"
-description = "Aumenta o tempo de atividade da torreta em +5 segundos."
+id = &"turret_battery_uncommon"
+ability_name = "Torreta: Bateria Avançada"
+description = "Célula de energia de longa duração. Aumenta o [b]TEMPO DE ATIVIDADE[/b] em +5 segundos."
 rarity = 1
 icon = ExtResource("1_2slxn")
 target_ability_id = &"deploy_turret"

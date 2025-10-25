@@ -7,7 +7,7 @@
 script = ExtResource("1_jkknm")
 id = &"sword_knockback_uncommon"
 ability_name = "Espada: Impacto Pesado"
-description = "Aumenta a força de **EMPURRÂO** em +100."
+description = "Aumenta a força de [b]EMPURRÂO[/b] em +100."
 rarity = 1
 icon = ExtResource("1_ogbfk")
 target_ability_id = &"sword_attack"

@@ -6,8 +6,9 @@
 [resource]
 script = ExtResource("1_script")
 id = &"pistol_cooldown_common"
-ability_name = "Pistola Automática"
-description = "Aumenta a cadência de tiro em 10%."
+ability_name = "Pistola: Mecanismo"
+description = "Mecanismo Rápido. Aumenta a [b]CADÊNCIA DE TIRO[/b] em 10%."
+rarity = 0
 icon = ExtResource("1_u7a4g")
 target_ability_id = &"pistol_shot"
 modifiers = {

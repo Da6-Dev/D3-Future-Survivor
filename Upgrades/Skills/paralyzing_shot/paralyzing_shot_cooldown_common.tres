@@ -6,10 +6,11 @@
 [resource]
 script = ExtResource("1_script")
 id = &"paralyzing_shot_cooldown_common"
-ability_name = "Tiro Paralisante"
-description = "Reduz o tempo de recarga em 15%."
+ability_name = "Tiro: Refrigeração"
+description = "Melhora a refrigeração da arma, aumentando a [b]VELOCIDADE DE RECARGA[/b] em 10%."
+rarity = 0
 icon = ExtResource("1_nwluf")
 target_ability_id = &"paralyzing_shot"
 modifiers = {
-"attack_speed_multiplier": 0.15
+"attack_speed_multiplier": 0.1
 }

@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"pistol_multishot_rare"
-ability_name = "Pistola Automática"
-description = "Atira +1 projétil por vez."
+ability_name = "Pistola: Cano Duplo"
+description = "Adiciona um segundo cano, disparando [b]+1 PROJÉTIL[/b] em um pequeno arco."
 rarity = 2
 icon = ExtResource("1_xtesh")
 target_ability_id = &"pistol_shot"

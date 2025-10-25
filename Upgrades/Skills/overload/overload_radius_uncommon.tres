@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"overload_radius_uncommon"
-ability_name = "Sobrecarga"
-description = "Aumenta o raio da explosão em +30."
+ability_name = "Sobrecarga: Expansão"
+description = "Aumenta o [b]RAIO DA EXPLOSÃO[/b] em +30."
 rarity = 1
 icon = ExtResource("1_28r8d")
 target_ability_id = &"overload"

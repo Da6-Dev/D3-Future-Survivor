@@ -43,6 +43,8 @@ var is_miniboss: bool = false
 var XpOrb: PackedScene = preload("res://Scenes/items/xp_orb.tscn")
 const DamageLabelScene: PackedScene = preload("res://Scenes/ui/damage_label.tscn")
 
+var _target_scale: Vector2 = Vector2.ONE
+
 enum EnemyState {
 	IDLE,
 	CHASE,
@@ -65,7 +67,7 @@ func _ready():
 	
 	var T : Tween = get_tree().create_tween()
 	
-	T.tween_property(self,"scale",Vector2(1,1),1.0).from(Vector2(0.3,0.3)).set_trans(Tween.TRANS_CUBIC)
+	T.tween_property(self,"scale", _target_scale, 1.0).from(_target_scale * 0.3).set_trans(Tween.TRANS_CUBIC)
 	
 	EntityManager.register_enemy(self)
 	current_health = max_health
@@ -121,6 +123,9 @@ func _enter_state(new_state: EnemyState):
 			if sprite:
 				sprite.modulate = damage_tint_color
 			knockback_timer.start()
+			# --- CORREÇÃO 2 (Desativar Colisão) ---
+			if collision_shape:
+				collision_shape.set_deferred("disabled", true)
 		
 		EnemyState.STUNNED:
 			velocity = Vector2.ZERO
@@ -132,7 +137,7 @@ func _enter_state(new_state: EnemyState):
 			
 			var T : Tween = get_tree().create_tween()
 			T.set_parallel(true)
-			T.tween_property(self,"scale",Vector2(0,0),0.55).from(Vector2(1.5,1.5)).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
+			T.tween_property(self,"scale",Vector2(0,0),0.55).from(_target_scale * 1.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
 			T.tween_property(self,"modulate",Color(1,1,1,0),0.55).from(Color(1,1,1,1)).set_trans(Tween.TRANS_LINEAR)
 			
 			velocity = Vector2.ZERO
@@ -159,6 +164,9 @@ func _exit_state(old_state: EnemyState):
 			if sprite:
 				sprite.modulate = Color.WHITE
 			knockback_timer.stop()
+			# --- CORREÇÃO 2 (Reativar Colisão) ---
+			if collision_shape:
+				collision_shape.set_deferred("disabled", false)
 			
 		EnemyState.STUNNED:
 			if sprite:
@@ -206,7 +214,9 @@ func take_damage(damage_payload: Dictionary, knockback_direction: Vector2 = Vect
 		push_error("take_damage recebeu um payload inválido! Tipo: %s" % typeof(damage_payload))
 		return
 
-	if current_state == EnemyState.DEAD or current_state == EnemyState.STUNNED:
+	# --- CORREÇÃO 1 (Dano em Stun) ---
+	# Removido 'or current_state == EnemyState.STUNNED'
+	if current_state == EnemyState.DEAD:
 		return
 
 	var amount = damage_payload.get("amount", 1.0)
@@ -221,7 +231,8 @@ func take_damage(damage_payload: Dictionary, knockback_direction: Vector2 = Vect
 		EntityManager.trigger_shake(10.0, 0.1, 30.0)
 	set_health(current_health - amount)
 	
-	if current_state != EnemyState.DEAD and incoming_knockback_strength > 0:
+	# Não aplicar knockback se já estiver em um estado de "paralisia"
+	if current_state != EnemyState.DEAD and current_state != EnemyState.STUNNED and incoming_knockback_strength > 0:
 		velocity = knockback_direction * incoming_knockback_strength
 		transition_to_state(EnemyState.KNOCKBACK)
 
@@ -274,7 +285,8 @@ func setup_enemy(p_is_miniboss: bool = false, health_multiplier: float = 1.0, sc
 	max_health = int(max_health * health_multiplier)
 	current_health = max_health
 	xp_amount = int(xp_amount * xp_multiplier)
-	scale *= scale_multiplier
+	
+	_target_scale = scale * scale_multiplier
 
 	if is_miniboss:
 		var crown_node: Sprite2D = get_node_or_null("CrownIcon")

@@ -6,11 +6,11 @@
 [resource]
 script = ExtResource("1_a4ylw")
 id = &"spinning_damage_common"
-ability_name = "Espadas Orbitais"
-description = "Aumenta o dano das espadas em +1."
+ability_name = "Espadas: Lâminas Afiadas"
+description = "Lâminas mais afiadas. Aumenta o [b]DANO[/b] base das espadas em +2."
+rarity = 0
 icon = ExtResource("1_hh28t")
 target_ability_id = &"spinning_swords"
 modifiers = {
-"damage": 1.0
+"damage_amount": 2.0
 }
-metadata/_custom_type_script = "uid://dd7jfgwmgvq8r"

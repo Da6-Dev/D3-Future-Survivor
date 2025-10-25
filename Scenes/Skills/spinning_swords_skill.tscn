@@ -9,9 +9,11 @@ visibility_layer = 8
 script = ExtResource("1_7ttgi")
 sword_scene = ExtResource("2_2vtvf")
 sword_count = 1
+rotation_speed = 1.0
 icon = ExtResource("3_m1re7")
 ability_id = &"spinning_swords"
 cooldown_time = 3.0
 active_duration = 2.0
+damage_amount = 3.0
 
 [node name="Pivot" type="Node2D" parent="."]

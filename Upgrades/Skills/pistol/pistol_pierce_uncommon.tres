@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_script")
 id = &"pistol_pierce_uncommon"
-ability_name = "Pistola Automática"
-description = "Projéteis agora perfuram +1 inimigo."
+ability_name = "Pistola: Perfurante"
+description = "Munição Perfurante. Projéteis agora atravessam [b]+1 INIMIGO[/b]."
 rarity = 1
 icon = ExtResource("1_j48yo")
 target_ability_id = &"pistol_shot"

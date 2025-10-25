@@ -6,6 +6,5 @@
 script = ExtResource("1_ut23w")
 max_health = 150
 speed = 100.0
-ability_slots = 1
-passive_slots = 0
+ability_slots = 4
 metadata/_custom_type_script = "uid://d0lgtoh5x2jsj"

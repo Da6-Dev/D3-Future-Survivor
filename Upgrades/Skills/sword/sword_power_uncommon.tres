@@ -7,7 +7,7 @@
 script = ExtResource("1_script")
 id = &"sword_power_uncommon"
 ability_name = "Espada: Força Bruta"
-description = "Aumenta o **DANO** em +2 e o **EMPATE** em +50."
+description = "Aumenta o [b]DANO[/b] da espada em +2 e o [b]EMPURRÂO[/b] em +50."
 rarity = 1
 icon = ExtResource("1_wgrv4")
 target_ability_id = &"sword_attack"

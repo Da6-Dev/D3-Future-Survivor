@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://d26nwl30cnx8v"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://d26nwl30cnx8v"]
 
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://b5m1lrkoq3x3j" path="res://Art/Sprites/Icons/tile005.png" id="1_stuwp"]
 
 [resource]
 script = ExtResource("1_script")
@@ -8,6 +9,7 @@ id = &"pistol_mastery_epic"
 ability_name = "Pistola Automática"
 description = "Aumenta o dano em +5 e a cadência de tiro em 15%."
 rarity = 3
+icon = ExtResource("1_stuwp")
 target_ability_id = &"pistol_shot"
 modifiers = {
 "attack_speed_multiplier": 0.15,

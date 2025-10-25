@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://bfthpkiko3txo"]
 
+[ext_resource type="Texture2D" uid="uid://c2w3s6beyu4sy" path="res://Art/Sprites/Icons/tile001.png" id="1_2j0rl"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
 [resource]
@@ -8,6 +9,7 @@ id = &"arc_drones_range_uncommon"
 ability_name = "VANTs de Arco"
 description = "Aumenta o alcance máximo de perseguição dos VANTs em +100."
 rarity = 1
+icon = ExtResource("1_2j0rl")
 target_ability_id = &"arc_drones"
 modifiers = {
 "max_chase_radius": 100.0

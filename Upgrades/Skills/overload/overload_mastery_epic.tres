@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://x5t087qap2kd"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://x5t087qap2kd"]
 
+[ext_resource type="Texture2D" uid="uid://dvxowc46bve1j" path="res://Art/Sprites/Icons/tile003.png" id="1_dvf4s"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
 [resource]
@@ -8,6 +9,7 @@ id = &"overload_mastery_epic"
 ability_name = "Sobrecarga"
 description = "Aumenta o bônus de velocidade de ataque em +15% e o dano da explosão em +5."
 rarity = 3
+icon = ExtResource("1_dvf4s")
 target_ability_id = &"overload"
 modifiers = {
 "cooldown_reduction_percent": 0.15,

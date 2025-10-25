@@ -3,27 +3,33 @@
 [ext_resource type="Texture2D" uid="uid://btjj7hwo182fk" path="res://Art/HUD-UI/ContainersPequenos.png" id="1_svudh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k4x02"]
-font_size = 25
-font_color = Color(0.3254902, 0.8235294, 1, 1)
 
 [node name="HudHabilityPlaceholder" type="MarginContainer"]
-custom_minimum_size = Vector2(80, 80)
-offset_right = 60.0
-offset_bottom = 60.0
+custom_minimum_size = Vector2(50, 50)
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(25, 25)
 
 [node name="HabilityTexture" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("1_svudh")
 
-[node name="CooldownLabel" type="Label" parent="HabilityTexture"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HabilityIcon" type="TextureRect" parent="HabilityTexture"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 52.0
+offset_bottom = 52.0
+pivot_offset = Vector2(20, 20)
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CooldownLabel" type="Label" parent="."]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "0"
 label_settings = SubResource("LabelSettings_k4x02")

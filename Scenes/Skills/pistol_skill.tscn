@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dacuxsnoeh5nk"]
+[gd_scene load_steps=4 format=3 uid="uid://dacuxsnoeh5nk"]
 
 [ext_resource type="Script" uid="uid://bhyogbwnevk6a" path="res://Scripts/Skills/pistol_skill.gd" id="1_1fldg"]
 [ext_resource type="PackedScene" uid="uid://piytnnejj3hv" path="res://Scenes/Skills/bullet.tscn" id="2_e14uj"]
+[ext_resource type="Texture2D" uid="uid://b5m1lrkoq3x3j" path="res://Art/Sprites/Icons/tile005.png" id="3_llpio"]
 
 [node name="PistolSkill" type="Node2D"]
 script = ExtResource("1_1fldg")
 bullet_scene = ExtResource("2_e14uj")
 knockback_strength = 150.0
+icon = ExtResource("3_llpio")
 ability_id = &"pistol_shot"
+damage_amount = 2.0

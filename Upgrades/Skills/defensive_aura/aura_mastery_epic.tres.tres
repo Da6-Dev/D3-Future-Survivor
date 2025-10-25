@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://co27rphhkh5fo"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://co27rphhkh5fo"]
 
+[ext_resource type="Texture2D" uid="uid://bunpy08q700h3" path="res://Art/Sprites/Icons/tile002.png" id="1_bmf4i"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_hbb2d"]
 
 [resource]
@@ -8,6 +9,7 @@ id = &"aura_mastery_epic"
 ability_name = "Postura Defensiva"
 description = "Aumenta o dano em +2 e reduz o intervalo entre pulsos em 20%."
 rarity = 3
+icon = ExtResource("1_bmf4i")
 target_ability_id = &"defensive_aura"
 modifiers = {
 "attack_speed_multiplier": 0.2,

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://dyba4utm11ltg"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://dyba4utm11ltg"]
 
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dvxowc46bve1j" path="res://Art/Sprites/Icons/tile003.png" id="1_tdm1w"]
 
 [resource]
 script = ExtResource("1_script")
@@ -8,6 +9,7 @@ id = &"overload_buff_duration_rare"
 ability_name = "Sobrecarga"
 description = "Aumenta a duração do bônus de velocidade de ataque em +2 segundos."
 rarity = 2
+icon = ExtResource("1_tdm1w")
 target_ability_id = &"overload"
 modifiers = {
 "active_duration": 2.0

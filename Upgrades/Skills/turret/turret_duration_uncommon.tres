@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://bnrs10561wd5"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://bnrs10561wd5"]
 
+[ext_resource type="Texture2D" uid="uid://4sohecu8hkmd" path="res://Art/Sprites/Icons/tile007.png" id="1_2slxn"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
 
 [resource]
@@ -8,6 +9,7 @@ id = &"turret_duration_uncommon"
 ability_name = "Torreta Atiradora"
 description = "Aumenta o tempo de atividade da torreta em +5 segundos."
 rarity = 1
+icon = ExtResource("1_2slxn")
 target_ability_id = &"deploy_turret"
 modifiers = {
 "duration": 5.0

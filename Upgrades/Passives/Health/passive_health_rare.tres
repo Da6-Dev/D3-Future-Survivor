@@ -1,6 +1,11 @@
-[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://drfkh4jkxv3ql"]
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=4 format=3 uid="uid://drfkh4jkxv3ql"]
 
+[ext_resource type="Texture2D" uid="uid://dfbmdqm6g2pyq" path="res://Art/Sprites/Icons/Stats-Sheet.png" id="1_rfowh"]
 [ext_resource type="Script" uid="uid://dd7jfgwmgvq8r" path="res://Scripts/Resources/AbilityUpgrade.gd" id="1_script"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jt2fu"]
+atlas = ExtResource("1_rfowh")
+region = Rect2(320, 0, 64, 64)
 
 [resource]
 script = ExtResource("1_script")
@@ -8,6 +13,7 @@ id = &"passive_health_rare"
 ability_name = "Passiva: Vitalidade III"
 description = "Aumenta a vida máxima em +35."
 rarity = 2
+icon = SubResource("AtlasTexture_jt2fu")
 type = 2
 passive_stat_id = &"stat_health"
 modifiers = {

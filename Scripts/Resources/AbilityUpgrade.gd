@@ -20,6 +20,7 @@ enum Rarity {
 @export var ability_name: String
 @export_multiline var description: String
 @export var rarity: Rarity = Rarity.COMMON
+@export var icon: Texture2D
 
 @export_group("Upgrade Logic")
 @export var type: UpgradeType = UpgradeType.UPGRADE_EXISTING_ABILITY

@@ -1,7 +1,60 @@
-[gd_scene load_steps=3 format=3 uid="uid://coumkc3xbkquh"]
+[gd_scene load_steps=12 format=3 uid="uid://coumkc3xbkquh"]
 
 [ext_resource type="Script" uid="uid://c536icmqfk1ii" path="res://Scripts/Skills/overload_skill.gd" id="1_ne2fo"]
 [ext_resource type="Texture2D" uid="uid://dvxowc46bve1j" path="res://Art/Sprites/Icons/tile003.png" id="2_5pw2l"]
+[ext_resource type="AudioStream" uid="uid://21ca5aihsl1x" path="res://Art/Sounds/OriginalSounds/OriginalSFX/SFXDownsampled.ogg" id="3_08xek"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_08xek"]
+radius = 150.0
+
+[sub_resource type="Gradient" id="Gradient_08xek"]
+offsets = PackedFloat32Array(0.07602339, 0.24269006)
+colors = PackedColorArray(1, 1, 1, 1, 0.755298, 0, 0.12827349, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c0pk1"]
+gradient = SubResource("Gradient_08xek")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.61538464, 0.47435898)
+
+[sub_resource type="Gradient" id="Gradient_c0pk1"]
+offsets = PackedFloat32Array(0, 0.6979866)
+colors = PackedColorArray(1, 1, 1, 1, 0.94724196, 0.8461983, 0.124972604, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2snuh"]
+gradient = SubResource("Gradient_c0pk1")
+
+[sub_resource type="Curve" id="Curve_08xek"]
+_data = [Vector2(0.16975307, 0), 0.0, 0.0, 0, 0, Vector2(0.18827161, 1), 0.0, 0.0, 0, 0, Vector2(0.8734567, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_c0pk1"]
+curve = SubResource("Curve_08xek")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_08xek"]
+lifetime_randomness = 0.28
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 1, 20)
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 0.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 0.0
+angle_min = -326.19998
+angle_max = 186.90001
+spread = 180.0
+initial_velocity_min = 4.7999997
+initial_velocity_max = 610.06
+angular_velocity_min = -407.55002
+angular_velocity_max = 244.52998
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_c0pk1")
+color_ramp = SubResource("GradientTexture1D_2snuh")
 
 [node name="OverloadSkill" type="Node2D"]
 script = ExtResource("1_ne2fo")
@@ -10,4 +63,22 @@ icon = ExtResource("2_5pw2l")
 ability_id = &"overload"
 cooldown_time = 12.0
 active_duration = 5.0
-damage_amount = 5
+
+[node name="SfxDownsampled" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_08xek")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_08xek")
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+texture = SubResource("GradientTexture2D_c0pk1")
+lifetime = 0.35000000000000003
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_08xek")

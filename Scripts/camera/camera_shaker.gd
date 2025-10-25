@@ -23,12 +23,13 @@ func _ready() -> void:
 	_noise = FastNoiseLite.new()
 	_noise.seed = randi()
 	_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	_noise.frequency = 0.01
 	
 func _physics_process(_delta: float) -> void:
 	if _shake_strength <= 0.0 or not is_instance_valid(_camera):
 		return
 
-	var time = Time.get_ticks_msec() * 0.001 * _shake_frequency
+	var time = Time.get_ticks_msec() * 0.01 * _shake_frequency
 	
 	var noise_x = _noise.get_noise_2d(time, _noise.seed)
 	var noise_y = _noise.get_noise_2d(time, _noise_y_seed)
@@ -40,6 +41,7 @@ func shake(strength: float, duration: float, frequency: float = 20.0) -> void:
 	_shake_strength = strength
 	_shake_frequency = frequency
 	_shake_timer.wait_time = duration
+	_noise_y_seed = randi()
 	_shake_timer.start()
 
 func _on_shake_timer_timeout() -> void:

@@ -1,7 +1,58 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdcbgk4ql1wge"]
+[gd_scene load_steps=11 format=3 uid="uid://bdcbgk4ql1wge"]
 
 [ext_resource type="Script" uid="uid://dsfxqx1mi5fkn" path="res://Scripts/Skills/sword_skill.gd" id="1_f4wqt"]
 [ext_resource type="Texture2D" uid="uid://d8nuv7m4swwr" path="res://Art/Sprites/Icons/tile000.png" id="2_1fbbh"]
+[ext_resource type="Texture2D" uid="uid://20biucbgpkte" path="res://Art/Sprites/SwordSlash/SlashEffect.png" id="3_ndkse"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wt7ee"]
+atlas = ExtResource("3_ndkse")
+region = Rect2(0, 0, 86, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r37mw"]
+atlas = ExtResource("3_ndkse")
+region = Rect2(86, 0, 86, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0g16"]
+atlas = ExtResource("3_ndkse")
+region = Rect2(172, 0, 86, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jphy"]
+atlas = ExtResource("3_ndkse")
+region = Rect2(258, 0, 86, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hanhj"]
+atlas = ExtResource("3_ndkse")
+region = Rect2(344, 0, 86, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6vra"]
+atlas = ExtResource("3_ndkse")
+region = Rect2(430, 0, 86, 95)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aya42"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wt7ee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r37mw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0g16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jphy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hanhj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6vra")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="SwordSkill" type="Node2D"]
 visibility_layer = 8
@@ -17,7 +68,14 @@ collision_layer = 32
 collision_mask = 16
 
 [node name="AttackAreaVisual" type="Polygon2D" parent="SwordArea"]
+visible = false
 polygon = PackedVector2Array(-13, -47, 52, -49, 72, -27, 83, -3, 75, 23, 52, 46, -13, 41, -9, 18, 25, 20, 34, 0, 25, -18, -10, -20)
 
 [node name="AttackAreaCollision" type="CollisionPolygon2D" parent="SwordArea"]
 polygon = PackedVector2Array(25, -18, -10, -20, -13, -47, 52, -49, 72, -27, 83, -3, 75, 23, 52, 46, -13, 41, -9, 18, 25, 20, 34, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SwordArea"]
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_aya42")
+frame_progress = 0.19453536
+offset = Vector2(0, -36)

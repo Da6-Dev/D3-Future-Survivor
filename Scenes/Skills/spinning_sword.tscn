@@ -1,6 +1,57 @@
-[gd_scene load_steps=2 format=3 uid="uid://cstqnmjeuyl0"]
+[gd_scene load_steps=10 format=3 uid="uid://cstqnmjeuyl0"]
 
 [ext_resource type="Script" uid="uid://djmbxlwb4vn85" path="res://Scripts/Skills/spinning_sword.gd" id="1_a51qd"]
+[ext_resource type="Texture2D" uid="uid://cgv74a7sf52mc" path="res://Art/Sprites/SpiningSwords/SpinnigSword.png" id="2_mt246"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8apb"]
+atlas = ExtResource("2_mt246")
+region = Rect2(0, 0, 10, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1we0e"]
+atlas = ExtResource("2_mt246")
+region = Rect2(10, 0, 10, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_samyu"]
+atlas = ExtResource("2_mt246")
+region = Rect2(20, 0, 10, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03mtm"]
+atlas = ExtResource("2_mt246")
+region = Rect2(30, 0, 10, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqffy"]
+atlas = ExtResource("2_mt246")
+region = Rect2(40, 0, 10, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bm11w"]
+atlas = ExtResource("2_mt246")
+region = Rect2(50, 0, 10, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nfqlw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8apb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1we0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_samyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03mtm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqffy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bm11w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="SpinningSword" type="Area2D"]
 scale = Vector2(1.5, 1.5)
@@ -8,7 +59,14 @@ collision_layer = 64
 collision_mask = 16
 script = ExtResource("1_a51qd")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nfqlw")
+autoplay = "default"
+frame_progress = 0.33972746
+offset = Vector2(0, -9)
+
 [node name="SwordVisual" type="Polygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-4, 0, 0, -33, 5, 0, 7, 0, 7, 1, 2, 1, 2, 8, -1, 8, -1, 1, -6, 1, -6, 0)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

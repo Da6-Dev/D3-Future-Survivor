@@ -9,6 +9,7 @@ var shatter_damage_percent: float = 0.0
 @onready var visual_area: Polygon2D = $SwordArea/AttackAreaVisual
 @onready var collision_shape_2d: CollisionPolygon2D = $SwordArea/AttackAreaCollision
 @onready var attack_area: Area2D = $SwordArea
+@onready var attack_effect: AnimatedSprite2D = $SwordArea/AnimatedSprite2D
 
 func _ability_ready() -> void:
 	visual_area.visible = false
@@ -20,12 +21,13 @@ func _ability_ready() -> void:
 func _on_activate(params: Dictionary) -> void:
 	var attack_angle = params.get("attack_angle", 0.0)
 	self.rotation = attack_angle
-
-	visual_area.visible = true
+	attack_effect.play("default")
+	attack_effect.visible = true
 	collision_shape_2d.disabled = false
 
 func _on_attack_finished() -> void:
-	visual_area.visible = false
+	attack_effect.stop()
+	attack_effect.visible = false
 	collision_shape_2d.disabled = true
 
 func _on_area_entered(area: Area2D) -> void:
